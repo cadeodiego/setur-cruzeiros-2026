@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporada de Cruzeiros Itajaí 2025/2026 — Infográfico</title>
+<style>
+:root {
+  --navy:#0A2540; --cyan:#00A6B8; --sand:#E8D5B7;
+  --coral:#FF6B6B; --char:#1F2937; --grey:#6B7280;
+  --lgrey:#E5E7EB; --bg:#F7F9FC; --white:#FFFFFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0A2540; color: var(--char); line-height: 1.5;
+}
+.page {
+  max-width: 860px; margin: 0 auto; background: white; overflow: hidden;
+  box-shadow: 0 0 80px rgba(0,0,0,0.3);
+}
+.hero {
+  background: linear-gradient(135deg, #0A2540 0%, #113656 60%, #00A6B8 100%);
+  color: white; padding: 60px 60px 50px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 300px; height: 300px; border-radius: 50%; background: rgba(255,107,107,0.12);
+}
+.hero::after {
+  content: ''; position: absolute; bottom: -120px; left: -60px;
+  width: 260px; height: 260px; border-radius: 50%; background: rgba(232,213,183,0.12);
+}
+.hero .kicker { font-size: 11px; font-weight: 700; color: var(--cyan); letter-spacing: 3px; }
+.hero h1 { font-size: 54px; font-weight: 800; margin-top: 10px; line-height: 1.05; color: white; }
+.hero .sub { font-size: 18px; color: var(--sand); margin-top: 10px; font-weight: 500; }
+.hero .period { font-size: 13px; color: var(--cyan); margin-top: 24px; font-weight: 600; letter-spacing: 1px; }
+.big-number-strip {
+  background: white; display: grid; grid-template-columns: repeat(4, 1fr);
+  border-bottom: 3px solid var(--navy);
+}
+.big-number-strip .item {
+  padding: 30px 15px; text-align: center; border-right: 1px solid var(--lgrey);
+}
+.big-number-strip .item:last-child { border-right: none; }
+.big-number-strip .item .v { font-size: 40px; font-weight: 800; color: var(--navy); line-height: 1; }
+.big-number-strip .item .l { font-size: 10px; font-weight: 700; color: var(--grey); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 8px; }
+.section { padding: 50px 60px; }
+.section-head .tag { font-size: 11px; font-weight: 700; color: var(--cyan); letter-spacing: 2px; }
+.section-head h2 { font-size: 30px; color: var(--navy); font-weight: 700; margin-top: 6px; line-height: 1.15; }
+.section-head p { font-size: 15px; color: var(--grey); margin-top: 10px; max-width: 700px; }
+.chart-block { margin-top: 30px; text-align: center; }
+.insight-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px; }
+.insight {
+  padding: 24px; border-radius: 12px; background: var(--bg);
+  border-left: 5px solid var(--navy);
+}
+.insight.coral { border-left-color: var(--coral); }
+.insight.cyan { border-left-color: var(--cyan); }
+.insight.sand { border-left-color: var(--sand); }
+.insight .n {
+  display: inline-block; font-size: 11px; font-weight: 800; padding: 3px 10px;
+  background: var(--navy); color: white; border-radius: 4px; letter-spacing: 1.5px;
+}
+.insight.coral .n { background: var(--coral); }
+.insight.cyan .n { background: var(--cyan); }
+.insight.sand .n { background: var(--sand); color: var(--navy); }
+.insight h3 { font-size: 20px; color: var(--navy); margin-top: 10px; font-weight: 700; line-height: 1.25; }
+.insight p { font-size: 13px; color: var(--char); margin-top: 10px; }
+.insight .stat { font-size: 28px; font-weight: 800; color: var(--navy); margin-top: 12px; }
+.insight.coral .stat { color: var(--coral); }
+.insight.cyan .stat { color: var(--cyan); }
+.impact {
+  background: var(--navy); color: white; padding: 50px 60px;
+  text-align: center;
+}
+.impact .kicker { font-size: 11px; color: var(--cyan); letter-spacing: 3px; font-weight: 700; }
+.impact h2 { font-size: 54px; color: var(--sand); margin-top: 14px; font-weight: 800; }
+.impact .range { font-size: 16px; color: var(--cyan); margin-top: 10px; font-weight: 500; }
+.impact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.impact-box {
+  background: rgba(255,255,255,0.06); padding: 22px; border-radius: 10px;
+  border: 1px solid rgba(0,166,184,0.3);
+}
+.impact-box .cat { font-size: 10px; color: var(--cyan); letter-spacing: 1.5px; font-weight: 700; }
+.impact-box .val { font-size: 24px; color: white; font-weight: 800; margin-top: 8px; }
+.impact-box .meta { font-size: 11px; color: var(--sand); margin-top: 6px; }
+.impact-box.hi { background: var(--coral); border-color: var(--coral); }
+.impact-box.hi .cat, .impact-box.hi .meta { color: white; opacity: 0.9; }
+.fleet { padding: 50px 60px; background: var(--bg); }
+.fleet-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-top: 26px; }
+.ship { background: white; padding: 18px 14px; border-radius: 10px; text-align: center; border-top: 4px solid var(--navy); }
+.ship .name { font-size: 13px; font-weight: 700; color: var(--navy); min-height: 35px; }
+.ship .flag { font-size: 10px; color: var(--grey); margin-top: 2px; font-style: italic; }
+.ship .esc { font-size: 30px; font-weight: 800; color: var(--navy); margin-top: 14px; line-height: 1; }
+.ship .esc-l { font-size: 9px; color: var(--grey); text-transform: uppercase; letter-spacing: 0.5px; }
+.ship.cyan { border-top-color: var(--cyan); }
+.ship.sand { border-top-color: var(--sand); }
+.ship.coral { border-top-color: var(--coral); }
+.footer {
+  background: var(--char); color: white; padding: 30px 60px; font-size: 11px; line-height: 1.6;
+}
+.footer strong { color: var(--cyan); }
+.footer .brand { font-weight: 700; font-size: 14px; color: var(--sand); letter-spacing: 1.5px; margin-bottom: 10px; }
+@media (max-width: 760px) {
+  .hero { padding: 40px 28px; }
+  .hero h1 { font-size: 36px; }
+  .section { padding: 32px 28px; }
+  .insight-grid { grid-template-columns: 1fr; }
+  .impact-grid { grid-template-columns: 1fr; }
+  .fleet-grid { grid-template-columns: repeat(2, 1fr); }
+  .big-number-strip { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="kicker">SETUR ITAJAÍ · PRESTAÇÃO DE CONTAS</div>
+    <h1>A temporada fechou forte.</h1>
+    <div class="sub">169.511 passageiros, 37 escalas, 140 dias de operação.</div>
+    <div class="period">PORTO DE ITAJAÍ · TEMPORADA 2025/2026 · 30/11/2025 — 18/04/2026</div>
+  </section>
+
+  <!-- BIG NUMBERS -->
+  <section class="big-number-strip">
+    <div class="item"><div class="v">37</div><div class="l">Escalas</div></div>
+    <div class="item"><div class="v">169.511</div><div class="l">Passageiros</div></div>
+    <div class="item"><div class="v">5</div><div class="l">Navios</div></div>
+    <div class="item"><div class="v">4</div><div class="l">Armadores</div></div>
+  </section>
+
+  <!-- SAZONALIDADE -->
+  <section class="section">
+    <div class="section-head">
+      <div class="tag">SAZONALIDADE</div>
+      <h2>Dezembro e janeiro concentraram 54% das escalas da temporada.</h2>
+      <p>A alta concentração nos dois primeiros meses sinaliza o desafio — e a oportunidade — de ampliar a movimentação nas janelas de fevereiro, março e abril.</p>
+    </div>
+    <div class="chart-block">
+      <svg width="100%" viewBox="0 0 800 260" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="200" x2="780" y2="200" stroke="#D8DEE9" stroke-width="1"/>
+        
+    <rect x="40" y="180" width="90" height="20" fill="#00A6B8" rx="4"/>
+    <text x="85.0" y="170" text-anchor="middle" font-size="12" font-weight="700" fill="#0A2540">5.156</text>
+    <text x="85.0" y="155" text-anchor="middle" font-size="9" fill="#6B7280" font-style="italic">1 escalas</text>
+    <text x="85.0" y="220" text-anchor="middle" font-size="11" fill="#1F2937" font-weight="600">Nov/2025</text>
+    <rect x="150" y="20" width="90" height="180" fill="#FF6B6B" rx="4"/>
+    <text x="195.0" y="10" text-anchor="middle" font-size="12" font-weight="700" fill="#0A2540">44.337</text>
+    <text x="195.0" y="-5" text-anchor="middle" font-size="9" fill="#6B7280" font-style="italic">9 escalas</text>
+    <text x="195.0" y="220" text-anchor="middle" font-size="11" fill="#1F2937" font-weight="600">Dez/2025</text>
+    <rect x="260" y="29" width="90" height="171" fill="#FF6B6B" rx="4"/>
+    <text x="305.0" y="19" text-anchor="middle" font-size="12" font-weight="700" fill="#0A2540">42.260</text>
+    <text x="305.0" y="4" text-anchor="middle" font-size="9" fill="#6B7280" font-style="italic">11 escalas</text>
+    <text x="305.0" y="220" text-anchor="middle" font-size="11" fill="#1F2937" font-weight="600">Jan/2026</text>
+    <rect x="370" y="97" width="90" height="103" fill="#00A6B8" rx="4"/>
+    <text x="415.0" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="#0A2540">25.447</text>
+    <text x="415.0" y="72" text-anchor="middle" font-size="9" fill="#6B7280" font-style="italic">5 escalas</text>
+    <text x="415.0" y="220" text-anchor="middle" font-size="11" fill="#1F2937" font-weight="600">Fev/2026</text>
+    <rect x="480" y="113" width="90" height="87" fill="#00A6B8" rx="4"/>
+    <text x="525.0" y="103" text-anchor="middle" font-size="12" font-weight="700" fill="#0A2540">21.638</text>
+    <text x="525.0" y="88" text-anchor="middle" font-size="9" fill="#6B7280" font-style="italic">5 escalas</text>
+    <text x="525.0" y="220" text-anchor="middle" font-size="11" fill="#1F2937" font-weight="600">Mar/2026</text>
+    <rect x="590" y="76" width="90" height="124" fill="#00A6B8" rx="4"/>
+    <text x="635.0" y="66" text-anchor="middle" font-size="12" font-weight="700" fill="#0A2540">30.673</text>
+    <text x="635.0" y="51" text-anchor="middle" font-size="9" fill="#6B7280" font-style="italic">6 escalas</text>
+    <text x="635.0" y="220" text-anchor="middle" font-size="11" fill="#1F2937" font-weight="600">Abr/2026</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ACHADOS -->
+  <section class="section" style="background: var(--bg)">
+    <div class="section-head">
+      <div class="tag">LEITURAS CRÍTICAS</div>
+      <h2>Quatro sinais da temporada que definem a próxima.</h2>
+    </div>
+    <div class="insight-grid">
+      <div class="insight coral">
+        <span class="n">01</span>
+        <h3>Concentração em um armador</h3>
+        <div class="stat">73%</div>
+        <p>A Costa Crociere operou 27 das 37 escalas — todas com o navio Costa Diadema. Diversificar armadores é a prioridade número um para 2026/2027.</p>
+      </div>
+      <div class="insight cyan">
+        <span class="n">02</span>
+        <h3>Itajaí opera como porto-base</h3>
+        <div class="stat">33 / 37</div>
+        <p>escalas em turnaround — o navio começa e termina a viagem aqui. Esse perfil gera pernoite pré/pós cruzeiro, com impacto econômico substancialmente maior na cidade.</p>
+      </div>
+      <div class="insight sand">
+        <span class="n">03</span>
+        <h3>Ocupação elevada dos navios</h3>
+        <div class="stat">86%</div>
+        <p>é a ocupação média estimada das escalas de turnaround em relação à capacidade máxima dos navios — sinal claro de procura comercial pelos roteiros que passam por Itajaí.</p>
+      </div>
+      <div class="insight">
+        <span class="n">04</span>
+        <h3>Ano-base oficial da temporada</h3>
+        <div class="stat">1º</div>
+        <p>Esta é a primeira temporada sistematizada com dados auditados — referência oficial a partir da qual a SETUR Itajaí vai acompanhar a evolução do turismo de cruzeiros na cidade.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ARMADORES -->
+  <section class="section">
+    <div class="section-head">
+      <div class="tag">POR ARMADOR</div>
+      <h2>Quatro bandeiras na temporada. Uma dominante.</h2>
+    </div>
+    <div style="margin-top: 30px; text-align: center">
+      <svg width="100%" viewBox="0 0 720 80" xmlns="http://www.w3.org/2000/svg">
+        
+    <rect x="0" y="0" width="525" height="60" fill="#0A2540"/>
+    <text x="262.5" y="28" text-anchor="middle" font-size="20" font-weight="700" fill="white">27</text>
+    <text x="262.5" y="46" text-anchor="middle" font-size="10" font-weight="600" fill="white">73%</text>
+    <rect x="525" y="0" width="136" height="60" fill="#00A6B8"/>
+    <text x="593.0" y="28" text-anchor="middle" font-size="20" font-weight="700" fill="white">7</text>
+    <text x="593.0" y="46" text-anchor="middle" font-size="10" font-weight="600" fill="white">19%</text>
+    <rect x="661" y="0" width="38" height="60" fill="#E8D5B7"/>
+    <rect x="699" y="0" width="19" height="60" fill="#FF6B6B"/>
+      </svg>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 14px;">
+        <div style="font-size: 11px;"><strong style="color:#0A2540">Costa Crociere</strong><br><span style="color:#6B7280">Itália · 27 esc.</span></div>
+        <div style="font-size: 11px;"><strong style="color:#00A6B8">MSC Crociere</strong><br><span style="color:#6B7280">Itália · 7 esc.</span></div>
+        <div style="font-size: 11px;"><strong style="color:#A88956">NCL</strong><br><span style="color:#6B7280">EUA · 2 esc.</span></div>
+        <div style="font-size: 11px;"><strong style="color:#FF6B6B">Plantours</strong><br><span style="color:#6B7280">Alemanha · 1 esc.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FROTA -->
+  <section class="fleet">
+    <div class="section-head">
+      <div class="tag">A FROTA QUE PASSOU POR ITAJAÍ</div>
+      <h2>Cinco navios de cinco perfis distintos.</h2>
+    </div>
+    <div class="fleet-grid">
+      <div class="ship">
+        <div class="name">Costa<br>Diadema</div>
+        <div class="flag">Itália</div>
+        <div class="esc">27</div>
+        <div class="esc-l">escalas</div>
+      </div>
+      <div class="ship cyan">
+        <div class="name">MSC<br>Sinfonia</div>
+        <div class="flag">Itália</div>
+        <div class="esc">6</div>
+        <div class="esc-l">escalas</div>
+      </div>
+      <div class="ship cyan">
+        <div class="name">MSC<br>Fantasia</div>
+        <div class="flag">Itália</div>
+        <div class="esc">1</div>
+        <div class="esc-l">escalas</div>
+      </div>
+      <div class="ship sand">
+        <div class="name">Oceania<br>Marina</div>
+        <div class="flag">EUA</div>
+        <div class="esc">2</div>
+        <div class="esc-l">escalas</div>
+      </div>
+      <div class="ship coral">
+        <div class="name">Hamburg</div>
+        <div class="flag">Alemanha</div>
+        <div class="esc">1</div>
+        <div class="esc-l">escalas</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IMPACTO -->
+  <section class="impact">
+    <div class="kicker">IMPACTO ECONÔMICO DIRETO ESTIMADO</div>
+    <h2>R$ 48.691.080</h2>
+    <div class="range">Intervalo: R$ 40.912.550 — R$ 56.469.610</div>
+    <div class="impact-grid">
+      <div class="impact-box">
+        <div class="cat">TURNAROUND</div>
+        <div class="val">R$ 30.298.500</div>
+        <div class="meta">67.330 passageiros · R$ 450/pax (mid)</div>
+      </div>
+      <div class="impact-box">
+        <div class="cat">TRÂNSITO</div>
+        <div class="val">R$ 18.392.580</div>
+        <div class="meta">102.181 passageiros · R$ 180/pax (mid)</div>
+      </div>
+      <div class="impact-box hi">
+        <div class="cat">IMPACTO TOTAL (MID)</div>
+        <div class="val">R$ 48.691.080</div>
+        <div class="meta">em 140 dias de temporada</div>
+      </div>
+    </div>
+    <div style="margin-top: 30px; font-size: 11px; color: var(--sand); font-style: italic; max-width: 640px; margin-left: auto; margin-right: auto;">
+      Estimativa baseada nos multiplicadores CLIA Brasil 2024/25. Contabiliza apenas gasto direto dos passageiros na cidade. Não inclui taxas portuárias, suprimento dos navios, gasto de tripulantes em terra, nem efeito multiplicador indireto sobre a cadeia produtiva.
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="brand">SETUR ITAJAÍ · SECRETARIA DE TURISMO E EVENTOS</div>
+    Fonte: Temporada_2025-2026.xlsx — base oficial SETUR Itajaí, consulta em 20/04/2026. Multiplicadores de gasto: Anuário CLIA Brasil 2024/25. Capacidades dos navios: sítios oficiais dos armadores. <strong>Contato imprensa:</strong> cadeodiego@gmail.com.
+  </footer>
+</div>
+</body>
+</html>

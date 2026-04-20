@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · Temporada de Cruzeiros Itajaí 2025/2026</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0"></script>
+<style>
+:root {
+  --navy:#0A2540; --cyan:#00A6B8; --sand:#E8D5B7;
+  --coral:#FF6B6B; --char:#1F2937; --grey:#6B7280;
+  --lgrey:#E5E7EB; --bg:#F7F9FC; --white:#FFFFFF;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg); color: var(--char); line-height: 1.5;
+}
+.topbar {
+  background: var(--navy); color: white; padding: 16px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.topbar .brand { display: flex; flex-direction: column; }
+.topbar .brand .kicker { font-size: 11px; color: var(--cyan); letter-spacing: 2px; font-weight: 700; }
+.topbar .brand .title { font-size: 18px; font-weight: 700; margin-top: 2px; }
+.topbar .period { font-size: 12px; color: var(--sand); text-align: right; }
+.container { max-width: 1400px; margin: 0 auto; padding: 24px 32px; }
+h1 { font-size: 28px; color: var(--navy); margin-bottom: 8px; font-weight: 700; }
+.subtitle { color: var(--grey); font-size: 14px; margin-bottom: 24px; font-style: italic; }
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
+}
+.kpi {
+  background: white; border: 1px solid var(--lgrey); border-radius: 12px;
+  padding: 20px; text-align: center; transition: transform 0.15s;
+}
+.kpi:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(10,37,64,0.08); }
+.kpi .value { font-size: 34px; font-weight: 700; color: var(--navy); line-height: 1; }
+.kpi .label { font-size: 10px; color: var(--grey); font-weight: 600; letter-spacing: 1.5px; margin-top: 8px; text-transform: uppercase; }
+.kpi .sub { font-size: 11px; color: var(--grey); font-style: italic; margin-top: 4px; }
+.kpi.accent .value { color: var(--coral); }
+.kpi.cyan .value { color: var(--cyan); }
+.filters {
+  background: white; border: 1px solid var(--lgrey); border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 24px; display: flex; gap: 20px; align-items: center; flex-wrap: wrap;
+}
+.filters label { font-size: 12px; font-weight: 600; color: var(--grey); display: flex; flex-direction: column; gap: 4px; }
+.filters select {
+  border: 1px solid var(--lgrey); border-radius: 6px; padding: 6px 10px;
+  font-size: 13px; color: var(--char); background: white; min-width: 180px;
+}
+.filters .btn {
+  background: var(--navy); color: white; border: none; padding: 8px 16px;
+  border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.filters .btn:hover { background: var(--cyan); }
+.row { display: grid; gap: 16px; margin-bottom: 16px; }
+.row.col-2 { grid-template-columns: 1fr 1fr; }
+.row.col-3 { grid-template-columns: 2fr 1fr 1fr; }
+.card {
+  background: white; border: 1px solid var(--lgrey); border-radius: 12px;
+  padding: 20px;
+}
+.card h2 { font-size: 14px; color: var(--navy); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.card .desc { font-size: 12px; color: var(--grey); margin-bottom: 16px; }
+.chart-wrap { position: relative; height: 260px; }
+.table-card { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th {
+  background: var(--navy); color: white; text-align: left; padding: 10px 12px;
+  font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase; font-weight: 600;
+}
+th.num, td.num { text-align: right; }
+td { padding: 10px 12px; border-bottom: 1px solid var(--lgrey); }
+tr:hover td { background: var(--bg); }
+.tag {
+  display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 4px; text-transform: uppercase; letter-spacing: 0.5px;
+}
+.tag.turn { background: #DBEAFE; color: var(--navy); }
+.tag.tran { background: #FEF3C7; color: #92400E; }
+.corrected { color: var(--coral); font-size: 10px; margin-left: 6px; }
+.footer-note {
+  background: white; border: 1px solid var(--lgrey); border-radius: 12px;
+  padding: 16px 20px; margin-top: 16px; font-size: 11px; color: var(--grey); font-style: italic;
+}
+.footer-note strong { color: var(--navy); font-style: normal; }
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+  .row.col-2, .row.col-3 { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="kicker">SETUR ITAJAÍ · DASHBOARD</div>
+    <div class="title">Temporada de Cruzeiros · Porto de Itajaí</div>
+  </div>
+  <div class="period">2025/2026<br><span style="color:var(--lgrey)">30/11/2025 a 18/04/2026</span></div>
+</div>
+
+<div class="container">
+  <h1>Dashboard Interativo</h1>
+  <div class="subtitle">Dados auditados da temporada 2025/2026. Filtre abaixo para navegar por mês, armador ou navio.</div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi"><div class="value">37</div><div class="label">Escalas</div><div class="sub">em 140 dias</div></div>
+    <div class="kpi cyan"><div class="value" id="kpi-pax">169.511</div><div class="label">Movimentação</div><div class="sub">emb + des + trânsitos + menores</div></div>
+    <div class="kpi"><div class="value">86%</div><div class="label">Ocupação média</div><div class="sub">turnaround · capac. máx.</div></div>
+    <div class="kpi accent"><div class="value">R$ 48.691.080</div><div class="label">Impacto estimado (mid)</div><div class="sub">CLIA Brasil 2024/25</div></div>
+  </div>
+
+  <!-- Filtros -->
+  <div class="filters">
+    <label>
+      <span>MÊS</span>
+      <select id="f-mes"><option value="">Todos</option></select>
+    </label>
+    <label>
+      <span>ARMADOR</span>
+      <select id="f-arm"><option value="">Todos</option></select>
+    </label>
+    <label>
+      <span>NAVIO</span>
+      <select id="f-navio"><option value="">Todos</option></select>
+    </label>
+    <label>
+      <span>OPERAÇÃO</span>
+      <select id="f-op">
+        <option value="">Todas</option>
+        <option value="Turnaround">Turnaround</option>
+        <option value="Trânsito">Trânsito</option>
+      </select>
+    </label>
+    <button class="btn" onclick="resetFilters()">Limpar filtros</button>
+    <div style="flex:1; text-align:right; font-size:12px; color:var(--grey);">
+      <span id="count-result">37 escalas</span> · <span id="sum-result">169.511 pax</span>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="row col-2">
+    <div class="card">
+      <h2>Movimentação por Mês</h2>
+      <div class="desc">Volume total de passageiros (emb + des + trânsitos + menores).</div>
+      <div class="chart-wrap"><canvas id="chartMes"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Escalas por Mês</h2>
+      <div class="desc">Número de escalas registradas.</div>
+      <div class="chart-wrap"><canvas id="chartEsc"></canvas></div>
+    </div>
+  </div>
+
+  <div class="row col-2">
+    <div class="card">
+      <h2>Distribuição por Armador</h2>
+      <div class="desc">Participação de cada armador no total de escalas.</div>
+      <div class="chart-wrap"><canvas id="chartArm"></canvas></div>
+    </div>
+    <div class="card">
+      <h2>Turnaround vs Trânsito</h2>
+      <div class="desc">Perfil operacional das escalas.</div>
+      <div class="chart-wrap"><canvas id="chartOp"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Tabela -->
+  <div class="card table-card">
+    <h2>Detalhe das Escalas</h2>
+    <div class="desc">Base auditada · 37 escalas · ordenadas por data de atracação.</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Atracação</th><th>Data</th><th>Navio</th><th>Armador</th>
+          <th>Navegação</th><th class="num">Embarque</th><th class="num">Desembarque</th>
+          <th class="num">Trânsito</th><th class="num">Menores</th><th class="num">Total</th><th>Operação</th>
+        </tr>
+      </thead>
+      <tbody id="tbody-escalas"></tbody>
+    </table>
+  </div>
+
+  <div class="footer-note">
+    <strong>Notas.</strong> Correção aplicada¹: escala 033/2026 (MSC Sinfonia, 11/01/2026) teve valor 980 migrado da coluna "Menores Embarque" para "Embarque" por erro de lançamento confirmado. Total da temporada (169.511) inalterado. Multiplicadores de gasto: CLIA Brasil 2024/25 (R$ 380–520 turnaround; R$ 150–210 trânsito). Capacidades de navios: valores máximos públicos dos armadores. Fonte primária: Temporada_2025-2026.xlsx, SETUR Itajaí, 20/04/2026.
+  </div>
+</div>
+
+<script>
+const DATA = {"escalas": 37, "dias": 140, "dia_ini": "2025-11-30T07:35:00", "dia_fim": "2026-04-18T17:45:00", "navios": ["COSTA DIADEMA", "HAMBURG", "MARINA", "MSC FANTASIA", "MSC SINFONIA"], "armadores": ["COSTA CROCIERE SPA (IT003761)", "MSC CROCIERE", "NORWEGIAN CRUISE LINE - NCL", "PLANTOURS & PARTNER GMBH"], "agencias": ["ASA BROKERS", "CR AGENCIA ITAJAÍ", "MSC ITAJAÍ"], "tot_emb": 30954, "tot_des": 32196, "tot_tra": 96399, "tot_men_emb": 2022, "tot_men_des": 2158, "tot_men_tra": 5782, "tot_menores": 9962, "tot_geral": 169511, "tot_turn": 67330, "tot_tran": 102181, "by_armador": {"COSTA CROCIERE SPA (IT003761)": 27, "MSC CROCIERE": 7, "PLANTOURS & PARTNER GMBH": 1, "NORWEGIAN CRUISE LINE - NCL": 2}, "by_armador_pax": {"COSTA CROCIERE SPA (IT003761)": 143260, "MSC CROCIERE": 23601, "PLANTOURS & PARTNER GMBH": 302, "NORWEGIAN CRUISE LINE - NCL": 2348}, "by_navio": {"COSTA DIADEMA": 27, "MSC SINFONIA": 6, "HAMBURG": 1, "MARINA": 2, "MSC FANTASIA": 1}, "by_navio_pax": {"COSTA DIADEMA": 143260, "MSC SINFONIA": 19683, "HAMBURG": 302, "MARINA": 2348, "MSC FANTASIA": 3918}, "by_mes": {"Nov/2025": 1, "Dez/2025": 9, "Jan/2026": 11, "Fev/2026": 5, "Mar/2026": 5, "Abr/2026": 6}, "by_mes_pax": {"Nov/2025": 5156, "Dez/2025": 44337, "Jan/2026": 42260, "Fev/2026": 25447, "Mar/2026": 21638, "Abr/2026": 30673}, "by_op": {"Turnaround": 33, "Trânsito": 4}, "by_op_pax": {"Turnaround": 162943, "Trânsito": 6568}, "imp_low": 40912550, "imp_mid": 48691080, "imp_high": 56469610, "imp_turn_mid": 30298500, "imp_tra_mid": 18392580, "ocupacao_media": 0.858496029586875, "trip_estim": 39473, "correction_note": "Linha corrigida: 033 2026 — valor 980 migrado de 'Menores Embarque' para 'Embarque'.", "data_detail": [{"atrac": "1113 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-11-30T07:35:00", "atd": "2025-11-30T17:25:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 924, "des": 930, "tra": 3043, "men_emb": 61, "men_des": 67, "men_tra": 131, "total": 5156, "operacao": "Turnaround", "mes": "Nov/2025", "ocupacao": 0.8419243986254296}, {"atrac": "1123 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-12-04T09:10:00", "atd": "2025-12-04T18:26:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 860, "des": 925, "tra": 2987, "men_emb": 63, "men_des": 62, "men_tra": 198, "total": 5095, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.8368708308065494}, {"atrac": "1138 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-12-07T07:39:00", "atd": "2025-12-07T17:40:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 929, "des": 862, "tra": 3264, "men_emb": 61, "men_des": 63, "men_tra": 214, "total": 5393, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.8966040024257126}, {"atrac": "1147 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-12-10T07:37:00", "atd": "2025-12-10T17:32:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 955, "des": 939, "tra": 2995, "men_emb": 83, "men_des": 63, "men_tra": 219, "total": 5254, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.8558722458055387}, {"atrac": "1159 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-12-13T07:39:00", "atd": "2025-12-13T17:30:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 909, "des": 956, "tra": 3192, "men_emb": 87, "men_des": 83, "men_tra": 196, "total": 5423, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.8905397210430563}, {"atrac": "1177 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-12-17T07:30:00", "atd": "2025-12-17T17:35:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 940, "des": 912, "tra": 3240, "men_emb": 88, "men_des": 87, "men_tra": 295, "total": 5562, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.9194461289670507}, {"atrac": "1192 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Cabotagem", "atb": "2025-12-20T07:31:00", "atd": "2025-12-20T17:30:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 938, "des": 944, "tra": 3205, "men_emb": 92, "men_des": 88, "men_tra": 240, "total": 5507, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.9047907822922984}, {"atrac": "1196 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "MSC SINFONIA", "naveg": "Cabotagem", "atb": "2025-12-21T07:25:00", "atd": "2025-12-21T17:20:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 919, "des": 922, "tra": 1150, "men_emb": 88, "men_des": 76, "men_tra": 95, "total": 3250, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.8143115942028986}, {"atrac": "1216 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2025-12-27T09:37:00", "atd": "2025-12-27T17:50:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 954, "des": 958, "tra": 3168, "men_emb": 93, "men_des": 94, "men_tra": 276, "total": 5543, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.9083282797655144}, {"atrac": "1220 2025", "local": "PORTO DE ITAJAÍ - APS", "navio": "MSC SINFONIA", "naveg": "Cabotagem", "atb": "2025-12-28T07:00:00", "atd": "2025-12-28T17:05:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 933, "des": 930, "tra": 1209, "men_emb": 59, "men_des": 89, "men_tra": 90, "total": 3310, "operacao": "Turnaround", "mes": "Dez/2025", "ocupacao": 0.8349637681159421}, {"atrac": "002 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-01-03T11:40:00", "atd": "2026-01-03T17:35:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 951, "des": 968, "tra": 3086, "men_emb": 74, "men_des": 95, "men_tra": 220, "total": 5394, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8793208004851425}, {"atrac": "006 2026", "local": "BRASKARNE", "navio": "HAMBURG", "naveg": "Longo Curso", "atb": "2026-01-04T11:37:00", "atd": "2026-01-04T19:45:00", "armador": "PLANTOURS & PARTNER GMBH", "agencia": "CR AGENCIA ITAJAÍ", "emb": 0, "des": 0, "tra": 302, "men_emb": 0, "men_des": 0, "men_tra": 0, "total": 302, "operacao": "Trânsito", "mes": "Jan/2026", "ocupacao": 0.755}, {"atrac": "007 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MSC SINFONIA", "naveg": "Cabotagem", "atb": "2026-01-04T12:35:00", "atd": "2026-01-05T04:07:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 882, "des": 979, "tra": 1163, "men_emb": 87, "men_des": 62, "men_tra": 70, "total": 3243, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8108695652173913}, {"atrac": "028 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-01-10T09:20:00", "atd": "2026-01-10T17:30:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1097, "des": 951, "tra": 2934, "men_emb": 82, "men_des": 73, "men_tra": 219, "total": 5356, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8600161714170205}, {"atrac": "033 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MSC SINFONIA", "naveg": "Cabotagem", "atb": "2026-01-11T07:20:00", "atd": "2026-01-11T17:25:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 980, "des": 962, "tra": 1217, "men_emb": 0, "men_des": 87, "men_tra": 85, "total": 3331, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8393115942028986}, {"atrac": "050 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MARINA", "naveg": "Longo Curso", "atb": "2026-01-15T09:55:00", "atd": "2026-01-15T19:55:00", "armador": "NORWEGIAN CRUISE LINE - NCL", "agencia": "CR AGENCIA ITAJAÍ", "emb": 2, "des": 2, "tra": 1169, "men_emb": 0, "men_des": 0, "men_tra": 0, "total": 1173, "operacao": "Trânsito", "mes": "Jan/2026", "ocupacao": 0.9368}, {"atrac": "061 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-01-17T09:30:00", "atd": "2026-01-17T17:35:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1083, "des": 1108, "tra": 3129, "men_emb": 98, "men_des": 83, "men_tra": 244, "total": 5745, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.9215686274509803}, {"atrac": "064 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MSC SINFONIA", "naveg": "Cabotagem", "atb": "2026-01-18T07:19:00", "atd": "2026-01-18T17:30:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 933, "des": 921, "tra": 1269, "men_emb": 57, "men_des": 48, "men_tra": 77, "total": 3305, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8425724637681159}, {"atrac": "086 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-01-24T09:38:00", "atd": "2026-01-24T17:25:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1042, "des": 1098, "tra": 3031, "men_emb": 68, "men_des": 98, "men_tra": 276, "total": 5613, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.9015564988882151}, {"atrac": "089 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MSC SINFONIA", "naveg": "Cabotagem", "atb": "2026-01-25T07:10:00", "atd": "2026-01-25T17:25:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 847, "des": 938, "tra": 1229, "men_emb": 76, "men_des": 58, "men_tra": 96, "total": 3244, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8277173913043478}, {"atrac": "112 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-01-31T09:25:00", "atd": "2026-01-31T17:25:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1075, "des": 1068, "tra": 3019, "men_emb": 79, "men_des": 69, "men_tra": 244, "total": 5554, "operacao": "Turnaround", "mes": "Jan/2026", "ocupacao": 0.8911461491813221}, {"atrac": "136 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-02-07T09:34:00", "atd": "2026-02-07T17:35:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1050, "des": 1083, "tra": 3077, "men_emb": 67, "men_des": 79, "men_tra": 205, "total": 5561, "operacao": "Turnaround", "mes": "Fev/2026", "ocupacao": 0.8937740044471397}, {"atrac": "157 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-02-14T09:31:00", "atd": "2026-02-14T17:25:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1046, "des": 1054, "tra": 2944, "men_emb": 62, "men_des": 68, "men_tra": 211, "total": 5385, "operacao": "Turnaround", "mes": "Fev/2026", "ocupacao": 0.8631493834647261}, {"atrac": "179 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-02-21T09:33:00", "atd": "2026-02-21T17:26:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 991, "des": 1055, "tra": 3047, "men_emb": 37, "men_des": 62, "men_tra": 177, "total": 5369, "operacao": "Turnaround", "mes": "Fev/2026", "ocupacao": 0.8685061653527391}, {"atrac": "189 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MSC FANTASIA", "naveg": "Longo Curso", "atb": "2026-02-23T09:00:00", "atd": "2026-02-23T18:40:00", "armador": "MSC CROCIERE", "agencia": "MSC ITAJAÍ", "emb": 0, "des": 2, "tra": 3719, "men_emb": 0, "men_des": 0, "men_tra": 197, "total": 3918, "operacao": "Trânsito", "mes": "Fev/2026", "ocupacao": 0.9893912604192978}, {"atrac": "208 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-02-28T09:28:00", "atd": "2026-02-28T17:43:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1041, "des": 994, "tra": 2977, "men_emb": 38, "men_des": 37, "men_tra": 127, "total": 5214, "operacao": "Turnaround", "mes": "Fev/2026", "ocupacao": 0.8407115423488983}, {"atrac": "229 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-03-07T09:30:00", "atd": "2026-03-07T17:00:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1023, "des": 1055, "tra": 2995, "men_emb": 35, "men_des": 38, "men_tra": 138, "total": 5284, "operacao": "Turnaround", "mes": "Mar/2026", "ocupacao": 0.850717606630281}, {"atrac": "242 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "MARINA", "naveg": "Longo Curso", "atb": "2026-03-11T09:43:00", "atd": "2026-03-11T18:55:00", "armador": "NORWEGIAN CRUISE LINE - NCL", "agencia": "CR AGENCIA ITAJAÍ", "emb": 0, "des": 1, "tra": 1174, "men_emb": 0, "men_des": 0, "men_tra": 0, "total": 1175, "operacao": "Trânsito", "mes": "Mar/2026", "ocupacao": 0.9396}, {"atrac": "253 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-03-14T09:30:00", "atd": "2026-03-14T17:35:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1005, "des": 1038, "tra": 2873, "men_emb": 30, "men_des": 36, "men_tra": 95, "total": 5077, "operacao": "Turnaround", "mes": "Mar/2026", "ocupacao": 0.8131190620578128}, {"atrac": "286 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-03-21T09:30:00", "atd": "2026-03-21T17:00:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 1042, "des": 1017, "tra": 2788, "men_emb": 30, "men_des": 30, "men_tra": 57, "total": 4964, "operacao": "Turnaround", "mes": "Mar/2026", "ocupacao": 0.7892662219526986}, {"atrac": "312 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-03-28T09:40:00", "atd": "2026-03-28T17:35:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 899, "des": 1059, "tra": 2981, "men_emb": 43, "men_des": 31, "men_tra": 125, "total": 5138, "operacao": "Turnaround", "mes": "Mar/2026", "ocupacao": 0.8332322619769558}, {"atrac": "328 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Longo Curso", "atb": "2026-04-01T08:00:00", "atd": "2026-04-01T17:25:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 971, "des": 903, "tra": 3140, "men_emb": 77, "men_des": 43, "men_tra": 202, "total": 5336, "operacao": "Turnaround", "mes": "Abr/2026", "ocupacao": 0.8770972306448352}, {"atrac": "338 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Cabotagem", "atb": "2026-04-04T08:15:00", "atd": "2026-04-04T17:25:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 904, "des": 974, "tra": 3241, "men_emb": 64, "men_des": 77, "men_tra": 163, "total": 5423, "operacao": "Turnaround", "mes": "Abr/2026", "ocupacao": 0.8921568627450981}, {"atrac": "353 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Cabotagem", "atb": "2026-04-08T08:00:00", "atd": "2026-04-08T17:39:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 926, "des": 907, "tra": 3078, "men_emb": 53, "men_des": 65, "men_tra": 160, "total": 5189, "operacao": "Turnaround", "mes": "Abr/2026", "ocupacao": 0.851728320194057}, {"atrac": "368 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Cabotagem", "atb": "2026-04-11T08:02:00", "atd": "2026-04-11T17:06:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 886, "des": 941, "tra": 3033, "men_emb": 37, "men_des": 55, "men_tra": 149, "total": 5101, "operacao": "Turnaround", "mes": "Abr/2026", "ocupacao": 0.8371740448756823}, {"atrac": "387 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Cabotagem", "atb": "2026-04-15T08:00:00", "atd": "2026-04-15T17:37:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 935, "des": 893, "tra": 3073, "men_emb": 51, "men_des": 38, "men_tra": 126, "total": 5116, "operacao": "Turnaround", "mes": "Abr/2026", "ocupacao": 0.8404083282797655}, {"atrac": "399 2026", "local": "PORTO DE ITAJAÍ - CODEBA", "navio": "COSTA DIADEMA", "naveg": "Cabotagem", "atb": "2026-04-18T08:02:00", "atd": "2026-04-18T17:45:00", "armador": "COSTA CROCIERE SPA (IT003761)", "agencia": "ASA BROKERS", "emb": 82, "des": 947, "tra": 3258, "men_emb": 2, "men_des": 54, "men_tra": 165, "total": 4508, "operacao": "Turnaround", "mes": "Abr/2026", "ocupacao": 0.8015969274307662}]};
+const FMT = {
+  n: (v) => new Intl.NumberFormat('pt-BR').format(Math.round(v)),
+  brl: (v) => 'R$ ' + new Intl.NumberFormat('pt-BR').format(Math.round(v)),
+  date: (iso) => {
+    const d = new Date(iso);
+    return d.getUTCDate().toString().padStart(2,'0') + '/' +
+           (d.getUTCMonth()+1).toString().padStart(2,'0') + '/' + d.getUTCFullYear();
+  },
+};
+
+const COLORS = {
+  navy:'#0A2540', cyan:'#00A6B8', sand:'#E8D5B7', coral:'#FF6B6B',
+  char:'#1F2937', grey:'#6B7280'
+};
+
+const ARM_ORDER = [
+  ['COSTA CROCIERE SPA (IT003761)', 'Costa Crociere', COLORS.navy],
+  ['MSC CROCIERE', 'MSC Crociere', COLORS.cyan],
+  ['NORWEGIAN CRUISE LINE - NCL', 'NCL', COLORS.sand],
+  ['PLANTOURS & PARTNER GMBH', 'Plantours', COLORS.coral],
+];
+const MESES = ['Nov/2025','Dez/2025','Jan/2026','Fev/2026','Mar/2026','Abr/2026'];
+
+// popular selects
+const fMes = document.getElementById('f-mes');
+MESES.forEach(m => { fMes.innerHTML += `<option value="${m}">${m}</option>`; });
+
+const fArm = document.getElementById('f-arm');
+ARM_ORDER.forEach(([k,l]) => { fArm.innerHTML += `<option value="${k}">${l}</option>`; });
+
+const fNavio = document.getElementById('f-navio');
+DATA.navios.forEach(n => { fNavio.innerHTML += `<option value="${n}">${n}</option>`; });
+
+const fOp = document.getElementById('f-op');
+
+// charts refs
+let chartMes, chartEsc, chartArm, chartOp;
+
+function initCharts() {
+  const ctxMes = document.getElementById('chartMes').getContext('2d');
+  chartMes = new Chart(ctxMes, {
+    type: 'bar',
+    data: {
+      labels: MESES,
+      datasets: [{
+        data: MESES.map(m => DATA.by_mes_pax[m]),
+        backgroundColor: MESES.map(m => (m === 'Dez/2025' || m === 'Jan/2026') ? COLORS.coral : COLORS.cyan),
+        borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: {
+        callbacks: { label: ctx => FMT.n(ctx.parsed.y) + ' pax' }
+      } },
+      scales: {
+        y: { beginAtZero: true, ticks: { callback: v => FMT.n(v) } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const ctxEsc = document.getElementById('chartEsc').getContext('2d');
+  chartEsc = new Chart(ctxEsc, {
+    type: 'bar',
+    data: {
+      labels: MESES,
+      datasets: [{
+        data: MESES.map(m => DATA.by_mes[m]),
+        backgroundColor: COLORS.navy, borderRadius: 6,
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { beginAtZero: true, ticks: { stepSize: 2 } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+
+  const ctxArm = document.getElementById('chartArm').getContext('2d');
+  chartArm = new Chart(ctxArm, {
+    type: 'doughnut',
+    data: {
+      labels: ARM_ORDER.map(a => a[1]),
+      datasets: [{
+        data: ARM_ORDER.map(a => DATA.by_armador[a[0]] || 0),
+        backgroundColor: ARM_ORDER.map(a => a[2]),
+        borderWidth: 2, borderColor: 'white',
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '62%',
+      plugins: {
+        legend: { position: 'right', labels: { font: { size: 11 } } },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed} escalas (${(ctx.parsed/37*100).toFixed(1)}%)` } }
+      }
+    }
+  });
+
+  const ctxOp = document.getElementById('chartOp').getContext('2d');
+  chartOp = new Chart(ctxOp, {
+    type: 'doughnut',
+    data: {
+      labels: ['Turnaround','Trânsito'],
+      datasets: [{
+        data: [DATA.by_op['Turnaround']||0, DATA.by_op['Trânsito']||0],
+        backgroundColor: [COLORS.navy, COLORS.sand],
+        borderWidth: 2, borderColor: 'white',
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false, cutout: '62%',
+      plugins: {
+        legend: { position: 'right', labels: { font: { size: 12 } } },
+        tooltip: { callbacks: { label: ctx => `${ctx.label}: ${ctx.parsed} escalas` } }
+      }
+    }
+  });
+}
+
+function renderTable(rows) {
+  const tbody = document.getElementById('tbody-escalas');
+  tbody.innerHTML = rows.map(d => {
+    const menores = d.men_emb + d.men_des + d.men_tra;
+    const armTxt = (ARM_ORDER.find(a => a[0] === d.armador) || [null, d.armador])[1];
+    const corrected = (d.navio === 'MSC SINFONIA' && d.atb.startsWith('2026-01-11')) ? '<span class="corrected">¹ corrigido</span>' : '';
+    return `<tr>
+      <td>${d.atrac}${corrected}</td>
+      <td>${FMT.date(d.atb)}</td>
+      <td><strong>${d.navio}</strong></td>
+      <td>${armTxt}</td>
+      <td>${d.naveg}</td>
+      <td class="num">${FMT.n(d.emb)}</td>
+      <td class="num">${FMT.n(d.des)}</td>
+      <td class="num">${FMT.n(d.tra)}</td>
+      <td class="num">${FMT.n(menores)}</td>
+      <td class="num"><strong>${FMT.n(d.total)}</strong></td>
+      <td><span class="tag ${d.operacao === 'Turnaround' ? 'turn' : 'tran'}">${d.operacao}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function applyFilters() {
+  const m = fMes.value, a = fArm.value, n = fNavio.value, o = fOp.value;
+  let rows = DATA.data_detail.slice();
+  if (m) rows = rows.filter(d => d.mes === m);
+  if (a) rows = rows.filter(d => d.armador === a);
+  if (n) rows = rows.filter(d => d.navio === n);
+  if (o) rows = rows.filter(d => d.operacao === o);
+
+  const totalPax = rows.reduce((acc, d) => acc + d.total, 0);
+  document.getElementById('count-result').textContent = `${rows.length} escala${rows.length === 1 ? '' : 's'}`;
+  document.getElementById('sum-result').textContent = `${FMT.n(totalPax)} pax`;
+
+  // recompute charts from filtered rows
+  const paxByMes = Object.fromEntries(MESES.map(m => [m,0]));
+  const escByMes = Object.fromEntries(MESES.map(m => [m,0]));
+  const paxByArm = {}, escByArm = {};
+  const paxByOp = {'Turnaround':0,'Trânsito':0};
+  const escByOp = {'Turnaround':0,'Trânsito':0};
+
+  rows.forEach(d => {
+    paxByMes[d.mes] += d.total;
+    escByMes[d.mes] += 1;
+    paxByArm[d.armador] = (paxByArm[d.armador] || 0) + d.total;
+    escByArm[d.armador] = (escByArm[d.armador] || 0) + 1;
+    paxByOp[d.operacao] += d.total;
+    escByOp[d.operacao] += 1;
+  });
+
+  chartMes.data.datasets[0].data = MESES.map(m => paxByMes[m]);
+  chartMes.update();
+  chartEsc.data.datasets[0].data = MESES.map(m => escByMes[m]);
+  chartEsc.update();
+  chartArm.data.datasets[0].data = ARM_ORDER.map(a => escByArm[a[0]] || 0);
+  chartArm.update();
+  chartOp.data.datasets[0].data = [escByOp['Turnaround'], escByOp['Trânsito']];
+  chartOp.update();
+
+  renderTable(rows);
+}
+
+function resetFilters() {
+  fMes.value = fArm.value = fNavio.value = fOp.value = '';
+  applyFilters();
+}
+
+[fMes, fArm, fNavio, fOp].forEach(el => el.addEventListener('change', applyFilters));
+
+initCharts();
+applyFilters();
+</script>
+
+</body>
+</html>

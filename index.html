@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Temporada de Cruzeiros Itajaí 2025/2026 · SETUR</title>
+<meta name="description" content="Análise executiva da Temporada de Cruzeiros do Porto de Itajaí 2025/2026. SETUR Itajaí.">
+<style>
+:root {
+  --navy:#0A2540; --cyan:#00A6B8; --sand:#E8D5B7;
+  --coral:#FF6B6B; --char:#1F2937; --grey:#6B7280;
+  --lgrey:#E5E7EB; --bg:#F7F9FC;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--navy); color: var(--char); min-height: 100vh;
+  display: flex; align-items: center; justify-content: center; padding: 40px 20px;
+}
+.wrap { max-width: 720px; width: 100%; }
+.hero { color: white; margin-bottom: 40px; }
+.kicker { font-size: 11px; color: var(--cyan); letter-spacing: 3px; font-weight: 700; }
+h1 { font-size: 44px; font-weight: 800; margin-top: 10px; line-height: 1.1; color: white; }
+.sub { font-size: 16px; color: var(--sand); margin-top: 12px; }
+.period { font-size: 12px; color: var(--cyan); margin-top: 18px; letter-spacing: 1px; font-weight: 600; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.card {
+  background: white; border-radius: 14px; padding: 26px;
+  text-decoration: none; color: var(--char);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+.card .tag { font-size: 10px; font-weight: 700; color: var(--cyan); letter-spacing: 2px; }
+.card h2 { font-size: 22px; color: var(--navy); font-weight: 700; line-height: 1.2; }
+.card p { font-size: 13px; color: var(--grey); line-height: 1.5; }
+.card .cta { margin-top: 8px; font-size: 13px; color: var(--coral); font-weight: 600; }
+.card .cta::after { content: ' →'; }
+.footer {
+  margin-top: 40px; color: var(--cyan); font-size: 11px; font-style: italic; text-align: center; opacity: 0.7;
+}
+@media (max-width: 640px) {
+  h1 { font-size: 32px; }
+  .cards { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="kicker">SETUR ITAJAÍ</div>
+    <h1>Temporada de Cruzeiros<br>2025/2026</h1>
+    <div class="sub">Análise executiva · Porto de Itajaí</div>
+    <div class="period">30/11/2025 — 18/04/2026 · 37 escalas · 169.511 passageiros</div>
+  </div>
+
+  <div class="cards">
+    <a class="card" href="dashboard.html">
+      <div class="tag">EXPLORAR DADOS</div>
+      <h2>Dashboard interativo</h2>
+      <p>Filtros por mês, armador, navio e operação. Tabela completa com 37 escalas auditadas.</p>
+      <div class="cta">Abrir dashboard</div>
+    </a>
+
+    <a class="card" href="infografico.html">
+      <div class="tag">IMPRENSA E COMUNICAÇÃO</div>
+      <h2>Infográfico da temporada</h2>
+      <p>Peça visual para release, imprensa e comunicação institucional — números, achados e impacto econômico.</p>
+      <div class="cta">Ver infográfico</div>
+    </a>
+  </div>
+
+  <div class="footer">
+    Secretaria de Turismo e Eventos de Itajaí · Diretoria Executiva
+  </div>
+</div>
+</body>
+</html>
