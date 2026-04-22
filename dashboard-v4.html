@@ -85,20 +85,12 @@
     .masthead {
       background: var(--azul-institucional);
       color: var(--off-white);
-      padding: 16px 48px;
+      padding: 18px 48px;
       display: flex; align-items: center; justify-content: space-between;
       border-bottom: 3px solid var(--amarelo-institucional);
       position: relative; z-index: 3;
     }
-    .masthead-brand { display: flex; align-items: center; gap: 18px; }
-    .masthead-brand .crest {
-      height: 44px; width: auto; display: block; flex-shrink: 0;
-    }
-    .masthead-brand .crest-divider {
-      width: 1px; height: 36px; background: rgba(255, 217, 26, 0.5);
-      flex-shrink: 0;
-    }
-    .masthead-brand .lockup { display: flex; flex-direction: column; gap: 3px; }
+    .masthead-brand { display: flex; flex-direction: column; gap: 3px; }
     .masthead-brand .kicker {
       font-size: 10px; color: var(--amarelo-institucional);
       letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
@@ -228,20 +220,16 @@
       margin-bottom: 24px;
     }
     .sc-legend {
-      display: flex; flex-wrap: wrap; gap: 22px 40px;
-      margin-top: 24px; align-items: center;
+      display: flex; flex-wrap: wrap; gap: 20px 28px;
+      margin-top: 18px; font-size: 12px;
+      color: var(--ink-secondary);
+      font-variant-numeric: tabular-nums;
     }
-    .sc-legend .leg-item {
-      display: flex; align-items: center; gap: 14px;
+    .sc-legend .swatch {
+      display: inline-block; width: 10px; height: 10px;
+      border-radius: 50%; margin-right: 8px; vertical-align: 1px;
     }
-    .sc-legend .wordmark {
-      height: 26px; width: auto; flex-shrink: 0; display: block;
-    }
-    .sc-legend .meta {
-      font-size: 11px; color: var(--ink-muted);
-      font-variant-numeric: tabular-nums lining-nums;
-      letter-spacing: 0.3px;
-    }
+    .sc-legend .meta { color: var(--ink-muted); margin-left: 6px; }
 
     /* ===== Section markers — numerais romanos ===== */
     section.block { padding: 72px 0 64px; border-top: 1px solid var(--rule); position: relative; }
@@ -306,41 +294,6 @@
     .finding p .num {
       font-variant-numeric: lining-nums tabular-nums;
       color: var(--ink); font-weight: 600;
-    }
-
-    /* ===== Pillars (Section V) ===== */
-    .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
-    .pillar {
-      position: relative;
-      padding: 28px 26px 26px;
-      background: var(--surface);
-      border-top: 2px solid var(--azul-institucional);
-      border-left: 1px solid var(--rule-soft);
-      border-right: 1px solid var(--rule-soft);
-      border-bottom: 1px solid var(--rule-soft);
-    }
-    .pillar .pillar-num {
-      font-family: 'Fraunces', serif; font-style: italic; font-weight: 400;
-      font-size: 2.4rem; line-height: 0.9; color: var(--amarelo-institucional);
-      -webkit-text-stroke: 1px var(--azul-institucional);
-      letter-spacing: -0.03em; margin-bottom: 12px;
-      font-variation-settings: 'opsz' 96, 'SOFT' 100;
-      display: block;
-    }
-    .pillar .pillar-kicker {
-      font-size: 9.5px; letter-spacing: 2.4px; font-weight: 700;
-      color: var(--ink-muted); text-transform: uppercase;
-      margin-bottom: 4px; font-variant-numeric: lining-nums;
-    }
-    .pillar h3 {
-      font-family: 'Fraunces', serif; font-weight: 500;
-      font-size: 1.4rem; line-height: 1.18;
-      margin-bottom: 14px; max-width: 22ch;
-      font-variation-settings: 'opsz' 72, 'SOFT' 30;
-      color: var(--ink); letter-spacing: -0.015em;
-    }
-    .pillar p {
-      font-size: 0.94rem; color: var(--ink-secondary); line-height: 1.6;
     }
 
     /* ===== Chart blocks ===== */
@@ -483,6 +436,7 @@
     .op-tag.trans {
       background: rgba(247, 123, 20, 0.14); color: var(--laranja);
     }
+    .corrected-flag { color: var(--laranja); font-size: 10px; margin-left: 6px; font-weight: 700; }
 
     /* ===== Colophon ===== */
     .colophon {
@@ -551,7 +505,6 @@
       .lead-metric .cell { border-right: none; border-bottom: 1px solid var(--rule-soft); padding-bottom: 24px; }
       .lead-metric .cell:nth-child(2n) { padding-left: 24px; }
       .findings { grid-template-columns: 1fr; gap: 32px; }
-      .pillars-grid { grid-template-columns: 1fr; gap: 24px; }
       .charts-2up { grid-template-columns: 1fr; gap: 48px; }
       .colophon .container { grid-template-columns: 1fr; gap: 28px; }
       .section-head { grid-template-columns: 80px 1fr; gap: 20px; }
@@ -598,12 +551,8 @@
   <!-- Masthead -->
   <header class="masthead" role="banner">
     <div class="masthead-brand">
-      <img class="crest" src="assets/itajai-turismo-branco.svg" alt="Itajaí · Turismo">
-      <div class="crest-divider" aria-hidden="true"></div>
-      <div class="lockup">
-        <div class="kicker">Relatório Executivo</div>
-        <div class="title">Temporada de Cruzeiros · Itajaí</div>
-      </div>
+      <div class="kicker">SETUR Itajaí · Relatório Executivo</div>
+      <div class="title">Temporada de Cruzeiros · Itajaí</div>
     </div>
     <div class="masthead-meta">
       Temporada <strong>2025/2026</strong><br>
@@ -655,34 +604,10 @@
           <svg id="svg-calendar" viewBox="0 0 1200 240" preserveAspectRatio="none" aria-label="Calendário visual das 37 escalas da temporada 2025/26"></svg>
         </div>
         <div class="sc-legend">
-          <span class="leg-item">
-            <svg class="wordmark" viewBox="0 0 100 26" style="color:var(--arm-costa)" xmlns="http://www.w3.org/2000/svg" aria-label="Costa Cruzeiros">
-              <text x="0" y="14" fill="currentColor" font-family="Inter, sans-serif" font-size="14" font-weight="800" letter-spacing="0.4">COSTA</text>
-              <text x="0" y="24" fill="currentColor" font-family="Inter, sans-serif" font-size="7" font-weight="700" letter-spacing="2.2">CRUZEIROS</text>
-            </svg>
-            <span class="meta">27 escalas · 143.260 pax</span>
-          </span>
-          <span class="leg-item">
-            <svg class="wordmark" viewBox="0 0 100 26" style="color:var(--arm-msc)" xmlns="http://www.w3.org/2000/svg" aria-label="MSC Cruzeiros">
-              <text x="0" y="14" fill="currentColor" font-family="Inter, sans-serif" font-size="14" font-weight="800" letter-spacing="0.6">MSC</text>
-              <text x="0" y="24" fill="currentColor" font-family="Inter, sans-serif" font-size="7" font-weight="700" letter-spacing="2.2">CRUZEIROS</text>
-            </svg>
-            <span class="meta">7 escalas · 23.601 pax</span>
-          </span>
-          <span class="leg-item">
-            <svg class="wordmark" viewBox="0 0 110 26" style="color:var(--arm-ncl)" xmlns="http://www.w3.org/2000/svg" aria-label="Norwegian Cruise Line">
-              <text x="0" y="14" fill="currentColor" font-family="Inter, sans-serif" font-size="13" font-weight="800" letter-spacing="0.4">NORWEGIAN</text>
-              <text x="0" y="24" fill="currentColor" font-family="Inter, sans-serif" font-size="7" font-weight="700" letter-spacing="2">CRUISE LINE</text>
-            </svg>
-            <span class="meta">2 escalas · 2.348 pax</span>
-          </span>
-          <span class="leg-item">
-            <svg class="wordmark" viewBox="0 0 105 26" style="color:var(--arm-plan)" xmlns="http://www.w3.org/2000/svg" aria-label="Plantours &amp; Partner">
-              <text x="0" y="14" fill="currentColor" font-family="Inter, sans-serif" font-size="13" font-weight="800" letter-spacing="0.4">PLANTOURS</text>
-              <text x="0" y="24" fill="currentColor" font-family="Inter, sans-serif" font-size="7" font-weight="600" letter-spacing="2" font-style="italic">&amp; PARTNER</text>
-            </svg>
-            <span class="meta">1 escala · 302 pax</span>
-          </span>
+          <span><span class="swatch" style="background:var(--arm-costa)"></span>Costa Crociere <span class="meta">27 escalas · 143.260 pax</span></span>
+          <span><span class="swatch" style="background:var(--arm-msc)"></span>MSC Crociere <span class="meta">7 escalas · 23.601 pax</span></span>
+          <span><span class="swatch" style="background:var(--arm-ncl)"></span>Norwegian <span class="meta">2 escalas · 2.348 pax</span></span>
+          <span><span class="swatch" style="background:var(--arm-plan)"></span>Plantours <span class="meta">1 escala · 302 pax</span></span>
         </div>
       </div>
     </section>
@@ -708,7 +633,7 @@
           <article class="finding">
             <div class="finding-num">achado ii</div>
             <h3>Costa Diadema respondeu por 85% da movimentação total.</h3>
-            <p><span class="num">27</span> das <span class="num">37</span> escalas foram operadas pela Costa Cruzeiros, resultando em <span class="num">143.260</span> passageiros. MSC Cruzeiros veio em segundo com <span class="num">7</span> escalas (<span class="num">23.601</span>). Diversificar a base de armadores é agenda prioritária para 2026/2027.</p>
+            <p><span class="num">27</span> das <span class="num">37</span> escalas foram operadas pela Costa Crociere, resultando em <span class="num">143.260</span> passageiros. MSC Crociere veio em segundo com <span class="num">7</span> escalas (<span class="num">23.601</span>). Diversificar a base de armadores é agenda prioritária para 2026/2027.</p>
           </article>
           <article class="finding">
             <div class="finding-num">achado iii</div>
@@ -766,7 +691,7 @@
 
         <div class="charts-2up">
           <div class="chart-block">
-            <h3 class="chart-title">Costa Cruzeiros operou 3 em cada 4 escalas da temporada.</h3>
+            <h3 class="chart-title">Costa Crociere operou 3 em cada 4 escalas da temporada.</h3>
             <p class="chart-subtitle">Cada ícone representa uma das 37 escalas, agrupado por armador. Fonte: SETUR Itajaí, temporada 2025/26.</p>
             <div class="isotype-wrap">
               <div class="isotype-grid" id="isotype-grid" aria-label="Isotipo de 37 navios coloridos por armador"></div>
@@ -836,41 +761,6 @@
       </div>
     </section>
 
-    <!-- Section V — Infraestrutura e agenda -->
-    <section class="block" data-reveal>
-      <div class="container">
-        <div class="section-head">
-          <div class="section-roman">V</div>
-          <div class="txt">
-            <div class="section-kicker">Infraestrutura e agenda</div>
-            <h2>A temporada operou no Centreventos. A estrutura receptiva <em>evolui</em> em três pilares.</h2>
-            <p class="standfirst">Itajaí ainda não dispõe de terminal portuário fixo dedicado a cruzeiros. A temporada 2025/26 foi inteiramente recebida no Centreventos, que precisou bloquear sua agenda entre 30 de novembro e 18 de abril para dar conta do receptivo. Mesmo nessa configuração adaptada, a cidade consolidou-se como hub estratégico do litoral sul brasileiro — e a Secretaria de Turismo já trabalha para que a próxima temporada encontre uma estrutura mais à altura do volume movimentado.</p>
-          </div>
-        </div>
-
-        <div class="pillars-grid">
-          <article class="pillar">
-            <span class="pillar-num">i</span>
-            <div class="pillar-kicker">Pilar 01</div>
-            <h3>Estrutura</h3>
-            <p>O hardware do receptivo: avançar em direção a um terminal dedicado, requalificar áreas de embarque e desembarque, organizar acessos urbanos e logística de bagagens em escala compatível com 5.700 passageiros por escala.</p>
-          </article>
-          <article class="pillar">
-            <span class="pillar-num">ii</span>
-            <div class="pillar-kicker">Pilar 02</div>
-            <h3>Operação</h3>
-            <p>O processo: padronizar o fluxo entre alfândega, polícia federal, ANVISA e armadores; integrar transporte urbano, fretamentos e rede hoteleira; e reduzir o tempo médio de embarque sem perder rigor sanitário e migratório.</p>
-          </article>
-          <article class="pillar">
-            <span class="pillar-num">iii</span>
-            <div class="pillar-kicker">Pilar 03</div>
-            <h3>Experiência</h3>
-            <p>O intangível: acolhimento, sinalização bilíngue, programação cultural na chegada, conexão com o comércio e os atrativos da cidade. Transformar a passagem por Itajaí em um motivo para o passageiro voltar — agora como turista.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <!-- Colophon -->
@@ -879,13 +769,13 @@
       <div>
         <div class="brand-mark">Itajaí, a Maix Quirida</div>
         <h4>Metodologia</h4>
-        <p>Base primária: Temporada_2025-2026.xlsx, registros oficiais SETUR Itajaí consolidados em 20/04/2026. Multiplicadores de impacto econômico: CLIA Brasil, Anuário 2024/25 (R$ 380–520 por passageiro em operação de embarque e desembarque completo, R$ 150–210 em operação de trânsito). Capacidades dos navios: valores máximos publicados pelos armadores.</p>
+        <p>Base primária: Temporada_2025-2026.xlsx, registros oficiais SETUR Itajaí consolidados em 20/04/2026. Multiplicadores de impacto econômico: CLIA Brasil, Anuário 2024/25 (R$ 380–520 por passageiro em operação de embarque e desembarque completo, R$ 150–210 em operação de trânsito). Capacidades dos navios: valores máximos publicados pelos armadores. <strong>Correção aplicada</strong>: escala 033/2026 (MSC Sinfonia, 11/01/2026) teve valor 980 migrado da coluna "Menores Embarque" para "Embarque" por erro de lançamento confirmado; total da temporada (169.511) inalterado.</p>
       </div>
       <div>
         <h4>Produção</h4>
         <p><strong>Secretaria de Turismo e Eventos de Itajaí</strong><br>Diretoria Executiva de Turismo e Eventos<br>Diego Oliveira · Diretor Executivo<br>cadeodiego@gmail.com</p>
         <h4>Versão</h4>
-        <p>Relatório Executivo v5.0 · Publicado em 21 de abril de 2026</p>
+        <p>Relatório Executivo v4.0 · Publicado em 21 de abril de 2026</p>
       </div>
     </div>
   </footer>
@@ -909,7 +799,7 @@
       {atrac:"006 2026",atb:"2026-01-04",navio:"HAMBURG",armador:"PLANTOURS & PARTNER GMBH",emb:0,des:0,tra:302,men:0,total:302,op:"trans",mes:"Jan/26"},
       {atrac:"007 2026",atb:"2026-01-04",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:882,des:979,tra:1163,men:219,total:3243,op:"emb-des",mes:"Jan/26"},
       {atrac:"028 2026",atb:"2026-01-10",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1097,des:951,tra:2934,men:374,total:5356,op:"emb-des",mes:"Jan/26"},
-      {atrac:"033 2026",atb:"2026-01-11",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:980,des:962,tra:1217,men:172,total:3331,op:"emb-des",mes:"Jan/26"},
+      {atrac:"033 2026",atb:"2026-01-11",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:980,des:962,tra:1217,men:172,total:3331,op:"emb-des",mes:"Jan/26",corrected:true},
       {atrac:"050 2026",atb:"2026-01-15",navio:"MARINA",armador:"NORWEGIAN CRUISE LINE - NCL",emb:2,des:2,tra:1169,men:0,total:1173,op:"trans",mes:"Jan/26"},
       {atrac:"061 2026",atb:"2026-01-17",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1083,des:1108,tra:3129,men:425,total:5745,op:"emb-des",mes:"Jan/26"},
       {atrac:"064 2026",atb:"2026-01-18",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:933,des:921,tra:1269,men:182,total:3305,op:"emb-des",mes:"Jan/26"},
@@ -939,8 +829,8 @@
     var BY_MES_ESC = {"Nov/25": 1, "Dez/25": 9, "Jan/26": 11, "Fev/26": 5, "Mar/26": 5, "Abr/26": 6};
 
     var ARM_MAP = [
-      ['COSTA CROCIERE SPA (IT003761)', 'Costa Cruzeiros', 'costa', 'var(--arm-costa)'],
-      ['MSC CROCIERE', 'MSC Cruzeiros', 'msc', 'var(--arm-msc)'],
+      ['COSTA CROCIERE SPA (IT003761)', 'Costa Crociere', 'costa', 'var(--arm-costa)'],
+      ['MSC CROCIERE', 'MSC Crociere', 'msc', 'var(--arm-msc)'],
       ['NORWEGIAN CRUISE LINE - NCL', 'Norwegian', 'ncl', 'var(--arm-ncl)'],
       ['PLANTOURS & PARTNER GMBH', 'Plantours', 'plan', 'var(--arm-plan)']
     ];
@@ -999,7 +889,7 @@
           filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); }
         });
         var a = document.createElement('a'); a.href = url;
-        a.download = 'cruzeiros-itajai-2025-26-relatorio-executivo-v5.png'; a.click();
+        a.download = 'cruzeiros-itajai-2025-26-relatorio-executivo-v4.png'; a.click();
       } catch(e) { console.error('Download failed:', e); }
       menu.style.display = '';
     }
@@ -1093,7 +983,18 @@
           'text-transform': 'uppercase'
         }, m.lbl.toUpperCase() + ' ' + (m.ms < Date.UTC(2026, 0, 1) ? '25' : '26')));
       });
-      // (Period info lives in masthead-meta and section subtitle — keeping the calendar header clean)
+      // Start/end date labels
+      svg.appendChild(el('text', {
+        x: padL, y: H - 18,
+        fill: '#4C4840', 'font-family': 'Inter, sans-serif',
+        'font-size': 10, 'font-weight': 600, 'letter-spacing': '2px'
+      }, '30 NOV 25'));
+      svg.appendChild(el('text', {
+        x: W - padR, y: H - 18,
+        fill: '#4C4840', 'font-family': 'Inter, sans-serif',
+        'font-size': 10, 'font-weight': 600, 'letter-spacing': '2px',
+        'text-anchor': 'end'
+      }, '18 ABR 26'));
 
       // Escala circles
       var maxPax = Math.max.apply(null, ESCALAS.map(function(e) { return e.total; }));
@@ -1325,8 +1226,9 @@
       var tbody = document.getElementById('tbody-escalas');
       tbody.innerHTML = rows.map(function(d) {
         var arm = (ARM_MAP.find(function(a) { return a[0] === d.armador; }) || [null, d.armador])[1];
+        var corr = d.corrected ? '<span class="corrected-flag">¹</span>' : '';
         return '<tr>' +
-          '<td>' + d.atrac + '</td>' +
+          '<td>' + d.atrac + corr + '</td>' +
           '<td>' + FMT.date(d.atb) + '</td>' +
           '<td><strong>' + d.navio + '</strong></td>' +
           '<td>' + arm + '</td>' +

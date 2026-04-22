@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Temporada de Cruzeiros 2025/26 — Relatório Executivo · SETUR Itajaí</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+  <script>Chart.defaults.animation = false;</script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.11/dist/html-to-image.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      /* Paleta Oficial Itajaí — A Maix Quirida */
+      --azul-institucional: #16295B;
+      --amarelo-institucional: #FFD91A;
+      --azul-profundo: #2D6AAA;
+      --azul-ciano: #4DAEC4;
+      --azul-ceu: #4B99CB;
+      --laranja: #F77B14;
+      --verde: #5DBC35;
+
+      /* Neutras */
+      --preto-suave: #282623;
+      --grafite: #4C4840;
+      --cinza-escuro: #6C6657;
+      --cinza-claro: #9E9B90;
+      --off-white: #F9F8F2;
+
+      /* Semântica do relatório */
+      --bg: var(--off-white);
+      --surface: #FFFFFF;
+      --ink: var(--azul-institucional);
+      --ink-secondary: var(--grafite);
+      --ink-muted: var(--cinza-escuro);
+      --rule: rgba(22, 41, 91, 0.12);
+      --rule-soft: rgba(22, 41, 91, 0.06);
+      --accent: var(--amarelo-institucional);
+      --accent-ink: var(--azul-institucional);
+      --highlight: #FFF4B3;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg); color: var(--ink);
+      line-height: 1.55; -webkit-font-smoothing: antialiased;
+      letter-spacing: -0.005em;
+      font-feature-settings: 'ss01', 'cv11';
+    }
+
+    /* ===== Typography (editorial) ===== */
+    .serif { font-family: 'Fraunces', Georgia, serif; }
+    h1, h2, h3, h4 { color: var(--ink); letter-spacing: -0.02em; line-height: 1.1; }
+    h1 { font-family: 'Fraunces', Georgia, serif; font-weight: 600; }
+    h2 { font-weight: 600; }
+    h3 { font-weight: 600; }
+
+    /* Measure */
+    p { max-width: 72ch; }
+
+    /* ===== Layout ===== */
+    .container { max-width: 1240px; margin: 0 auto; padding: 0 48px; }
+
+    /* Cover / Masthead */
+    .masthead {
+      background: var(--azul-institucional);
+      color: var(--off-white);
+      padding: 20px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 4px solid var(--amarelo-institucional);
+    }
+    .masthead-brand { display: flex; flex-direction: column; gap: 2px; }
+    .masthead-brand .kicker {
+      font-size: 10px; color: var(--amarelo-institucional);
+      letter-spacing: 3px; font-weight: 700; text-transform: uppercase;
+    }
+    .masthead-brand .title { font-size: 14px; font-weight: 500; color: var(--off-white); }
+    .masthead-meta { font-size: 11px; color: rgba(249, 248, 242, 0.75); text-align: right; }
+    .masthead-meta strong { color: var(--off-white); font-weight: 500; }
+
+    /* Hero */
+    .hero { padding: 88px 0 56px; }
+    .hero-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 3px;
+      color: var(--azul-profundo); text-transform: uppercase; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-eyebrow::before {
+      content: ''; width: 32px; height: 2px; background: var(--amarelo-institucional);
+    }
+    .hero h1 {
+      font-size: clamp(2.25rem, 4.5vw, 3.75rem);
+      max-width: 22ch; margin-bottom: 24px; line-height: 1.08;
+    }
+    .hero h1 .hl { background: linear-gradient(transparent 65%, var(--highlight) 65%); padding: 0 2px; }
+    .hero .lede {
+      font-size: 1.15rem; color: var(--ink-secondary);
+      max-width: 64ch; line-height: 1.6; font-weight: 400;
+    }
+    .hero .lede strong { color: var(--ink); font-weight: 600; }
+
+    /* Primary metric (KPMG-style lead number) */
+    .lead-metric {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 0; margin: 48px 0 56px;
+      border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+    }
+    .lead-metric .cell {
+      padding: 28px 32px 28px 0; border-right: 1px solid var(--rule-soft);
+    }
+    .lead-metric .cell:last-child { border-right: none; padding-right: 0; }
+    .lead-metric .cell:not(:first-child) { padding-left: 32px; }
+    .lead-metric .label {
+      font-size: 10px; color: var(--ink-muted);
+      letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .lead-metric .value {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2rem, 3.2vw, 2.75rem);
+      font-weight: 600; color: var(--ink); line-height: 1;
+      letter-spacing: -0.02em;
+    }
+    .lead-metric .unit {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem; color: var(--ink-muted); font-weight: 500;
+      margin-left: 6px;
+    }
+    .lead-metric .ctx {
+      font-size: 12px; color: var(--ink-muted); margin-top: 10px;
+      line-height: 1.5; max-width: 28ch;
+    }
+    .lead-metric .cell.accent .value { color: var(--azul-profundo); }
+
+    /* Section markers */
+    section.block { padding: 56px 0; border-top: 1px solid var(--rule); }
+    .section-kicker {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 10px; letter-spacing: 3px; font-weight: 700;
+      color: var(--ink-muted); text-transform: uppercase; margin-bottom: 20px;
+    }
+    .section-kicker .num {
+      font-family: 'Fraunces', serif; font-size: 14px; font-weight: 600;
+      color: var(--azul-institucional); letter-spacing: -0.02em;
+    }
+    .section-kicker::after {
+      content: ''; flex: 1; height: 1px; background: var(--rule-soft);
+    }
+    section.block h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.75rem, 2.8vw, 2.25rem);
+      font-weight: 600; margin-bottom: 14px; max-width: 24ch; line-height: 1.15;
+    }
+    section.block .standfirst {
+      font-size: 1.1rem; color: var(--ink-secondary);
+      max-width: 60ch; line-height: 1.55; margin-bottom: 40px;
+    }
+
+    /* Findings (3 insights) */
+    .findings { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .finding { position: relative; }
+    .finding .finding-number {
+      font-family: 'Fraunces', serif;
+      font-size: 3rem; font-weight: 400; font-style: italic;
+      color: var(--amarelo-institucional);
+      line-height: 1; margin-bottom: 14px;
+      -webkit-text-stroke: 1px var(--azul-profundo);
+    }
+    .finding h3 {
+      font-size: 1.2rem; font-weight: 600; line-height: 1.3;
+      margin-bottom: 12px; max-width: 26ch;
+    }
+    .finding p {
+      font-size: 0.95rem; color: var(--ink-secondary); line-height: 1.55;
+    }
+
+    /* Chart blocks (Tufte-inspired) */
+    .chart-block { margin-bottom: 56px; }
+    .chart-block:last-child { margin-bottom: 0; }
+    .chart-block .chart-title {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: 1.4rem; font-weight: 600; line-height: 1.25;
+      margin-bottom: 10px; max-width: 38ch;
+    }
+    .chart-block .chart-subtitle {
+      font-size: 13px; color: var(--ink-muted);
+      margin-bottom: 24px; max-width: 60ch;
+    }
+    .chart-block .chart-canvas-wrap {
+      position: relative; height: 360px;
+    }
+    .chart-block .chart-annotation {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px 20px; margin-top: 16px;
+      background: var(--surface); border-left: 3px solid var(--amarelo-institucional);
+      font-size: 13px; color: var(--ink-secondary); line-height: 1.5;
+    }
+    .chart-block .chart-annotation strong { color: var(--ink); font-weight: 600; }
+    .chart-block .chart-annotation::before {
+      content: '↳'; font-family: 'Fraunces', serif; color: var(--azul-profundo);
+      font-weight: 600; font-size: 1.1rem; line-height: 1;
+    }
+
+    /* Two-up charts */
+    .charts-2up { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; }
+
+    /* Filters (minimal, editorial) */
+    .filter-bar {
+      display: flex; gap: 20px; align-items: flex-end; flex-wrap: wrap;
+      padding: 20px 0; margin-bottom: 0;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .filter-bar label { display: flex; flex-direction: column; gap: 6px; }
+    .filter-bar label > span {
+      font-size: 9px; color: var(--ink-muted); letter-spacing: 2px;
+      font-weight: 600; text-transform: uppercase;
+    }
+    .filter-bar select {
+      background: transparent; color: var(--ink);
+      border: none; border-bottom: 1px solid var(--ink-muted);
+      padding: 4px 20px 4px 0; font-size: 14px; font-family: inherit;
+      min-width: 160px; cursor: pointer;
+      appearance: none; -webkit-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%236C6657' stroke-width='1.5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right center;
+    }
+    .filter-bar select:focus { outline: none; border-bottom-color: var(--azul-institucional); }
+    .filter-bar .reset-btn {
+      background: transparent; color: var(--azul-profundo);
+      border: none; padding: 4px 0; font-size: 12px; font-weight: 600;
+      letter-spacing: 1px; text-transform: uppercase; cursor: pointer;
+      font-family: inherit;
+    }
+    .filter-bar .reset-btn:hover { color: var(--azul-institucional); text-decoration: underline; }
+    .filter-bar .filter-summary {
+      margin-left: auto; font-size: 12px; color: var(--ink-muted);
+      font-variant-numeric: tabular-nums;
+    }
+    .filter-bar .filter-summary strong { color: var(--ink); font-weight: 600; }
+
+    /* Table (editorial) */
+    .table-block { margin-top: 32px; }
+    .data-table { width: 100%; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums; }
+    .data-table thead tr { border-bottom: 2px solid var(--ink); }
+    .data-table th {
+      text-align: left; padding: 12px 12px 12px 0;
+      font-size: 10px; letter-spacing: 1.5px; font-weight: 600;
+      text-transform: uppercase; color: var(--ink-muted);
+    }
+    .data-table th.num, .data-table td.num { text-align: right; }
+    .data-table td {
+      padding: 14px 12px 14px 0; border-bottom: 1px solid var(--rule-soft);
+      color: var(--ink);
+    }
+    .data-table tr:hover td { background: var(--surface); }
+    .op-tag {
+      display: inline-block; font-size: 10px; font-weight: 600;
+      padding: 3px 8px; border-radius: 2px; letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .op-tag.emb-des {
+      background: rgba(45, 106, 170, 0.12); color: var(--azul-profundo);
+    }
+    .op-tag.trans {
+      background: rgba(247, 123, 20, 0.12); color: var(--laranja);
+    }
+    .corrected-flag { color: var(--laranja); font-size: 10px; margin-left: 6px; }
+
+    /* Outlook / recommendations */
+    .outlook { padding: 56px 0; background: var(--azul-institucional); color: var(--off-white); margin-top: 56px; }
+    .outlook h2 { color: var(--off-white); font-family: 'Fraunces', serif; font-size: 2rem; margin-bottom: 16px; max-width: 28ch; }
+    .outlook .standfirst { color: rgba(249, 248, 242, 0.85); font-size: 1.1rem; max-width: 60ch; margin-bottom: 40px; }
+    .outlook .recs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+    .outlook .rec { padding: 24px 0; border-top: 2px solid var(--amarelo-institucional); }
+    .outlook .rec .rec-kicker {
+      font-size: 10px; color: var(--amarelo-institucional);
+      letter-spacing: 2px; font-weight: 700; text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .outlook .rec h3 {
+      color: var(--off-white); font-size: 1.1rem; font-weight: 600;
+      margin-bottom: 10px; line-height: 1.35;
+    }
+    .outlook .rec p { color: rgba(249, 248, 242, 0.8); font-size: 0.9rem; line-height: 1.5; }
+
+    /* Colophon */
+    .colophon {
+      padding: 40px 48px; background: var(--preto-suave); color: var(--cinza-claro);
+      font-size: 12px; line-height: 1.7;
+    }
+    .colophon .container { display: grid; grid-template-columns: 2fr 1fr; gap: 48px; }
+    .colophon h4 {
+      color: var(--off-white); font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; font-weight: 600; margin-bottom: 8px;
+    }
+    .colophon p + h4 { margin-top: 16px; }
+    .colophon strong { color: var(--off-white); font-weight: 500; }
+
+    /* Utility menu */
+    .viz-menu { position: fixed; top: 16px; right: 16px; z-index: 9999; }
+    .viz-menu-toggle {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--azul-institucional); color: var(--off-white);
+      border: none; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      box-shadow: 0 4px 12px rgba(22, 41, 91, 0.3); transition: transform 0.2s;
+    }
+    .viz-menu-toggle:hover { transform: scale(1.05); }
+    .viz-menu-dropdown {
+      position: absolute; top: 48px; right: 0; min-width: 200px;
+      background: var(--surface); border: 1px solid var(--rule);
+      padding: 6px; opacity: 0; visibility: hidden; transform: translateY(-4px);
+      transition: all 0.2s; box-shadow: 0 8px 24px rgba(22, 41, 91, 0.12);
+    }
+    .viz-menu-dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+    .viz-menu-dropdown button {
+      width: 100%; padding: 10px 14px; border: none; background: transparent;
+      color: var(--ink); font-size: 13px; font-family: inherit;
+      cursor: pointer; text-align: left; display: flex; align-items: center; gap: 10px;
+    }
+    .viz-menu-dropdown button:hover { background: var(--off-white); }
+
+    /* Animations — restrained, editorial */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-in { animation: fadeIn 0.5s ease-out both; }
+    .fade-in.d1 { animation-delay: 0.08s; }
+    .fade-in.d2 { animation-delay: 0.16s; }
+    .fade-in.d3 { animation-delay: 0.24s; }
+
+    .reveal { opacity: 0; transform: translateY(12px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .lead-metric { grid-template-columns: 1fr 1fr; }
+      .lead-metric .cell { border-right: none; border-bottom: 1px solid var(--rule-soft); padding-bottom: 24px; }
+      .lead-metric .cell:nth-child(2n) { padding-left: 0; }
+      .findings { grid-template-columns: 1fr; gap: 32px; }
+      .charts-2up { grid-template-columns: 1fr; gap: 40px; }
+      .outlook .recs { grid-template-columns: 1fr; gap: 32px; }
+      .colophon .container { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 768px) {
+      .container { padding: 0 24px; }
+      .masthead { padding: 16px 24px; flex-direction: column; align-items: flex-start; gap: 8px; }
+      .masthead-meta { text-align: left; }
+      .hero { padding: 56px 0 40px; }
+      .outlook { padding: 40px 24px; }
+      .colophon { padding: 32px 24px; }
+      body { overflow-x: hidden; }
+    }
+
+    /* Print */
+    @media print {
+      body { background: white; color: black; }
+      .viz-menu { display: none !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+      .masthead { background: var(--azul-institucional) !important; }
+      .outlook { background: var(--azul-institucional) !important; page-break-before: always; }
+      * { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+      section.block { page-break-inside: avoid; }
+    }
+    @page { margin: 0.6in; }
+  </style>
+</head>
+<body>
+  <!-- Utility menu -->
+  <div class="viz-menu">
+    <button class="viz-menu-toggle" onclick="toggleMenu()" aria-label="Opções">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <line x1="3" y1="5" x2="17" y2="5"/><line x1="3" y1="10" x2="17" y2="10"/><line x1="3" y1="15" x2="17" y2="15"/>
+      </svg>
+    </button>
+    <div class="viz-menu-dropdown" id="menuDropdown">
+      <button onclick="downloadImage()">Baixar PNG</button>
+      <button onclick="window.print()">Imprimir / PDF</button>
+    </div>
+  </div>
+
+  <!-- Masthead -->
+  <header class="masthead" role="banner">
+    <div class="masthead-brand">
+      <div class="kicker">SETUR Itajaí · Relatório Executivo</div>
+      <div class="title serif">Temporada de Cruzeiros · Itajaí</div>
+    </div>
+    <div class="masthead-meta">
+      Temporada <strong>2025/2026</strong><br>
+      30 novembro 2025 — 18 abril 2026 · 140 dias
+    </div>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <!-- Hero -->
+    <section class="hero fade-in">
+      <div class="container">
+        <div class="hero-eyebrow">Temporada encerrada · Abril 2026</div>
+        <h1>A maior temporada de cruzeiros da história de Itajaí movimentou <span class="hl">169 mil passageiros</span> e injetou <span class="hl">R$ 48,7 milhões</span> na economia local.</h1>
+        <p class="lede">Em 140 dias, <strong>37 escalas de 5 navios</strong> operados por 4 armadores consolidaram Itajaí como base de origem preferencial no litoral sul brasileiro. A temporada superou a média histórica em volume de operação, com <strong>96% das escalas em modelo de embarque e desembarque completo</strong> — o perfil de maior retorno econômico local.</p>
+      </div>
+    </section>
+
+    <!-- Lead metrics -->
+    <section class="fade-in d1">
+      <div class="container">
+        <div class="lead-metric">
+          <div class="cell accent">
+            <div class="label">Impacto econômico estimado</div>
+            <div class="value">R$ 48,7<span class="unit">milhões</span></div>
+            <div class="ctx">Cenário central. Intervalo: R$ 40,9M – R$ 56,5M, conforme multiplicadores CLIA Brasil 2024/25.</div>
+          </div>
+          <div class="cell">
+            <div class="label">Movimentação total</div>
+            <div class="value">169.511</div>
+            <div class="ctx">Passageiros. Embarques, desembarques, trânsitos e menores somados.</div>
+          </div>
+          <div class="cell">
+            <div class="label">Escalas realizadas</div>
+            <div class="value">37</div>
+            <div class="ctx">33 com embarque e desembarque completo, 4 em trânsito.</div>
+          </div>
+          <div class="cell">
+            <div class="label">Ocupação média</div>
+            <div class="value">86<span class="unit">%</span></div>
+            <div class="ctx">Nas operações de embarque e desembarque completo, sobre capacidade máxima dos navios.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Findings -->
+    <section class="block" data-reveal>
+      <div class="container">
+        <div class="section-kicker"><span class="num">01</span> Leituras estratégicas</div>
+        <h2>Três movimentos definiram a temporada.</h2>
+        <p class="standfirst">O volume total esconde três dinâmicas que explicam onde está a fortaleza e onde está a oportunidade para a próxima temporada.</p>
+
+        <div class="findings">
+          <article class="finding">
+            <div class="finding-number">01</div>
+            <h3>Dezembro e janeiro concentraram 51% do fluxo da temporada inteira.</h3>
+            <p>Os dois meses de alta temporada somaram 86.597 passageiros — mais que o triplo de março (21.638) e quatro vezes novembro (5.156). A dependência sazonal é o principal risco estratégico da operação.</p>
+          </article>
+          <article class="finding">
+            <div class="finding-number">02</div>
+            <h3>Costa Diadema respondeu por 85% da movimentação total.</h3>
+            <p>27 das 37 escalas foram operadas pela Costa Crociere, resultando em 143.260 passageiros. MSC Crociere veio em segundo com 7 escalas (23.601). Diversificar a base de armadores é agenda prioritária para 2026/2027.</p>
+          </article>
+          <article class="finding">
+            <div class="finding-number">03</div>
+            <h3>96% das escalas foram de embarque e desembarque completo — o perfil de maior retorno.</h3>
+            <p>33 escalas com base em Itajaí contra apenas 4 em trânsito. O município já captura o formato de maior valor agregado; abrir espaço para mais escalas de trânsito eleva volume sem exigir nova infraestrutura portuária.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart: Temporal -->
+    <section class="block" data-reveal>
+      <div class="container">
+        <div class="section-kicker"><span class="num">02</span> Distribuição temporal</div>
+        <h2>O pico de dezembro e janeiro é o eixo da temporada.</h2>
+        <p class="standfirst">A distribuição mensal de passageiros e escalas revela a concentração sazonal que caracteriza o mercado de cruzeiros brasileiro e o perfil específico de Itajaí.</p>
+
+        <div class="charts-2up">
+          <div class="chart-block">
+            <h3 class="chart-title">Dezembro e janeiro somaram mais passageiros do que fevereiro, março e abril combinados.</h3>
+            <p class="chart-subtitle">Movimentação mensal de passageiros (embarques + desembarques + trânsitos + menores). Fonte: SETUR Itajaí, temporada 2025/26.</p>
+            <div class="chart-canvas-wrap" role="img" aria-label="Gráfico de barras mostrando passageiros por mês">
+              <canvas id="chartMes"></canvas>
+            </div>
+            <div class="chart-annotation">
+              <div><strong>86.597 passageiros</strong> somente nos dois meses de pico — 51% do total da temporada. Pico em dezembro (44.337), influenciado pelas férias de fim de ano e alta procura nacional.</div>
+            </div>
+          </div>
+          <div class="chart-block">
+            <h3 class="chart-title">Janeiro concentrou 11 escalas em 31 dias — densidade operacional máxima.</h3>
+            <p class="chart-subtitle">Número de escalas por mês. Fonte: SETUR Itajaí, temporada 2025/26.</p>
+            <div class="chart-canvas-wrap" role="img" aria-label="Gráfico de linha mostrando escalas por mês">
+              <canvas id="chartEsc"></canvas>
+            </div>
+            <div class="chart-annotation">
+              <div>Média de <strong>uma escala a cada 2,8 dias em janeiro</strong>. A intensidade mobiliza agências de receptivo, transportes urbanos e atrativos turísticos locais — Itajaí opera como hub completo durante o pico.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Chart: Mix operacional -->
+    <section class="block" data-reveal>
+      <div class="container">
+        <div class="section-kicker"><span class="num">03</span> Mix operacional</div>
+        <h2>Costa Diadema foi o motor da temporada.</h2>
+        <p class="standfirst">A participação dos armadores e o tipo de operação definem o padrão de receita do município. A concentração atual é ativo de curto prazo e risco de médio.</p>
+
+        <div class="charts-2up">
+          <div class="chart-block">
+            <h3 class="chart-title">Costa Crociere operou 3 em cada 4 escalas da temporada.</h3>
+            <p class="chart-subtitle">Distribuição de escalas por armador. Fonte: SETUR Itajaí, temporada 2025/26.</p>
+            <div class="chart-canvas-wrap" role="img" aria-label="Gráfico horizontal de barras com armadores">
+              <canvas id="chartArm"></canvas>
+            </div>
+            <div class="chart-annotation">
+              <div>Concentração de <strong>73% em um único armador</strong> e <strong>85% da movimentação em um único navio</strong> (Costa Diadema). Diversificação é agenda estruturante para 2026/2027.</div>
+            </div>
+          </div>
+          <div class="chart-block">
+            <h3 class="chart-title">89% da movimentação veio de escalas com base em Itajaí.</h3>
+            <p class="chart-subtitle">Distribuição do volume de passageiros por tipo de operação. Fonte: SETUR Itajaí, temporada 2025/26.</p>
+            <div class="chart-canvas-wrap" role="img" aria-label="Gráfico mostrando embarque e desembarque versus trânsito">
+              <canvas id="chartOp"></canvas>
+            </div>
+            <div class="chart-annotation">
+              <div><strong>Embarque e desembarque</strong> — passageiro começa ou termina viagem em Itajaí — gera maior impacto por pax (R$ 380–520 contra R$ 150–210 em trânsito, base CLIA). Escalas de trânsito podem complementar sem competir pela mesma infraestrutura.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detail table -->
+    <section class="block" data-reveal>
+      <div class="container">
+        <div class="section-kicker"><span class="num">04</span> Base de dados auditada</div>
+        <h2>37 escalas. Dados abertos para consulta e auditoria.</h2>
+        <p class="standfirst">Filtre abaixo para explorar a base linha a linha. A transparência é premissa: qualquer afirmação deste relatório pode ser reconstruída a partir desta tabela.</p>
+
+        <div class="filter-bar">
+          <label><span>Mês</span><select id="f-mes"><option value="">Todos</option></select></label>
+          <label><span>Armador</span><select id="f-arm"><option value="">Todos</option></select></label>
+          <label><span>Navio</span><select id="f-navio"><option value="">Todos</option></select></label>
+          <label><span>Tipo de operação</span><select id="f-op"><option value="">Todas</option><option value="emb-des">Embarque e desembarque</option><option value="trans">Trânsito</option></select></label>
+          <button class="reset-btn" onclick="resetFilters()">Limpar filtros</button>
+          <div class="filter-summary">
+            Exibindo <span id="count-result"><strong>37</strong></span> de 37 escalas · <span id="sum-result"><strong>169.511</strong></span> passageiros
+          </div>
+        </div>
+
+        <div class="table-block">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Atracação</th><th>Data</th><th>Navio</th><th>Armador</th>
+                <th class="num">Embarque</th><th class="num">Desembarque</th><th class="num">Trânsito</th>
+                <th class="num">Total</th><th>Operação</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-escalas"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Outlook / recommendations -->
+  <section class="outlook" data-reveal>
+    <div class="container">
+      <div class="section-kicker" style="color: var(--amarelo-institucional);"><span class="num" style="color: var(--amarelo-institucional);">05</span> Próxima temporada</div>
+      <h2>Três agendas para consolidar a liderança em 2026/2027.</h2>
+      <p class="standfirst">O resultado recorde abre espaço para movimentos estratégicos. Três prioridades para a Secretaria de Turismo e para a cadeia portuária local.</p>
+
+      <div class="recs">
+        <article class="rec">
+          <div class="rec-kicker">Agenda 01</div>
+          <h3>Diversificar a base de armadores.</h3>
+          <p>Dependência de 73% em um único operador é risco de receita. Buscar ao menos dois novos armadores para a temporada 2026/27 com contratos plurianuais.</p>
+        </article>
+        <article class="rec">
+          <div class="rec-kicker">Agenda 02</div>
+          <h3>Ampliar escalas de trânsito.</h3>
+          <p>Apenas 4 das 37 escalas. Escalas de trânsito complementam o pico sem competir por vagas portuárias de embarque — volume adicional sem pressão de infraestrutura.</p>
+        </article>
+        <article class="rec">
+          <div class="rec-kicker">Agenda 03</div>
+          <h3>Descongestionar a janela dezembro-janeiro.</h3>
+          <p>Criar atrativos para estender a temporada para outubro-novembro e abril-maio, reduzindo a dependência sazonal e aumentando o retorno anual total da operação.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Colophon -->
+  <footer class="colophon">
+    <div class="container">
+      <div>
+        <h4>Metodologia</h4>
+        <p>Base primária: Temporada_2025-2026.xlsx, registros oficiais SETUR Itajaí consolidados em 20/04/2026. Multiplicadores de impacto econômico: CLIA Brasil, Anuário 2024/25 (R$ 380–520 por passageiro em operação de embarque e desembarque completo, R$ 150–210 em operação de trânsito). Capacidades dos navios: valores máximos publicados pelos armadores. <strong>Correção aplicada</strong>: escala 033/2026 (MSC Sinfonia, 11/01/2026) teve valor 980 migrado da coluna "Menores Embarque" para "Embarque" por erro de lançamento confirmado; total da temporada (169.511) inalterado.</p>
+      </div>
+      <div>
+        <h4>Produção</h4>
+        <p><strong>Secretaria de Turismo e Eventos de Itajaí</strong><br>Diretoria Executiva de Turismo e Eventos<br>Diego Oliveira · Diretor Executivo<br>cadeodiego@gmail.com</p>
+        <h4>Versão</h4>
+        <p>Relatório Executivo v3.0 · Publicado em 21 de abril de 2026</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // === Data ===
+    var DATA = {
+      navios: ["COSTA DIADEMA", "HAMBURG", "MARINA", "MSC FANTASIA", "MSC SINFONIA"],
+      armadores: ["COSTA CROCIERE SPA (IT003761)", "MSC CROCIERE", "NORWEGIAN CRUISE LINE - NCL", "PLANTOURS & PARTNER GMBH"],
+      by_mes_pax: {"Nov/25": 5156, "Dez/25": 44337, "Jan/26": 42260, "Fev/26": 25447, "Mar/26": 21638, "Abr/26": 30673},
+      by_mes: {"Nov/25": 1, "Dez/25": 9, "Jan/26": 11, "Fev/26": 5, "Mar/26": 5, "Abr/26": 6},
+      by_armador: {"COSTA CROCIERE SPA (IT003761)": 27, "MSC CROCIERE": 7, "PLANTOURS & PARTNER GMBH": 1, "NORWEGIAN CRUISE LINE - NCL": 2},
+      by_op_pax: {"emb-des": 162943, "trans": 6568}
+    };
+
+    var ESCALAS = [
+      {atrac:"1113 2025",atb:"2025-11-30",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:924,des:930,tra:3043,men:259,total:5156,op:"emb-des",mes:"Nov/25"},
+      {atrac:"1123 2025",atb:"2025-12-04",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:860,des:925,tra:2987,men:323,total:5095,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1138 2025",atb:"2025-12-07",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:929,des:862,tra:3264,men:338,total:5393,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1147 2025",atb:"2025-12-10",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:955,des:939,tra:2995,men:365,total:5254,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1159 2025",atb:"2025-12-13",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:909,des:956,tra:3192,men:366,total:5423,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1177 2025",atb:"2025-12-17",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:940,des:912,tra:3240,men:470,total:5562,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1192 2025",atb:"2025-12-20",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:938,des:944,tra:3205,men:420,total:5507,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1196 2025",atb:"2025-12-21",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:919,des:922,tra:1150,men:259,total:3250,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1216 2025",atb:"2025-12-27",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:954,des:958,tra:3168,men:463,total:5543,op:"emb-des",mes:"Dez/25"},
+      {atrac:"1220 2025",atb:"2025-12-28",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:933,des:930,tra:1209,men:238,total:3310,op:"emb-des",mes:"Dez/25"},
+      {atrac:"002 2026",atb:"2026-01-03",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:951,des:968,tra:3086,men:389,total:5394,op:"emb-des",mes:"Jan/26"},
+      {atrac:"006 2026",atb:"2026-01-04",navio:"HAMBURG",armador:"PLANTOURS & PARTNER GMBH",emb:0,des:0,tra:302,men:0,total:302,op:"trans",mes:"Jan/26"},
+      {atrac:"007 2026",atb:"2026-01-04",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:882,des:979,tra:1163,men:219,total:3243,op:"emb-des",mes:"Jan/26"},
+      {atrac:"028 2026",atb:"2026-01-10",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1097,des:951,tra:2934,men:374,total:5356,op:"emb-des",mes:"Jan/26"},
+      {atrac:"033 2026",atb:"2026-01-11",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:980,des:962,tra:1217,men:172,total:3331,op:"emb-des",mes:"Jan/26",corrected:true},
+      {atrac:"050 2026",atb:"2026-01-15",navio:"MARINA",armador:"NORWEGIAN CRUISE LINE - NCL",emb:2,des:2,tra:1169,men:0,total:1173,op:"trans",mes:"Jan/26"},
+      {atrac:"061 2026",atb:"2026-01-17",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1083,des:1108,tra:3129,men:425,total:5745,op:"emb-des",mes:"Jan/26"},
+      {atrac:"064 2026",atb:"2026-01-18",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:933,des:921,tra:1269,men:182,total:3305,op:"emb-des",mes:"Jan/26"},
+      {atrac:"086 2026",atb:"2026-01-24",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1042,des:1098,tra:3031,men:442,total:5613,op:"emb-des",mes:"Jan/26"},
+      {atrac:"089 2026",atb:"2026-01-25",navio:"MSC SINFONIA",armador:"MSC CROCIERE",emb:847,des:938,tra:1229,men:230,total:3244,op:"emb-des",mes:"Jan/26"},
+      {atrac:"112 2026",atb:"2026-01-31",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1075,des:1068,tra:3019,men:392,total:5554,op:"emb-des",mes:"Jan/26"},
+      {atrac:"136 2026",atb:"2026-02-07",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1050,des:1083,tra:3077,men:351,total:5561,op:"emb-des",mes:"Fev/26"},
+      {atrac:"157 2026",atb:"2026-02-14",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1046,des:1054,tra:2944,men:341,total:5385,op:"emb-des",mes:"Fev/26"},
+      {atrac:"179 2026",atb:"2026-02-21",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:991,des:1055,tra:3047,men:276,total:5369,op:"emb-des",mes:"Fev/26"},
+      {atrac:"189 2026",atb:"2026-02-23",navio:"MSC FANTASIA",armador:"MSC CROCIERE",emb:0,des:2,tra:3719,men:197,total:3918,op:"trans",mes:"Fev/26"},
+      {atrac:"208 2026",atb:"2026-02-28",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1041,des:994,tra:2977,men:202,total:5214,op:"emb-des",mes:"Fev/26"},
+      {atrac:"229 2026",atb:"2026-03-07",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1023,des:1055,tra:2995,men:211,total:5284,op:"emb-des",mes:"Mar/26"},
+      {atrac:"242 2026",atb:"2026-03-11",navio:"MARINA",armador:"NORWEGIAN CRUISE LINE - NCL",emb:0,des:1,tra:1174,men:0,total:1175,op:"trans",mes:"Mar/26"},
+      {atrac:"253 2026",atb:"2026-03-14",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1005,des:1038,tra:2873,men:161,total:5077,op:"emb-des",mes:"Mar/26"},
+      {atrac:"286 2026",atb:"2026-03-21",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:1042,des:1017,tra:2788,men:117,total:4964,op:"emb-des",mes:"Mar/26"},
+      {atrac:"312 2026",atb:"2026-03-28",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:899,des:1059,tra:2981,men:199,total:5138,op:"emb-des",mes:"Mar/26"},
+      {atrac:"328 2026",atb:"2026-04-01",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:971,des:903,tra:3140,men:322,total:5336,op:"emb-des",mes:"Abr/26"},
+      {atrac:"338 2026",atb:"2026-04-04",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:904,des:974,tra:3241,men:304,total:5423,op:"emb-des",mes:"Abr/26"},
+      {atrac:"353 2026",atb:"2026-04-08",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:926,des:907,tra:3078,men:278,total:5189,op:"emb-des",mes:"Abr/26"},
+      {atrac:"368 2026",atb:"2026-04-11",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:886,des:941,tra:3033,men:241,total:5101,op:"emb-des",mes:"Abr/26"},
+      {atrac:"387 2026",atb:"2026-04-15",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:935,des:893,tra:3073,men:215,total:5116,op:"emb-des",mes:"Abr/26"},
+      {atrac:"399 2026",atb:"2026-04-18",navio:"COSTA DIADEMA",armador:"COSTA CROCIERE SPA (IT003761)",emb:82,des:947,tra:3258,men:221,total:4508,op:"emb-des",mes:"Abr/26"}
+    ];
+
+    var MESES = ['Nov/25','Dez/25','Jan/26','Fev/26','Mar/26','Abr/26'];
+    var ARM_MAP = [
+      ['COSTA CROCIERE SPA (IT003761)', 'Costa Crociere'],
+      ['MSC CROCIERE', 'MSC Crociere'],
+      ['NORWEGIAN CRUISE LINE - NCL', 'Norwegian'],
+      ['PLANTOURS & PARTNER GMBH', 'Plantours']
+    ];
+    var OP_LABEL = { 'emb-des': 'Embarque e desembarque', 'trans': 'Trânsito' };
+
+    var FMT = {
+      n: function(v) { return new Intl.NumberFormat('pt-BR').format(Math.round(v)); },
+      date: function(iso) {
+        var d = new Date(iso);
+        return String(d.getUTCDate()).padStart(2,'0') + '/' + String(d.getUTCMonth()+1).padStart(2,'0') + '/' + d.getUTCFullYear();
+      }
+    };
+
+    // === Menu ===
+    function toggleMenu() {
+      var d = document.getElementById('menuDropdown');
+      if (d) d.classList.toggle('open');
+    }
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.viz-menu')) {
+        var d = document.getElementById('menuDropdown');
+        if (d) d.classList.remove('open');
+      }
+    });
+
+    // === Scroll reveal ===
+    document.querySelectorAll('[data-reveal]').forEach(function(el) { el.classList.add('reveal'); });
+    var revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(function(el) { revealObs.observe(el); });
+
+    // === Download PNG ===
+    async function downloadImage() {
+      var menu = document.querySelector('.viz-menu');
+      menu.style.display = 'none';
+      try {
+        var url = await htmlToImage.toPng(document.body, {
+          quality: 1, pixelRatio: 2,
+          filter: function(n) { return !n.classList || !n.classList.contains('viz-menu'); }
+        });
+        var a = document.createElement('a'); a.href = url;
+        a.download = 'cruzeiros-itajai-2025-26-relatorio-executivo.png'; a.click();
+      } catch(e) { console.error('Download failed:', e); }
+      menu.style.display = '';
+    }
+
+    // === Charts (Tufte-inspired, consulting-grade) ===
+    var COLORS = {
+      ink: '#16295B',           // azul institucional
+      inkSoft: '#2D6AAA',        // azul profundo
+      accent: '#FFD91A',         // amarelo institucional
+      warm: '#F77B14',           // laranja
+      muted: '#9E9B90',          // cinza claro
+      grid: 'rgba(22, 41, 91, 0.06)',
+      labelColor: '#4C4840'      // grafite
+    };
+
+    Chart.defaults.color = COLORS.labelColor;
+    Chart.defaults.font.family = 'Inter';
+    Chart.defaults.font.size = 12;
+
+    function resetCanvas(id) {
+      var old = document.getElementById(id);
+      if (!old) return null;
+      var parent = old.parentNode;
+      var canvas = document.createElement('canvas');
+      canvas.id = id;
+      parent.replaceChild(canvas, old);
+      return canvas;
+    }
+
+    function buildCharts() {
+      if (typeof Chart === 'undefined') return;
+
+      // Chart 1: Passageiros por mês (bar) — destaque dez/jan em amarelo institucional
+      var ctxMes = resetCanvas('chartMes');
+      if (ctxMes) {
+        new Chart(ctxMes, {
+          type: 'bar',
+          data: {
+            labels: MESES,
+            datasets: [{
+              data: MESES.map(function(m) { return DATA.by_mes_pax[m]; }),
+              backgroundColor: MESES.map(function(m) {
+                return (m === 'Dez/25' || m === 'Jan/26') ? COLORS.accent : COLORS.ink;
+              }),
+              borderRadius: 2, borderSkipped: false,
+              barPercentage: 0.72
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            layout: { padding: { top: 20, right: 10, bottom: 0, left: 0 } },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                enabled: true, padding: 12, cornerRadius: 0,
+                backgroundColor: COLORS.ink, titleColor: '#F9F8F2', bodyColor: '#F9F8F2',
+                titleFont: { size: 11, weight: 600 }, bodyFont: { size: 13 },
+                callbacks: { label: function(ctx) { return FMT.n(ctx.parsed.y) + ' passageiros'; } }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true,
+                ticks: { callback: function(v) { return v >= 1000 ? (v/1000) + 'k' : v; }, color: COLORS.muted, font: { size: 11 } },
+                grid: { color: COLORS.grid, drawTicks: false },
+                border: { display: false }
+              },
+              x: {
+                grid: { display: false }, border: { color: COLORS.labelColor, width: 1 },
+                ticks: { color: COLORS.labelColor, font: { size: 12, weight: 500 } }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 2: Escalas por mês (line)
+      var ctxEsc = resetCanvas('chartEsc');
+      if (ctxEsc) {
+        new Chart(ctxEsc, {
+          type: 'line',
+          data: {
+            labels: MESES,
+            datasets: [{
+              data: MESES.map(function(m) { return DATA.by_mes[m]; }),
+              borderColor: COLORS.ink, backgroundColor: 'rgba(22, 41, 91, 0.08)',
+              fill: true, tension: 0.3,
+              pointBackgroundColor: COLORS.ink, pointBorderColor: '#FFFFFF',
+              pointBorderWidth: 2, pointRadius: 6, pointHoverRadius: 9,
+              borderWidth: 2.5
+            }]
+          },
+          options: {
+            responsive: true, maintainAspectRatio: false,
+            layout: { padding: { top: 20, right: 10, bottom: 0, left: 0 } },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                enabled: true, padding: 12, cornerRadius: 0,
+                backgroundColor: COLORS.ink, titleColor: '#F9F8F2', bodyColor: '#F9F8F2',
+                callbacks: { label: function(ctx) { return ctx.parsed.y + ' escala' + (ctx.parsed.y > 1 ? 's' : ''); } }
+              }
+            },
+            scales: {
+              y: {
+                beginAtZero: true, ticks: { stepSize: 2, color: COLORS.muted, font: { size: 11 } },
+                grid: { color: COLORS.grid, drawTicks: false }, border: { display: false }
+              },
+              x: {
+                grid: { display: false }, border: { color: COLORS.labelColor, width: 1 },
+                ticks: { color: COLORS.labelColor, font: { size: 12, weight: 500 } }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 3: Armador (horizontal bar, Costa destaque)
+      var ctxArm = resetCanvas('chartArm');
+      if (ctxArm) {
+        new Chart(ctxArm, {
+          type: 'bar',
+          data: {
+            labels: ARM_MAP.map(function(a) { return a[1]; }),
+            datasets: [{
+              data: ARM_MAP.map(function(a) { return DATA.by_armador[a[0]] || 0; }),
+              backgroundColor: [COLORS.ink, COLORS.inkSoft, COLORS.muted, COLORS.muted],
+              borderRadius: 2
+            }]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            layout: { padding: { top: 20, right: 30, bottom: 0, left: 0 } },
+            plugins: {
+              legend: { display: false },
+              tooltip: {
+                enabled: true, padding: 12, cornerRadius: 0,
+                backgroundColor: COLORS.ink, titleColor: '#F9F8F2', bodyColor: '#F9F8F2',
+                callbacks: { label: function(ctx) { return ctx.parsed.x + ' escalas — ' + (ctx.parsed.x/37*100).toFixed(1) + '%'; } }
+              }
+            },
+            scales: {
+              x: {
+                beginAtZero: true, ticks: { stepSize: 5, color: COLORS.muted, font: { size: 11 } },
+                grid: { color: COLORS.grid, drawTicks: false }, border: { display: false }
+              },
+              y: {
+                grid: { display: false }, border: { color: COLORS.labelColor, width: 1 },
+                ticks: { color: COLORS.labelColor, font: { size: 13, weight: 500 } }
+              }
+            }
+          }
+        });
+      }
+
+      // Chart 4: Tipo de operação (horizontal stacked bar showing % of pax)
+      var ctxOp = resetCanvas('chartOp');
+      if (ctxOp) {
+        var total = DATA.by_op_pax['emb-des'] + DATA.by_op_pax['trans'];
+        var pctEmb = (DATA.by_op_pax['emb-des'] / total * 100);
+        var pctTrans = (DATA.by_op_pax['trans'] / total * 100);
+        new Chart(ctxOp, {
+          type: 'bar',
+          data: {
+            labels: ['Distribuição de passageiros'],
+            datasets: [
+              {
+                label: 'Embarque e desembarque',
+                data: [pctEmb], backgroundColor: COLORS.ink,
+                barThickness: 72
+              },
+              {
+                label: 'Trânsito',
+                data: [pctTrans], backgroundColor: COLORS.warm,
+                barThickness: 72
+              }
+            ]
+          },
+          options: {
+            indexAxis: 'y',
+            responsive: true, maintainAspectRatio: false,
+            layout: { padding: { top: 80, right: 20, bottom: 60, left: 0 } },
+            plugins: {
+              legend: {
+                display: true, position: 'bottom', align: 'start',
+                labels: { boxWidth: 12, boxHeight: 12, padding: 16, font: { size: 12, weight: 500 }, color: COLORS.labelColor }
+              },
+              tooltip: {
+                enabled: true, padding: 12, cornerRadius: 0,
+                backgroundColor: COLORS.ink, titleColor: '#F9F8F2', bodyColor: '#F9F8F2',
+                callbacks: {
+                  label: function(ctx) {
+                    var pax = ctx.dataset.label === 'Embarque e desembarque' ? DATA.by_op_pax['emb-des'] : DATA.by_op_pax['trans'];
+                    return ctx.dataset.label + ': ' + FMT.n(pax) + ' pax (' + ctx.parsed.x.toFixed(1) + '%)';
+                  }
+                }
+              }
+            },
+            scales: {
+              x: {
+                stacked: true, min: 0, max: 100,
+                ticks: { callback: function(v) { return v + '%'; }, color: COLORS.muted, font: { size: 11 } },
+                grid: { color: COLORS.grid, drawTicks: false }, border: { display: false }
+              },
+              y: {
+                stacked: true, grid: { display: false },
+                border: { display: false }, ticks: { display: false }
+              }
+            }
+          }
+        });
+      }
+    }
+
+    // === Filter table ===
+    var fMes = document.getElementById('f-mes');
+    var fArm = document.getElementById('f-arm');
+    var fNavio = document.getElementById('f-navio');
+    var fOp = document.getElementById('f-op');
+
+    MESES.forEach(function(m) { fMes.innerHTML += '<option value="' + m + '">' + m + '</option>'; });
+    ARM_MAP.forEach(function(a) { fArm.innerHTML += '<option value="' + a[0] + '">' + a[1] + '</option>'; });
+    DATA.navios.forEach(function(n) { fNavio.innerHTML += '<option value="' + n + '">' + n + '</option>'; });
+
+    function renderTable(rows) {
+      var tbody = document.getElementById('tbody-escalas');
+      tbody.innerHTML = rows.map(function(d) {
+        var arm = (ARM_MAP.find(function(a) { return a[0] === d.armador; }) || [null, d.armador])[1];
+        var corr = d.corrected ? '<span class="corrected-flag">¹</span>' : '';
+        return '<tr>' +
+          '<td>' + d.atrac + corr + '</td>' +
+          '<td>' + FMT.date(d.atb) + '</td>' +
+          '<td><strong>' + d.navio + '</strong></td>' +
+          '<td>' + arm + '</td>' +
+          '<td class="num">' + FMT.n(d.emb) + '</td>' +
+          '<td class="num">' + FMT.n(d.des) + '</td>' +
+          '<td class="num">' + FMT.n(d.tra) + '</td>' +
+          '<td class="num"><strong>' + FMT.n(d.total) + '</strong></td>' +
+          '<td><span class="op-tag ' + d.op + '">' + OP_LABEL[d.op] + '</span></td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    function applyFilters() {
+      var m = fMes.value, a = fArm.value, n = fNavio.value, o = fOp.value;
+      var rows = ESCALAS.slice();
+      if (m) rows = rows.filter(function(r) { return r.mes === m; });
+      if (a) rows = rows.filter(function(r) { return r.armador === a; });
+      if (n) rows = rows.filter(function(r) { return r.navio === n; });
+      if (o) rows = rows.filter(function(r) { return r.op === o; });
+      var totalPax = rows.reduce(function(acc, r) { return acc + r.total; }, 0);
+      document.getElementById('count-result').innerHTML = '<strong>' + rows.length + '</strong>';
+      document.getElementById('sum-result').innerHTML = '<strong>' + FMT.n(totalPax) + '</strong>';
+      renderTable(rows);
+    }
+
+    function resetFilters() {
+      fMes.value = fArm.value = fNavio.value = fOp.value = '';
+      applyFilters();
+    }
+
+    [fMes, fArm, fNavio, fOp].forEach(function(el) { el.addEventListener('change', applyFilters); });
+
+    // === Init ===
+    applyFilters();
+    window.addEventListener('load', buildCharts);
+    if (document.readyState === 'complete') buildCharts();
+  </script>
+</body>
+</html>
