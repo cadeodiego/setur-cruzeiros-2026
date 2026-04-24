@@ -173,6 +173,9 @@ body {
 .flux-head .titles .kicker { margin-bottom: 2px; }
 .flux-head .titles h1 { font-family: 'Poppins'; font-size: 26px; font-weight: 700; color: var(--primary); letter-spacing: -0.015em; line-height: 1.1; }
 .flux-head .titles .sub { font-size: 13px; color: var(--grey); margin-top: 3px; font-style: italic; }
+.flux-head .titles .loc-link { display: block; text-decoration: none; color: inherit; transition: opacity 0.18s ease; }
+.flux-head .titles .loc-link:hover { opacity: 0.72; }
+.flux-head .titles .loc-link h1::after { content: ' ↗'; font-size: 0.7em; color: var(--grey); vertical-align: super; margin-left: 4px; }
 .flux-head .legend-row { margin: 0; }
 .flux-head .brand-mark { padding-top: 0; }
 
@@ -715,8 +718,10 @@ body {
 <section class="slide white flux-slide" id="s4">
   <div class="flux-head">
     <div class="titles">
-      <div class="kicker">NOVA LOCALIZAÇÃO · TEMPORADA 2026/2027</div>
-      <h1>Terminal em terreno dedicado</h1>
+      <a href="https://maps.app.goo.gl/Nhyzp9JND5sh5HUK8" target="_blank" rel="noopener" class="loc-link">
+        <div class="kicker">NOVA LOCALIZAÇÃO · TEMPORADA 2026/2027</div>
+        <h1>Terminal em terreno dedicado</h1>
+      </a>
       <div class="sub">Espaço próprio adjacente ao complexo portuário · acesso e saída por vias distintas.</div>
     </div>
     <div class="brand-mark">
