@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<title>Prancha Embarque · Terminal de Cruzeiros de Itajaí · V3.01.01</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+  html, body { margin: 0; padding: 0; background: #E8E2D2; font-family: 'Inter', sans-serif; color: #0F2540; }
+  .page {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  .sheet {
+    width: 100%;
+    max-width: 1600px;
+    aspect-ratio: 1.415 / 1;
+    background: #FBFAF4;
+    position: relative;
+    box-shadow: 0 2px 30px rgba(15,37,64,0.10);
+  }
+  .sheet svg { width: 100%; height: 100%; display: block; }
+  @media print {
+    @page { size: A3 landscape; margin: 0; }
+    body { background: #FBFAF4; }
+    .page { padding: 0; }
+    .sheet { max-width: none; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="sheet">
+    <!-- viewBox é A3 paisagem em mm: 420 x 297 -->
+    <svg viewBox="0 0 420 297" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- filtro sutil p/ textura de papel (sem exagero) -->
+        <pattern id="seats" x="0" y="0" width="1.6" height="2" patternUnits="userSpaceOnUse">
+          <rect x="0.2" y="0.2" width="1.2" height="1.6" fill="none" stroke="#6E8195" stroke-width="0.08" opacity="0.55"/>
+        </pattern>
+        <pattern id="seatsFine" x="0" y="0" width="1.1" height="1.4" patternUnits="userSpaceOnUse">
+          <rect x="0.15" y="0.15" width="0.8" height="1.1" fill="none" stroke="#6E8195" stroke-width="0.06" opacity="0.55"/>
+        </pattern>
+        <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 Z" fill="#B5562E"/>
+        </marker>
+      </defs>
+
+      <!-- fundo off-white explícito -->
+      <rect width="420" height="297" fill="#FBFAF4"/>
+
+      <!-- CORNER MARKS (moldura técnica) -->
+      <g stroke="#1A1F2E" stroke-width="0.3" fill="none">
+        <path d="M 10,10 L 10,18 M 10,10 L 18,10"/>
+        <path d="M 410,10 L 410,18 M 410,10 L 402,10"/>
+        <path d="M 10,287 L 10,279 M 10,287 L 18,287"/>
+        <path d="M 410,287 L 410,279 M 410,287 L 402,287"/>
+      </g>
+
+      <!-- CABEÇALHO -->
+      <g>
+        <!-- marca SETUR à esquerda -->
+        <g transform="translate(22,20)">
+          <rect x="0" y="0" width="14" height="14" fill="#0F2540"/>
+          <text x="7" y="7" text-anchor="middle" font-family="'Source Serif 4', serif" font-size="3.8" fill="#FBFAF4" font-weight="600" letter-spacing="0.08">SETUR</text>
+          <line x1="2" y1="9" x2="12" y2="9" stroke="#B5562E" stroke-width="0.3"/>
+          <text x="7" y="11.5" text-anchor="middle" font-family="Inter, sans-serif" font-size="1.6" fill="#FBFAF4" letter-spacing="0.3">ITAJAÍ · SC</text>
+        </g>
+        <g transform="translate(40,20)">
+          <text x="0" y="5" font-family="'Source Serif 4', serif" font-size="4.4" fill="#0F2540" font-weight="500" letter-spacing="-0.03">Secretaria de Turismo e Eventos de Itajaí</text>
+          <text x="0" y="10" font-family="Inter, sans-serif" font-size="2.6" fill="#6E8195" letter-spacing="0.4" font-weight="500">DESTINO ITAJAÍ · COSTADO DE CRUZEIROS · TEMPORADA 2026/27</text>
+        </g>
+
+        <!-- bloco direito: meta + bússola -->
+        <g transform="translate(320,18)">
+          <text x="0" y="4" font-family="Inter, sans-serif" font-size="2.2" fill="#6E8195" letter-spacing="0.3">PRANCHA</text>
+          <text x="0" y="9" font-family="'Source Serif 4', serif" font-size="5.2" fill="#0F2540" font-weight="500" font-variant-numeric="tabular-nums" letter-spacing="-0.04">V3.01.01</text>
+
+          <text x="30" y="4" font-family="Inter, sans-serif" font-size="2.2" fill="#6E8195" letter-spacing="0.3">EMITIDO</text>
+          <text x="30" y="9" font-family="'Source Serif 4', serif" font-size="4.2" fill="#0F2540" font-weight="500" font-variant-numeric="tabular-nums" letter-spacing="-0.02">ABR·2026</text>
+
+          <!-- bússola -->
+          <g transform="translate(75,8)">
+            <circle cx="0" cy="0" r="6" fill="none" stroke="#0F2540" stroke-width="0.3"/>
+            <circle cx="0" cy="0" r="0.5" fill="#0F2540"/>
+            <path d="M 0,-5 L 1.2,0 L 0,5 L -1.2,0 Z" fill="#0F2540" opacity="0.8"/>
+            <path d="M 0,-5 L 1.2,0 L -1.2,0 Z" fill="#B5562E"/>
+            <text x="0" y="-7" text-anchor="middle" font-family="Inter, sans-serif" font-size="1.8" fill="#0F2540" font-weight="600">N</text>
+          </g>
+        </g>
+
+        <!-- título principal -->
+        <g transform="translate(22,42)">
+          <text x="0" y="0" font-family="Inter, sans-serif" font-size="2.8" fill="#B5562E" letter-spacing="0.5" font-weight="600">EMBARQUE · CABOTAGEM</text>
+          <text x="0" y="11" font-family="'Source Serif 4', serif" font-size="11" fill="#0F2540" font-weight="500" letter-spacing="-0.05">Fluxo operacional · Terminal de Cruzeiros de Itajaí</text>
+          <text x="0" y="17" font-family="Inter, sans-serif" font-size="2.8" fill="#0F2540" letter-spacing="0.02">
+            Trajeto do passageiro no reembarque — da entrada pelo portão externo até o acesso ao navio, com passagem por credenciamento, inspeção de bagagem, lounge e despacho.
+          </text>
+        </g>
+
+        <!-- linha separadora -->
+        <line x1="22" y1="67" x2="398" y2="67" stroke="#0F2540" stroke-width="0.2"/>
+      </g>
+
+      <!-- ===== PLANTA ===== -->
+      <!-- Área útil: x 22..305, y 73..230 (largura 283, altura 157) -->
+      <!-- a planta original é aproximadamente 2.1:1. Usamos esse ratio -->
+      <g transform="translate(22,73)">
+        <!-- contorno externo do terminal -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+
+          <!-- (todas as zonas — contornos de ARQUITETURA finos em grafite #1A1F2E) -->
+          <!-- peso base 0.25 para linhas arquitetônicas -->
+
+          <!-- COLUNA ESQUERDA: Desembarque + PF + Check-in -->
+          <!-- Desembarque de passageiros (37m²) -->
+          <g>
+            <rect x="0" y="0" width="22" height="14" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.25"/>
+            <text x="11" y="5.5" text-anchor="middle" font-size="2.2" font-weight="500">DESEMBARQUE DE</text>
+            <text x="11" y="8.5" text-anchor="middle" font-size="2.2" font-weight="500">PASSAGEIROS</text>
+            <text x="11" y="12" text-anchor="middle" font-size="1.9" fill="#6E8195">37 m²</text>
+          </g>
+
+          <!-- Área Polícia Federal (121,25m²) — ZONA DE CONTROLE, azul-marinho no contorno mais forte -->
+          <g>
+            <rect x="0" y="14" width="22" height="52" fill="#E7EBF0" stroke="#0F2540" stroke-width="0.5"/>
+            <!-- bancos/guichês PF -->
+            <g opacity="0.55">
+              <rect x="2" y="18" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="2" y="24" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="2" y="30" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="2" y="36" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="2" y="42" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="2" y="48" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="2" y="54" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="18" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="24" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="30" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="36" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="42" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="48" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+              <rect x="12" y="54" width="8" height="3" fill="none" stroke="#0F2540" stroke-width="0.15"/>
+            </g>
+            <text x="11" y="63" text-anchor="middle" font-size="2.1" font-weight="600" fill="#0F2540">ÁREA POLÍCIA FEDERAL</text>
+            <text x="11" y="65.8" text-anchor="middle" font-size="1.8" fill="#6E8195">121,25 m²</text>
+          </g>
+
+          <!-- Check-in (coluna com fila) — zona atravessada pelo fluxo -->
+          <g>
+            <rect x="22" y="14" width="10" height="92" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.25"/>
+            <!-- catracas/balcões de check-in -->
+            <g opacity="0.6">
+              <rect x="22.5" y="16" width="9" height="88" fill="url(#seatsFine)"/>
+            </g>
+            <text x="27" y="60" text-anchor="middle" font-size="2.2" font-weight="500" transform="rotate(-90 27 60)">CHECK-IN · 130 m²</text>
+          </g>
+        </g>
+
+        <!-- SALAS 01–05 (grupo central superior) -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <!-- Sala 01 -->
+          <rect x="32" y="0" width="20" height="9" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="42" y="4.5" text-anchor="middle" font-size="2" font-weight="500">SALA 01</text>
+          <text x="42" y="7" text-anchor="middle" font-size="1.8" fill="#6E8195">23,4 m²</text>
+
+          <!-- Sala 02 -->
+          <rect x="32" y="9" width="20" height="7.5" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="42" y="13" text-anchor="middle" font-size="2" font-weight="500">SALA 02</text>
+          <text x="42" y="15.2" text-anchor="middle" font-size="1.8" fill="#6E8195">19,84 m²</text>
+
+          <!-- Sala 03 -->
+          <rect x="32" y="16.5" width="20" height="9" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="42" y="21" text-anchor="middle" font-size="2" font-weight="500">SALA 03</text>
+          <text x="42" y="23.5" text-anchor="middle" font-size="1.8" fill="#6E8195">29 m²</text>
+
+          <!-- Banheiros desembarque -->
+          <rect x="32" y="25.5" width="9" height="13" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="36.5" y="30" text-anchor="middle" font-size="1.7" font-weight="500">BANH.</text>
+          <text x="36.5" y="32.3" text-anchor="middle" font-size="1.7" font-weight="500">DESEMB.</text>
+          <text x="36.5" y="36" text-anchor="middle" font-size="1.6" fill="#6E8195">46,58 m²</text>
+
+          <!-- Banheiros embarque -->
+          <rect x="41" y="25.5" width="11" height="13" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="46.5" y="30" text-anchor="middle" font-size="1.7" font-weight="500">BANH.</text>
+          <text x="46.5" y="32.3" text-anchor="middle" font-size="1.7" font-weight="500">EMBARQUE</text>
+          <text x="46.5" y="36" text-anchor="middle" font-size="1.6" fill="#6E8195">46,58 m²</text>
+
+          <!-- Sala 04 Família -->
+          <rect x="52" y="16.5" width="12" height="11" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="58" y="20.5" text-anchor="middle" font-size="1.8" font-weight="500">SALA 04</text>
+          <text x="58" y="23" text-anchor="middle" font-size="1.8" font-weight="500">FAMÍLIA</text>
+          <text x="58" y="25.8" text-anchor="middle" font-size="1.6" fill="#6E8195">16 m²</text>
+
+          <!-- Sala 05 Ambulatório (SAÚDE) — leve tinta distintiva -->
+          <rect x="52" y="27.5" width="12" height="11" fill="#EDF0E7" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="58" y="31.5" text-anchor="middle" font-size="1.8" font-weight="500">SALA 05</text>
+          <text x="58" y="34" text-anchor="middle" font-size="1.8" font-weight="500">AMBULATÓRIO</text>
+          <text x="58" y="36.8" text-anchor="middle" font-size="1.6" fill="#6E8195">16 m²</text>
+        </g>
+
+        <!-- ÁREA DE RETIRADA DE BAGAGENS -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <rect x="64" y="0" width="140" height="38.5" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <text x="134" y="19" text-anchor="middle" font-size="3.4" font-weight="500">ÁREA DE RETIRADA DE BAGAGENS</text>
+          <text x="134" y="23.5" text-anchor="middle" font-size="2.4" fill="#6E8195">1.054 m²</text>
+        </g>
+
+        <!-- costura sul do cluster salas/bagagens -->
+        <line x1="52" y1="38.5" x2="52" y2="39" stroke="#1A1F2E" stroke-width="0.25"/>
+
+        <!-- LOUNGE DE BANCOS (atravessado pelo fluxo — fill terracota leve) -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <rect x="32" y="38.5" width="110" height="67.5" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.3"/>
+          <!-- assentos do lounge -->
+          <g transform="translate(34,42)">
+            <rect width="106" height="62" fill="url(#seats)"/>
+          </g>
+          <text x="87" y="76" text-anchor="middle" font-size="3" font-weight="500" fill="#0F2540">LOUNGE DE BANCOS</text>
+          <text x="87" y="80" text-anchor="middle" font-size="2.2" fill="#6E8195">425 m²</text>
+        </g>
+
+        <!-- INSPEÇÃO SCANNER (meio, área com scanners) -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <rect x="142" y="38.5" width="62" height="40" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.3"/>
+          <!-- ícones de scanner (4 esteiras) -->
+          <g opacity="0.7" stroke="#0F2540" stroke-width="0.2" fill="none">
+            <g transform="translate(150,46)">
+              <rect x="0" y="0" width="10" height="4"/>
+              <line x1="0" y1="2" x2="10" y2="2"/>
+              <rect x="2" y="-2" width="6" height="2"/>
+            </g>
+            <g transform="translate(166,46)">
+              <rect x="0" y="0" width="10" height="4"/>
+              <line x1="0" y1="2" x2="10" y2="2"/>
+              <rect x="2" y="-2" width="6" height="2"/>
+            </g>
+            <g transform="translate(182,46)">
+              <rect x="0" y="0" width="10" height="4"/>
+              <line x1="0" y1="2" x2="10" y2="2"/>
+              <rect x="2" y="-2" width="6" height="2"/>
+            </g>
+            <g transform="translate(150,58)">
+              <rect x="0" y="0" width="10" height="4"/>
+              <line x1="0" y1="2" x2="10" y2="2"/>
+              <rect x="2" y="-2" width="6" height="2"/>
+            </g>
+            <g transform="translate(166,58)">
+              <rect x="0" y="0" width="10" height="4"/>
+              <line x1="0" y1="2" x2="10" y2="2"/>
+              <rect x="2" y="-2" width="6" height="2"/>
+            </g>
+            <g transform="translate(182,58)">
+              <rect x="0" y="0" width="10" height="4"/>
+              <line x1="0" y1="2" x2="10" y2="2"/>
+              <rect x="2" y="-2" width="6" height="2"/>
+            </g>
+          </g>
+          <text x="173" y="73" text-anchor="middle" font-size="2.4" font-weight="500">INSPEÇÃO SCANNER</text>
+          <text x="173" y="76.2" text-anchor="middle" font-size="1.9" fill="#6E8195">40 m²</text>
+        </g>
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <rect x="142" y="78.5" width="62" height="27.5" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.3"/>
+          <!-- fila em zigue-zague (marcações de organização) -->
+          <g opacity="0.55" fill="#6E8195">
+            <g transform="translate(146,84)">
+              <circle cx="0" cy="0" r="0.4"/><circle cx="2" cy="0" r="0.4"/><circle cx="4" cy="0" r="0.4"/><circle cx="6" cy="0" r="0.4"/><circle cx="8" cy="0" r="0.4"/><circle cx="10" cy="0" r="0.4"/><circle cx="12" cy="0" r="0.4"/><circle cx="14" cy="0" r="0.4"/><circle cx="16" cy="0" r="0.4"/><circle cx="18" cy="0" r="0.4"/><circle cx="20" cy="0" r="0.4"/><circle cx="22" cy="0" r="0.4"/><circle cx="24" cy="0" r="0.4"/><circle cx="26" cy="0" r="0.4"/><circle cx="28" cy="0" r="0.4"/><circle cx="30" cy="0" r="0.4"/><circle cx="32" cy="0" r="0.4"/><circle cx="34" cy="0" r="0.4"/><circle cx="36" cy="0" r="0.4"/><circle cx="38" cy="0" r="0.4"/><circle cx="40" cy="0" r="0.4"/><circle cx="42" cy="0" r="0.4"/><circle cx="44" cy="0" r="0.4"/><circle cx="46" cy="0" r="0.4"/><circle cx="48" cy="0" r="0.4"/><circle cx="50" cy="0" r="0.4"/><circle cx="52" cy="0" r="0.4"/>
+            </g>
+            <g transform="translate(146,88)">
+              <circle cx="0" cy="0" r="0.4"/><circle cx="2" cy="0" r="0.4"/><circle cx="4" cy="0" r="0.4"/><circle cx="6" cy="0" r="0.4"/><circle cx="8" cy="0" r="0.4"/><circle cx="10" cy="0" r="0.4"/><circle cx="12" cy="0" r="0.4"/><circle cx="14" cy="0" r="0.4"/><circle cx="16" cy="0" r="0.4"/><circle cx="18" cy="0" r="0.4"/><circle cx="20" cy="0" r="0.4"/><circle cx="22" cy="0" r="0.4"/><circle cx="24" cy="0" r="0.4"/><circle cx="26" cy="0" r="0.4"/><circle cx="28" cy="0" r="0.4"/><circle cx="30" cy="0" r="0.4"/><circle cx="32" cy="0" r="0.4"/><circle cx="34" cy="0" r="0.4"/><circle cx="36" cy="0" r="0.4"/><circle cx="38" cy="0" r="0.4"/><circle cx="40" cy="0" r="0.4"/><circle cx="42" cy="0" r="0.4"/><circle cx="44" cy="0" r="0.4"/><circle cx="46" cy="0" r="0.4"/><circle cx="48" cy="0" r="0.4"/><circle cx="50" cy="0" r="0.4"/><circle cx="52" cy="0" r="0.4"/>
+            </g>
+            <g transform="translate(146,92)">
+              <circle cx="0" cy="0" r="0.4"/><circle cx="2" cy="0" r="0.4"/><circle cx="4" cy="0" r="0.4"/><circle cx="6" cy="0" r="0.4"/><circle cx="8" cy="0" r="0.4"/><circle cx="10" cy="0" r="0.4"/><circle cx="12" cy="0" r="0.4"/><circle cx="14" cy="0" r="0.4"/><circle cx="16" cy="0" r="0.4"/><circle cx="18" cy="0" r="0.4"/><circle cx="20" cy="0" r="0.4"/><circle cx="22" cy="0" r="0.4"/><circle cx="24" cy="0" r="0.4"/><circle cx="26" cy="0" r="0.4"/><circle cx="28" cy="0" r="0.4"/><circle cx="30" cy="0" r="0.4"/><circle cx="32" cy="0" r="0.4"/><circle cx="34" cy="0" r="0.4"/><circle cx="36" cy="0" r="0.4"/><circle cx="38" cy="0" r="0.4"/><circle cx="40" cy="0" r="0.4"/><circle cx="42" cy="0" r="0.4"/><circle cx="44" cy="0" r="0.4"/><circle cx="46" cy="0" r="0.4"/><circle cx="48" cy="0" r="0.4"/><circle cx="50" cy="0" r="0.4"/><circle cx="52" cy="0" r="0.4"/>
+            </g>
+            <g transform="translate(146,96)">
+              <circle cx="0" cy="0" r="0.4"/><circle cx="2" cy="0" r="0.4"/><circle cx="4" cy="0" r="0.4"/><circle cx="6" cy="0" r="0.4"/><circle cx="8" cy="0" r="0.4"/><circle cx="10" cy="0" r="0.4"/><circle cx="12" cy="0" r="0.4"/><circle cx="14" cy="0" r="0.4"/><circle cx="16" cy="0" r="0.4"/><circle cx="18" cy="0" r="0.4"/><circle cx="20" cy="0" r="0.4"/><circle cx="22" cy="0" r="0.4"/><circle cx="24" cy="0" r="0.4"/><circle cx="26" cy="0" r="0.4"/><circle cx="28" cy="0" r="0.4"/><circle cx="30" cy="0" r="0.4"/><circle cx="32" cy="0" r="0.4"/><circle cx="34" cy="0" r="0.4"/><circle cx="36" cy="0" r="0.4"/><circle cx="38" cy="0" r="0.4"/><circle cx="40" cy="0" r="0.4"/><circle cx="42" cy="0" r="0.4"/><circle cx="44" cy="0" r="0.4"/><circle cx="46" cy="0" r="0.4"/><circle cx="48" cy="0" r="0.4"/><circle cx="50" cy="0" r="0.4"/><circle cx="52" cy="0" r="0.4"/>
+            </g>
+          </g>
+          <text x="173" y="103" text-anchor="middle" font-size="2.2" font-weight="500">RECEPÇÃO E FILA · INSPEÇÃO SCANNER</text>
+          <text x="173" y="105.5" text-anchor="middle" font-size="1.8" fill="#6E8195">98 m²</text>
+        </g>
+
+        <!-- ESPAÇO PARA SCANNER E MALAS (canto direito superior) -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <rect x="204" y="0" width="79" height="68" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+          <!-- scanners de porão (esteiras maiores) -->
+          <g opacity="0.7" stroke="#0F2540" stroke-width="0.2" fill="none">
+            <g transform="translate(214,16)">
+              <rect x="0" y="0" width="12" height="5"/>
+              <line x1="0" y1="2.5" x2="12" y2="2.5"/>
+            </g>
+            <g transform="translate(232,16)">
+              <rect x="0" y="0" width="12" height="5"/>
+              <line x1="0" y1="2.5" x2="12" y2="2.5"/>
+            </g>
+            <g transform="translate(250,16)">
+              <rect x="0" y="0" width="12" height="5"/>
+              <line x1="0" y1="2.5" x2="12" y2="2.5"/>
+            </g>
+            <g transform="translate(268,16)">
+              <rect x="0" y="0" width="12" height="5"/>
+              <line x1="0" y1="2.5" x2="12" y2="2.5"/>
+            </g>
+          </g>
+          <text x="243.5" y="38" text-anchor="middle" font-size="2.6" font-weight="500">ESPAÇO PARA</text>
+          <text x="243.5" y="41" text-anchor="middle" font-size="2.6" font-weight="500">SCANNER E MALAS</text>
+          <text x="243.5" y="45" text-anchor="middle" font-size="2" fill="#6E8195">210 m²</text>
+        </g>
+
+        <!-- DESPACHO DE MALAS -->
+        <g font-family="Inter, sans-serif" fill="#0F2540">
+          <rect x="204" y="68" width="79" height="38" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.3"/>
+          <!-- esteiras de despacho -->
+          <g opacity="0.5" fill="#6E8195">
+            <rect x="210" y="74" width="70" height="1.2"/>
+            <rect x="210" y="77" width="70" height="1.2"/>
+            <rect x="210" y="80" width="70" height="1.2"/>
+          </g>
+          <!-- carrinhos de malas (hachura) -->
+          <g transform="translate(210,84)" opacity="0.55">
+            <g fill="none" stroke="#6E8195" stroke-width="0.1">
+              <rect x="0" y="0" width="70" height="20" fill="url(#seatsFine)"/>
+            </g>
+          </g>
+          <text x="243.5" y="104" text-anchor="middle" font-size="2.4" font-weight="500">DESPACHO DE MALAS · 143 m²</text>
+        </g>
+
+        <!-- dentes / serrilha da fachada direita + esquerda (abstraídos) -->
+        <g stroke="#1A1F2E" stroke-width="0.2" fill="none" opacity="0.9">
+          <!-- direita -->
+          <path d="M 283,2 l 4,2 l -4,2 M 283,10 l 4,2 l -4,2 M 283,18 l 4,2 l -4,2 M 283,26 l 4,2 l -4,2 M 283,34 l 4,2 l -4,2 M 283,42 l 4,2 l -4,2 M 283,50 l 4,2 l -4,2 M 283,58 l 4,2 l -4,2 M 283,68 l 4,2 l -4,2 M 283,76 l 4,2 l -4,2 M 283,84 l 4,2 l -4,2 M 283,92 l 4,2 l -4,2 M 283,100 l 4,2 l -4,2"/>
+        </g>
+
+        <!-- ===================== FLUXO DE EMBARQUE ===================== -->
+        <!-- Traçado tracejado terracota com círculos numerados nas etapas.
+             Setas apenas nas mudanças de direção críticas. -->
+        <g>
+          <!-- camada 1: highlight das zonas atravessadas (já está com fill terracota claro nas zonas acima) -->
+
+          <!-- caminho principal — entradas pelo sul (recepção fila + despacho), passa por scanner,
+               cruza para lounge, check-in, PF, e sai pelo portão do navio (esquerda) -->
+
+          <!-- ENTRADA 1: Recepção e fila (sobe para inspeção) -->
+          <path d="M 173,106 L 173,100 L 173,85 L 173,78"
+                stroke="#B5562E" stroke-width="0.9" fill="none"
+                stroke-dasharray="2,1.6" stroke-linecap="round"/>
+
+          <!-- ENTRADA 2: Despacho de malas (sobe para scanner de porão) -->
+          <path d="M 244,106 L 244,78 L 244,68"
+                stroke="#B5562E" stroke-width="0.9" fill="none"
+                stroke-dasharray="2,1.6" stroke-linecap="round"/>
+
+          <!-- dentro do lounge e para check-in -->
+          <path d="M 173,72 L 142,72 L 100,72 L 60,72 L 40,72 L 32,72"
+                stroke="#B5562E" stroke-width="1.0" fill="none"
+                stroke-dasharray="2,1.6" stroke-linecap="round"/>
+
+          <!-- sobe no check-in até topo -->
+          <path d="M 32,72 L 32,60 L 32,40 L 32,20 L 32,12 L 32,8 L 22,8 L 10,8 L 0,8"
+                stroke="#B5562E" stroke-width="1.1" fill="none"
+                stroke-dasharray="2,1.6" stroke-linecap="round"
+                marker-end="url(#arrow)"/>
+        </g>
+
+        <!-- ===================== NUMERAÇÃO DAS ETAPAS ===================== -->
+        <!-- círculos numerados nas paradas operacionais -->
+        <g font-family="Inter, sans-serif">
+          <!-- 1 — Recepção e fila inspeção scanner -->
+          <g>
+            <circle cx="173" cy="108.5" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="173" y="109.6" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">1</text>
+          </g>
+          <!-- 2 — Inspeção Scanner (mão) -->
+          <g>
+            <circle cx="173" cy="58" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="173" y="59.1" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">2</text>
+          </g>
+          <!-- 3 — Despacho de malas -->
+          <g>
+            <circle cx="244" cy="108.5" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="244" y="109.6" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">3</text>
+          </g>
+          <!-- 4 — Scanner de malas (porão) -->
+          <g>
+            <circle cx="244" cy="34" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="244" y="35.1" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">4</text>
+          </g>
+          <!-- 5 — Lounge -->
+          <g>
+            <circle cx="87" cy="72" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="87" y="73.1" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">5</text>
+          </g>
+          <!-- 6 — Check-in -->
+          <g>
+            <circle cx="27" cy="36" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="27" y="37.1" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">6</text>
+          </g>
+          <!-- 7 — Acesso ao navio -->
+          <g>
+            <circle cx="-6" cy="8" r="2.8" fill="#B5562E" stroke="#FBFAF4" stroke-width="0.4"/>
+            <text x="-6" y="9.1" text-anchor="middle" font-size="3" fill="#FBFAF4" font-weight="700">7</text>
+          </g>
+        </g>
+
+        <!-- rótulo externo "ACESSO AO NAVIO" com seta -->
+        <g font-family="Inter, sans-serif" fill="#B5562E">
+          <text x="14" y="-3" text-anchor="middle" font-size="2.1" font-weight="600" letter-spacing="0.3">ACESSO AO NAVIO</text>
+          <path d="M 14,-1 L 14,5" stroke="#B5562E" stroke-width="0.6" stroke-dasharray="1,0.8" marker-end="url(#arrow)"/>
+        </g>
+        <!-- rótulos externos "ENTRADA" nos sul -->
+        <g font-family="Inter, sans-serif" fill="#B5562E">
+          <text x="173" y="115" text-anchor="middle" font-size="2.1" font-weight="600" letter-spacing="0.3">ENTRADA · PASSAGEIRO</text>
+          <text x="244" y="115" text-anchor="middle" font-size="2.1" font-weight="600" letter-spacing="0.3">ENTRADA · MALAS DESPACHADAS</text>
+        </g>
+      </g>
+
+      <!-- ===== LEGENDA LATERAL (direita) ===== -->
+      <g transform="translate(315,75)">
+        <line x1="0" y1="0" x2="0" y2="175" stroke="#0F2540" stroke-width="0.15" opacity="0.5"/>
+        <text x="6" y="4" font-family="Inter, sans-serif" font-size="2.2" fill="#6E8195" letter-spacing="0.3" font-weight="500">LEGENDA</text>
+        <text x="6" y="10" font-family="'Source Serif 4', serif" font-size="4.6" fill="#0F2540" font-weight="500" letter-spacing="-0.03">Convenções</text>
+
+        <!-- grupo 1: fluxo -->
+        <g transform="translate(6,18)">
+          <text font-family="Inter, sans-serif" font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">FLUXO</text>
+          <g transform="translate(0,3)">
+            <path d="M 0,2 L 20,2" stroke="#B5562E" stroke-width="0.9" stroke-dasharray="2,1.6" stroke-linecap="round" marker-end="url(#arrow)"/>
+            <text x="24" y="3" font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">Trajeto do embarque — cabotagem</text>
+          </g>
+          <g transform="translate(0,8)">
+            <circle cx="3" cy="2" r="1.8" fill="#B5562E"/>
+            <text x="1.5" y="2.8" font-family="Inter, sans-serif" font-size="2" fill="#FBFAF4" font-weight="700">N</text>
+            <text x="8" y="3" font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">Etapa numerada · 1 a 7</text>
+          </g>
+        </g>
+
+        <!-- grupo 2: zonas -->
+        <g transform="translate(6,37)">
+          <text font-family="Inter, sans-serif" font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">ZONAS</text>
+          <g transform="translate(0,3)">
+            <rect x="0" y="0" width="8" height="4" fill="#E7EBF0" stroke="#0F2540" stroke-width="0.5"/>
+            <text x="12" y="3" font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">Controle institucional — Polícia Federal</text>
+          </g>
+          <g transform="translate(0,8.5)">
+            <rect x="0" y="0" width="8" height="4" fill="#F4ECE4" stroke="#1A1F2E" stroke-width="0.25"/>
+            <text x="12" y="3" font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">Zona atravessada pelo fluxo</text>
+          </g>
+          <g transform="translate(0,14)">
+            <rect x="0" y="0" width="8" height="4" fill="#ECEFF2" stroke="#1A1F2E" stroke-width="0.25"/>
+            <text x="12" y="3" font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">Apoio — circulação e serviços</text>
+          </g>
+          <g transform="translate(0,19.5)">
+            <rect x="0" y="0" width="8" height="4" fill="#EDF0E7" stroke="#1A1F2E" stroke-width="0.25"/>
+            <text x="12" y="3" font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">Ambulatório — Saúde municipal</text>
+          </g>
+        </g>
+
+        <!-- grupo 3: etapas numeradas -->
+        <g transform="translate(6,68)">
+          <text font-family="Inter, sans-serif" font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">ETAPAS</text>
+          <g font-family="Inter, sans-serif" font-size="2.1" fill="#0F2540">
+            <g transform="translate(0,4)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">1</text>
+              <text x="5" y="-0.5" font-weight="600">Recepção e fila · scanner</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Bagagem de mão — Receita Federal</text>
+            </g>
+            <g transform="translate(0,10)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">2</text>
+              <text x="5" y="-0.5" font-weight="600">Inspeção Scanner</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Passagem pelos pórticos</text>
+            </g>
+            <g transform="translate(0,16)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">3</text>
+              <text x="5" y="-0.5" font-weight="600">Despacho de malas</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Etiquetagem por cabine</text>
+            </g>
+            <g transform="translate(0,22)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">4</text>
+              <text x="5" y="-0.5" font-weight="600">Scanner de porão</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Inspeção das malas despachadas</text>
+            </g>
+            <g transform="translate(0,28)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">5</text>
+              <text x="5" y="-0.5" font-weight="600">Lounge de bancos</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Área de espera pré-credenciamento</text>
+            </g>
+            <g transform="translate(0,34)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">6</text>
+              <text x="5" y="-0.5" font-weight="600">Credenciamento · check-in</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Operadora — manifesto</text>
+            </g>
+            <g transform="translate(0,40)">
+              <text x="0" y="0" font-weight="700" fill="#B5562E" font-family="'Source Serif 4', serif" font-size="3">7</text>
+              <text x="5" y="-0.5" font-weight="600">Acesso ao navio</text>
+              <text x="5" y="2.3" fill="#6E8195" font-size="1.9">Portaló · embarque efetivo</text>
+            </g>
+          </g>
+        </g>
+
+        <!-- atores institucionais atuantes -->
+        <g transform="translate(6,185)">
+          <text font-family="Inter, sans-serif" font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">ATORES NO EMBARQUE CABOTAGEM</text>
+          <g font-family="Inter, sans-serif" font-size="2" fill="#0F2540">
+            <text x="0" y="4">· Operadora (MSC · Costa · NCL · RCL)</text>
+            <text x="0" y="8">· Receita Federal — inspeção de bagagem</text>
+            <text x="0" y="12">· Autoridade Portuária — gestão do costado</text>
+            <text x="0" y="16">· ANVISA — vigilância sanitária</text>
+            <text x="0" y="20">· Secretaria de Turismo e Eventos de Itajaí</text>
+          </g>
+        </g>
+      </g>
+
+      <!-- ===== RODAPÉ ===== -->
+      <g transform="translate(22,245)">
+        <line x1="0" y1="0" x2="376" y2="0" stroke="#0F2540" stroke-width="0.2"/>
+        <g font-family="Inter, sans-serif">
+          <!-- col 1: fonte -->
+          <g transform="translate(0,4)">
+            <text font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">FONTE</text>
+            <text y="4" font-size="2.1" fill="#0F2540">Planta base · Terminal de Cruzeiros de Itajaí</text>
+            <text y="7.5" font-size="2.1" fill="#0F2540">Secretaria de Turismo e Eventos de Itajaí · 2026</text>
+          </g>
+          <!-- col 2: responsável -->
+          <g transform="translate(100,4)">
+            <text font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">RESPONSÁVEL TÉCNICO</text>
+            <text y="4" font-size="2.1" fill="#0F2540">Coordenação da Temporada de Cruzeiros 2026/27</text>
+            <text y="7.5" font-size="2.1" fill="#0F2540">SETUR · destino Itajaí · costado de cruzeiros</text>
+          </g>
+          <!-- col 3: escala -->
+          <g transform="translate(205,4)">
+            <text font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">ESCALA ESQUEMÁTICA</text>
+            <g transform="translate(0,3)">
+              <line x1="0" y1="2" x2="30" y2="2" stroke="#0F2540" stroke-width="0.3"/>
+              <line x1="0" y1="0" x2="0" y2="4" stroke="#0F2540" stroke-width="0.3"/>
+              <line x1="10" y1="0" x2="10" y2="4" stroke="#0F2540" stroke-width="0.3"/>
+              <line x1="20" y1="0" x2="20" y2="4" stroke="#0F2540" stroke-width="0.3"/>
+              <line x1="30" y1="0" x2="30" y2="4" stroke="#0F2540" stroke-width="0.3"/>
+              <text x="0" y="8" font-size="1.8" fill="#6E8195" font-variant-numeric="tabular-nums">0</text>
+              <text x="10" y="8" font-size="1.8" fill="#6E8195" font-variant-numeric="tabular-nums">10</text>
+              <text x="20" y="8" font-size="1.8" fill="#6E8195" font-variant-numeric="tabular-nums">20</text>
+              <text x="30" y="8" font-size="1.8" fill="#6E8195" font-variant-numeric="tabular-nums">30 m</text>
+            </g>
+          </g>
+          <!-- col 4: selo + ref -->
+          <g transform="translate(280,4)">
+            <text font-size="1.9" fill="#6E8195" letter-spacing="0.25" font-weight="500">REFERÊNCIA</text>
+            <text y="4" font-size="2.1" fill="#0F2540" font-variant-numeric="tabular-nums">FLX-ITJ-CRZ-EMB-CAB · V3.01.01</text>
+            <text y="7.5" font-size="2.1" fill="#0F2540">Válido outubro/2026 → abril/2027</text>
+          </g>
+          <!-- col 5: aprovação -->
+          <g transform="translate(280,20)">
+            <line x1="0" y1="0" x2="90" y2="0" stroke="#0F2540" stroke-width="0.3"/>
+            <text y="3" font-size="1.8" fill="#6E8195" letter-spacing="0.15">Secretário(a) de Turismo · data · carimbo</text>
+          </g>
+          <!-- selo circular "documento para aprovação" -->
+          <g transform="translate(370,20) rotate(-8)">
+            <circle cx="0" cy="0" r="10" fill="none" stroke="#B5562E" stroke-width="0.4"/>
+            <circle cx="0" cy="0" r="8.3" fill="none" stroke="#B5562E" stroke-width="0.2"/>
+            <text text-anchor="middle" y="-2" font-family="Inter, sans-serif" font-size="1.6" fill="#B5562E" letter-spacing="0.25" font-weight="600">DOCUMENTO</text>
+            <text text-anchor="middle" y="1" font-family="'Source Serif 4', serif" font-size="2.6" fill="#B5562E" font-weight="600">PARA</text>
+            <text text-anchor="middle" y="4" font-family="'Source Serif 4', serif" font-size="2.6" fill="#B5562E" font-weight="600">APROVAÇÃO</text>
+            <text text-anchor="middle" y="6.5" font-family="Inter, sans-serif" font-size="1.3" fill="#B5562E" letter-spacing="0.2">SETUR · 2026</text>
+          </g>
+        </g>
+      </g>
+
+      <!-- nota técnica de rodapé -->
+      <g transform="translate(22,285)" font-family="Inter, sans-serif">
+        <text font-size="1.7" fill="#6E8195" letter-spacing="0.15">
+          Planta esquemática · não substitui projeto executivo · proporções relativas entre zonas preservadas conforme base arquitetônica do terminal.
+        </text>
+      </g>
+    </svg>
+  </div>
+</div>
+</body>
+</html>
