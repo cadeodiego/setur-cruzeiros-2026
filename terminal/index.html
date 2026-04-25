@@ -190,8 +190,8 @@ body {
   position: relative;
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.9),
-    0 2px 4px rgba(20,20,20,0.04),
-    0 14px 32px rgba(22,41,91,0.08);
+    0 3px 6px rgba(20,20,20,0.06),
+    0 22px 48px rgba(22,41,91,0.14);
   cursor: zoom-in;
   transition: transform .15s ease, box-shadow .15s ease;
 }
@@ -199,8 +199,8 @@ body {
   transform: translateY(-1px);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,0.9),
-    0 2px 4px rgba(20,20,20,0.05),
-    0 18px 38px rgba(22,41,91,0.12);
+    0 4px 10px rgba(20,20,20,0.08),
+    0 28px 60px rgba(22,41,91,0.20);
 }
 .plan-hero img { width: 100%; height: auto; max-height: 100%; object-fit: contain; display: block; border-radius: 4px; }
 
@@ -290,10 +290,11 @@ body {
 .steps-row { display: grid; grid-template-columns: repeat(var(--step-count, 5), 1fr); gap: 10px; margin-top: 4px; }
 .steps-row .step { background: var(--white); border: 1px solid var(--softbg); border-radius: 8px; padding: 10px 12px; display: flex; gap: 10px; align-items: flex-start; }
 .steps-row .step .n {
-  flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%;
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
   background: var(--primary); color: var(--white);
   display: flex; align-items: center; justify-content: center;
-  font-family: 'Poppins'; font-weight: 700; font-size: 13px;
+  font-family: 'Poppins'; font-weight: 800; font-size: 15px;
+  box-shadow: 0 1px 3px rgba(22,41,91,0.18);
 }
 .steps-row.embark    .step .n { background: var(--embark); }
 .steps-row.disembark .step .n { background: var(--disembark); }
@@ -402,6 +403,126 @@ body {
 .zone-card .area { font-family: 'Poppins'; font-size: 18px; font-weight: 700; color: var(--blue-3); line-height: 1; }
 .zone-card .name { font-size: 11.5px; font-weight: 700; color: var(--primary); margin-top: 5px; text-transform: uppercase; letter-spacing: 0.3px; }
 .zone-card .role { font-size: 10.5px; color: var(--grey); margin-top: 3px; line-height: 1.35; }
+
+/* Régua de capacidade — banner de KPIs cruzados (slide 05) */
+.cap-rule {
+  margin-top: 14px;
+  background: var(--primary); color: var(--white);
+  border-radius: 12px;
+  padding: 16px 22px;
+  display: grid; grid-template-columns: auto repeat(4, 1fr);
+  gap: 22px; align-items: center;
+}
+.cap-rule .rule-label {
+  font-family: 'Poppins'; font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--yellow); writing-mode: vertical-rl;
+  transform: rotate(180deg); padding: 4px 0;
+  border-left: 2px solid var(--yellow); padding-left: 8px;
+}
+.cap-rule .rule-item .v {
+  font-family: 'Poppins'; font-size: 24px; font-weight: 700;
+  color: var(--white); line-height: 1; letter-spacing: -0.02em;
+}
+.cap-rule .rule-item .v .u { font-size: 12px; color: var(--yellow); margin-left: 3px; font-weight: 600; }
+.cap-rule .rule-item .l {
+  font-size: 9.5px; color: var(--yellow); font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase; margin-top: 5px;
+}
+.cap-rule .rule-item .s { font-size: 10.5px; color: #D9E0ED; line-height: 1.35; margin-top: 3px; }
+.cap-source { font-size: 9.5px; color: var(--grey); margin-top: 8px; font-style: italic; letter-spacing: 0.3px; }
+
+/* Chip de tempo médio do fluxo no header dos slides 06-11 */
+.flux-time {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 6px; padding: 4px 10px;
+  background: var(--softbg); color: var(--text-2);
+  border-radius: 14px; font-size: 10.5px; font-weight: 600;
+  letter-spacing: 0.2px;
+}
+.flux-time .clock { font-size: 12px; line-height: 1; }
+.flux-time .total { font-family: 'Poppins'; font-weight: 700; color: var(--primary); }
+.flux-time .note { font-style: italic; color: var(--grey); font-weight: 400; margin-left: 4px; }
+
+/* Carimbo de tempo grande sobre a planta (canto superior esquerdo) */
+.time-stamp {
+  position: absolute; top: 14px; left: 14px;
+  background: var(--white); border: 2px solid var(--primary);
+  padding: 8px 14px; border-radius: 6px;
+  display: flex; flex-direction: column; gap: 1px;
+  box-shadow: 0 4px 14px rgba(22,41,91,0.18);
+  z-index: 2;
+}
+.time-stamp .ts-kicker {
+  font-family: 'Poppins', sans-serif;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--grey);
+}
+.time-stamp .ts-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 18px; font-weight: 800; line-height: 1;
+  color: var(--primary); letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.time-stamp.embark    { border-color: var(--embark); }
+.time-stamp.embark    .ts-value { color: var(--embark); }
+.time-stamp.disembark { border-color: var(--disembark); }
+.time-stamp.disembark .ts-value { color: var(--disembark); }
+.time-stamp.transit   { border-color: var(--transit); }
+.time-stamp.transit   .ts-value { color: var(--transit); }
+
+/* Overlay "Abrir no Maps" sobre o frame do mapa no slide 04 */
+.maps-overlay {
+  position: absolute; bottom: 16px; right: 16px;
+  background: var(--primary); color: var(--white);
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 8px 12px; border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(22,41,91,0.25);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: transform .15s ease, background .15s ease;
+}
+.maps-overlay:hover { background: var(--blue-2); transform: translateY(-1px); }
+.loc-frame { position: relative; }
+
+/* Slide 13 NOVO · Plano de Segurança · grid de dispositivos */
+.sec-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin-top: 4px;
+}
+.sec-card {
+  background: var(--white); border: 1px solid var(--softbg);
+  border-left: 4px solid var(--blue-2);
+  border-radius: 8px; padding: 14px 16px;
+}
+.sec-card .h {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px; font-weight: 700; color: var(--primary);
+  letter-spacing: -0.01em; margin-bottom: 4px;
+}
+.sec-card .h .ico {
+  display: inline-block; width: 22px; height: 22px; border-radius: 50%;
+  background: var(--blue-2); color: var(--white);
+  text-align: center; line-height: 22px;
+  font-size: 12px; font-weight: 700; margin-right: 8px;
+  vertical-align: middle;
+}
+.sec-card .b { font-size: 11.5px; color: var(--text-2); line-height: 1.45; }
+.sec-card.cctv      { border-left-color: var(--blue-2); }
+.sec-card.cctv      .ico { background: var(--blue-2); }
+.sec-card.scan      { border-left-color: var(--blue-3); }
+.sec-card.scan      .ico { background: var(--blue-3); }
+.sec-card.access    { border-left-color: var(--green); }
+.sec-card.access    .ico { background: var(--green); }
+.sec-card.bio       { border-left-color: var(--primary); }
+.sec-card.bio       .ico { background: var(--primary); }
+.sec-card.alarm     { border-left-color: var(--orange); }
+.sec-card.alarm     .ico { background: var(--orange); }
+.sec-card.command   { border-left-color: #C9A310; }
+.sec-card.command   .ico { background: #C9A310; }
 
 .arm-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 6px; }
 .arm-table th { background: var(--primary); color: var(--white); text-align: left; padding: 9px 12px; font-size: 9.5px; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 700; }
@@ -556,6 +677,32 @@ body {
   .brand-mark.inverse img { height: 26px; }
   .brand-mark.inverse { padding: 4px 10px; }
   .brand-mark .sep { height: 22px; }
+
+  /* Régua + chips + carimbo de tempo · ajustes de impressão */
+  .cap-rule { padding: 10px 14px; gap: 12px; margin-top: 8px; border-radius: 8px; }
+  .cap-rule .rule-label { font-size: 8px; padding-left: 5px; }
+  .cap-rule .rule-item .v { font-size: 17px; }
+  .cap-rule .rule-item .v .u { font-size: 9px; }
+  .cap-rule .rule-item .l { font-size: 8px; margin-top: 3px; letter-spacing: 1.2px; }
+  .cap-rule .rule-item .s { font-size: 8.5px; line-height: 1.3; margin-top: 2px; }
+  .cap-source { font-size: 8px; margin-top: 5px; }
+
+  .flux-time { padding: 3px 8px; font-size: 9.5px; gap: 4px; margin-top: 4px; }
+  .flux-time .clock { font-size: 10px; }
+
+  .time-stamp { padding: 5px 9px; top: 8px; left: 10px; border-width: 1.5px; }
+  .time-stamp .ts-kicker { font-size: 7px; letter-spacing: 1.4px; }
+  .time-stamp .ts-value  { font-size: 13px; }
+
+  .maps-overlay { font-size: 8.5px; padding: 5px 9px; bottom: 10px; right: 10px; letter-spacing: 1.2px; }
+
+  .sec-grid { gap: 7px; }
+  .sec-card { padding: 9px 11px; }
+  .sec-card .h { font-size: 10.5px; margin-bottom: 3px; }
+  .sec-card .h .ico { width: 17px; height: 17px; line-height: 17px; font-size: 10px; margin-right: 6px; }
+  .sec-card .b { font-size: 9px; line-height: 1.35; }
+
+  .steps-row .step .n { width: 22px; height: 22px; font-size: 12px; }
 }
 
 @media (max-width: 1100px) {
@@ -588,7 +735,10 @@ body {
       Apresentação operacional da nova estrutura, da localização do terreno, dos
       fluxos de passageiros e de ônibus e do cronograma de implantação para a
       próxima temporada — <strong>peça institucional destinada a armadores,
-      agentes marítimos e autoridades parceiras</strong>.
+      agentes marítimos e autoridades parceiras</strong>. Resultado do
+      <strong>grupo de trabalho coordenado entre SETUR e Porto de Itajaí</strong>,
+      com a contribuição dos demais órgãos e parceiros envolvidos na operação
+      de cruzeiros na cidade.
     </div>
     <div class="cover-meta">
       <div class="item"><div class="v">3.200 m²</div><div class="l">Área construída · terminal</div></div>
@@ -614,7 +764,7 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">02 / 15</div>
+      <div class="slide-idx">02 / 16</div>
     </div>
   </div>
 
@@ -673,7 +823,7 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">03 / 15</div>
+      <div class="slide-idx">03 / 16</div>
     </div>
   </div>
 
@@ -710,7 +860,7 @@ body {
 
   <div class="slide-foot">
     <div>Costa Diadema: 3.700 pax · MSC Sinfonia: 2.680 pax · Marina: 1.250 pax</div>
-    <div>03 / 15</div>
+    <div>03 / 16</div>
   </div>
 </section>
 
@@ -718,7 +868,7 @@ body {
 <section class="slide white flux-slide" id="s4">
   <div class="flux-head">
     <div class="titles">
-      <a href="https://maps.app.goo.gl/Nhyzp9JND5sh5HUK8" target="_blank" rel="noopener" class="loc-link">
+      <a href="https://maps.app.goo.gl/8qNUdE4cUmc6c1T29" target="_blank" rel="noopener" class="loc-link">
         <div class="kicker">NOVA LOCALIZAÇÃO · TEMPORADA 2026/2027</div>
         <h1>Terminal em terreno dedicado</h1>
       </a>
@@ -727,13 +877,16 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">04 / 15</div>
+      <div class="slide-idx">04 / 16</div>
     </div>
   </div>
 
   <div class="loc-wrap">
     <div class="loc-frame">
-      <img src="localizacao/mapa-localizacao.png" alt="Mapa de localização do novo terreno">
+      <img src="localizacao/mapa-local-receptivo-cruzeiros-2026-27.png" alt="Mapa do receptivo de cruzeiros 2026/27 · planta do terreno com fluxos de embarque e desembarque">
+      <a href="https://maps.app.goo.gl/8qNUdE4cUmc6c1T29" target="_blank" rel="noopener" class="maps-overlay">
+        Abrir no Google Maps ↗
+      </a>
     </div>
     <div class="loc-panel">
       <div class="block">
@@ -745,12 +898,11 @@ body {
         <div class="coord">26°54'36.4"S · 48°40'13.8"W</div>
       </div>
       <div class="block">
-        <div class="h">Vias de acesso</div>
+        <div class="h">Fluxos segregados sem cruzamento</div>
         <div class="body">
-          <strong>Entrada:</strong> Rua Izabel Ramos Fabeni.<br>
-          <strong>Saída:</strong> Rua Blumenau → Rua Benjamim Franklin Pereira.<br>
-          <strong>Conexão arterial:</strong> Av. Irineu Bornhausen,
-          eixo de ligação até o cais de atracação (gate 02).
+          <strong>Embarque (azul):</strong> Av. Irineu Bornhausen → Rua Izabel Ramos Fabeni → terminal.<br>
+          <strong>Desembarque (vermelho):</strong> JBS Terminal → Rua Blumenau → Rua Izabel Ramos Fabeni.<br>
+          <strong>Conexão arterial:</strong> Av. Irineu Bornhausen, eixo de ligação até o cais de atracação (gate 02).
         </div>
       </div>
       <div class="block">
@@ -766,8 +918,8 @@ body {
   </div>
 
   <div class="slide-foot">
-    <div>Vila Portuária · próximo ao gate 02 · Itajaí / SC</div>
-    <div>04 / 15</div>
+    <div>Vila Portuária · próximo ao gate 02 · Itajaí / SC · clique no mapa para abrir no Google Maps</div>
+    <div>04 / 16</div>
   </div>
 </section>
 
@@ -781,25 +933,25 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">05 / 15</div>
+      <div class="slide-idx">05 / 16</div>
     </div>
   </div>
 
   <p class="lede">
-    Área construída de <strong>3.200 m²</strong> em configuração 80 × 40 m,
-    organizada por zonas segmentadas para embarque, desembarque, controle,
-    bagagem, inspeção e acolhimento. Cada zona sustenta um ponto específico
-    da jornada do passageiro.
+    Área construída de <strong>3.200 m²</strong> em configuração 80 × 40 m
+    (área operacional útil de <strong>2.895 m²</strong>), organizada por zonas
+    segmentadas para embarque, desembarque, controle, bagagem, inspeção e
+    acolhimento. Cada zona sustenta um ponto específico da jornada do passageiro.
   </p>
 
   <div class="zones-grid">
     <div class="zone-card"><div class="area">1.054 m²</div><div class="name">Retirada de bagagens</div><div class="role">Maior zona do terminal · recepção de malas ao desembarque.</div></div>
-    <div class="zone-card"><div class="area">730 m²</div><div class="name">Check-in</div><div class="role">Balcões de atendimento · embarque.</div></div>
-    <div class="zone-card"><div class="area">425 m²</div><div class="name">Lounge de bancos</div><div class="role">Acomodação em filas e espera organizada.</div></div>
-    <div class="zone-card"><div class="area">240 m²</div><div class="name">Inspeção scanner</div><div class="role">Raio-X para passageiros e bagagem de mão.</div></div>
-    <div class="zone-card"><div class="area">210 m²</div><div class="name">Scanner e malas</div><div class="role">Inspeção de bagagem despachada.</div></div>
-    <div class="zone-card"><div class="area">143 m²</div><div class="name">Despacho de malas</div><div class="role">Balcões e triagem no embarque.</div></div>
-    <div class="zone-card"><div class="area">121 m²</div><div class="name">Área Polícia Federal</div><div class="role">Controle migratório para longo curso.</div></div>
+    <div class="zone-card"><div class="area">730 m²</div><div class="name">Check-in</div><div class="role">20 bancadas de atendimento · embarque.</div></div>
+    <div class="zone-card"><div class="area">425 m²</div><div class="name">Lounge de bancos</div><div class="role">504 cadeiras · espera organizada.</div></div>
+    <div class="zone-card"><div class="area">240 m²</div><div class="name">Inspeção scanner</div><div class="role">8 esteiras de mão · raio-X para passageiros.</div></div>
+    <div class="zone-card"><div class="area">210 m²</div><div class="name">Scanner e malas</div><div class="role">4 esteiras · inspeção de bagagem despachada.</div></div>
+    <div class="zone-card"><div class="area">143 m²</div><div class="name">Despacho de malas</div><div class="role">9 bancadas · triagem no embarque.</div></div>
+    <div class="zone-card"><div class="area">121 m²</div><div class="name">Área Polícia Federal</div><div class="role">12 bancadas · controle migratório longo curso.</div></div>
     <div class="zone-card"><div class="area">98 m²</div><div class="name">Recepção · fila scanner</div><div class="role">Pré-inspeção e orientação.</div></div>
     <div class="zone-card"><div class="area">93 m²</div><div class="name">Banheiros</div><div class="role">Dois núcleos de 46,58 m².</div></div>
     <div class="zone-card"><div class="area">72 m²</div><div class="name">Salas administrativas</div><div class="role">Operação, coordenação e apoio técnico.</div></div>
@@ -807,9 +959,34 @@ body {
     <div class="zone-card"><div class="area">37 m²</div><div class="name">Desembarque · cais</div><div class="role">Portal de entrada desde o navio.</div></div>
   </div>
 
+  <div class="cap-rule">
+    <div class="rule-label">Régua<br>de<br>capacidade</div>
+    <div class="rule-item">
+      <div class="v">~1.560<span class="u">pax</span></div>
+      <div class="l">Capacidade simultânea</div>
+      <div class="s">504 sentados no lounge + ~1.060 em processamento e fila.</div>
+    </div>
+    <div class="rule-item">
+      <div class="v">~480<span class="u">pax/h</span></div>
+      <div class="l">Throughput de embarque</div>
+      <div class="s">Dimensionado para navio de 4.500 pax em 9–10 h escalonadas.</div>
+    </div>
+    <div class="rule-item">
+      <div class="v">1,85<span class="u">m²/pax</span></div>
+      <div class="l">Densidade no pico</div>
+      <div class="s">Acima do referencial técnico de 1,2 m²/pax para terminais marítimos.</div>
+    </div>
+    <div class="rule-item">
+      <div class="v">41<span class="u">unid.</span></div>
+      <div class="l">Bancadas operacionais</div>
+      <div class="s">20 check-in + 12 PF + 9 despacho de bagagem.</div>
+    </div>
+  </div>
+  <div class="cap-source">Fonte: Quadro de Áreas e Espaços + Quadro de Equipamentos e Pessoas em Fila · planta arquitetônica V3 · 14/04/2026.</div>
+
   <div class="slide-foot">
-    <div>Configuração 80 × 40 m · versão 3 · 14/04/2026</div>
-    <div>05 / 15</div>
+    <div>Configuração 80 × 40 m · área útil 2.895 m² · versão 3 · 14/04/2026</div>
+    <div>05 / 16</div>
   </div>
 </section>
 
@@ -820,6 +997,12 @@ body {
       <div class="kicker">JORNADA DO PASSAGEIRO · EMBARQUE</div>
       <h1>Cabotagem</h1>
       <div class="sub">Do check-in ao navio em 7 estações — operação doméstica.</div>
+      <div class="flux-time">
+        <span class="clock">⏱</span>
+        <span>Tempo médio do passageiro</span>
+        <span class="total">~25 min</span>
+        <span class="note">chegando no horário agendado</span>
+      </div>
     </div>
     <div class="legend-row">
       <div class="item" style="color: var(--embark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
@@ -827,28 +1010,22 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">06 / 15</div>
+      <div class="slide-idx">06 / 16</div>
     </div>
   </div>
 
   <div class="plan-hero">
+    <div class="time-stamp embark">
+      <div class="ts-kicker">Tempo médio</div>
+      <div class="ts-value">~25 min</div>
+    </div>
     <div class="variant-stamp embark">CABOTAGEM</div>
-    <img src="plantas/embarque-cabotagem.png" alt="Planta do terminal com fluxo de embarque de cabotagem">
-  </div>
-
-  <div class="steps-row embark" style="--step-count: 7;">
-    <div class="step"><div class="n">1</div><div class="body"><div class="title">Acesso · recepção</div><div class="desc">Portal público · orientação inicial.</div><span class="zone">98 m²</span></div></div>
-    <div class="step"><div class="n">2</div><div class="body"><div class="title">Inspeção scanner</div><div class="desc">Raio-X · bagagem de mão.</div><span class="zone">240 m²</span></div></div>
-    <div class="step"><div class="n">3</div><div class="body"><div class="title">Lounge de bancos</div><div class="desc">Espera organizada.</div><span class="zone">425 m²</span></div></div>
-    <div class="step"><div class="n">4</div><div class="body"><div class="title">Check-in</div><div class="desc">Balcões do armador · cartão de bordo.</div><span class="zone">730 m²</span></div></div>
-    <div class="step"><div class="n">5</div><div class="body"><div class="title">Despacho de bagagem</div><div class="desc">Balcões e inspeção em paralelo.</div><span class="zone">353 m²</span></div></div>
-    <div class="step"><div class="n">6</div><div class="body"><div class="title">Apoio</div><div class="desc">Sala-família e ambulatório.</div><span class="zone">32 m²</span></div></div>
-    <div class="step"><div class="n">7</div><div class="body"><div class="title">Embarque · navio</div><div class="desc">Saída lateral esquerda para atracação.</div></div></div>
+    <img src="plantas/embarque-sem-imigracao.jpeg" alt="Planta do terminal com fluxo de embarque de cabotagem (sem imigração)">
   </div>
 
   <div class="slide-foot">
-    <div>Fluxo V3.01.01 · cabotagem · operação doméstica</div>
-    <div>06 / 15</div>
+    <div>Fluxo V3.01.01 · cabotagem · operação doméstica · ~25 min/pax · sequência indicada na própria planta</div>
+    <div>06 / 16</div>
   </div>
 </section>
 
@@ -859,6 +1036,12 @@ body {
       <div class="kicker">JORNADA DO PASSAGEIRO · EMBARQUE</div>
       <h1>Internacional · com controle PF</h1>
       <div class="sub">Fluxo adaptado para longo curso · inserção do controle migratório sem refluxo.</div>
+      <div class="flux-time">
+        <span class="clock">⏱</span>
+        <span>Tempo médio do passageiro</span>
+        <span class="total">~40 min</span>
+        <span class="note">com controle migratório · chegando no horário agendado</span>
+      </div>
     </div>
     <div class="legend-row">
       <div class="item" style="color: var(--embark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
@@ -866,29 +1049,22 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">07 / 15</div>
+      <div class="slide-idx">07 / 16</div>
     </div>
   </div>
 
   <div class="plan-hero">
+    <div class="time-stamp embark">
+      <div class="ts-kicker">Tempo médio</div>
+      <div class="ts-value">~40 min</div>
+    </div>
     <div class="variant-stamp embark">INTERNACIONAL · PF</div>
-    <img src="plantas/embarque-internacional.png" alt="Planta do terminal com fluxo de embarque internacional">
-  </div>
-
-  <div class="steps-row embark" style="--step-count: 8;">
-    <div class="step"><div class="n">1</div><div class="body"><div class="title">Acesso · recepção</div><div class="desc">Portal público · orientação inicial.</div><span class="zone">98 m²</span></div></div>
-    <div class="step"><div class="n">2</div><div class="body"><div class="title">Inspeção scanner</div><div class="desc">Raio-X · bagagem de mão.</div><span class="zone">240 m²</span></div></div>
-    <div class="step"><div class="n">3</div><div class="body"><div class="title">Check-in</div><div class="desc">Balcões do armador.</div><span class="zone">730 m²</span></div></div>
-    <div class="step"><div class="n">4</div><div class="body"><div class="title">Controle migratório</div><div class="desc">Polícia Federal · longo curso.</div><span class="zone">121 m²</span></div></div>
-    <div class="step"><div class="n">5</div><div class="body"><div class="title">Lounge de bancos</div><div class="desc">Espera pós-controle.</div><span class="zone">425 m²</span></div></div>
-    <div class="step"><div class="n">6</div><div class="body"><div class="title">Despacho de bagagem</div><div class="desc">Inspeção e triagem.</div><span class="zone">353 m²</span></div></div>
-    <div class="step"><div class="n">7</div><div class="body"><div class="title">Apoio</div><div class="desc">Família e ambulatório.</div><span class="zone">32 m²</span></div></div>
-    <div class="step"><div class="n">8</div><div class="body"><div class="title">Embarque · navio</div><div class="desc">Saída lateral esquerda.</div></div></div>
+    <img src="plantas/embarque-com-imigracao.jpeg" alt="Planta do terminal com fluxo de embarque internacional (com controle migratório)">
   </div>
 
   <div class="slide-foot">
-    <div>Fluxo V3.01.02 · longo curso · com controle migratório PF</div>
-    <div>07 / 15</div>
+    <div>Fluxo V3.01.02 · longo curso · com controle migratório PF · ~40 min/pax · sequência indicada na própria planta</div>
+    <div>07 / 16</div>
   </div>
 </section>
 
@@ -899,6 +1075,12 @@ body {
       <div class="kicker">JORNADA DO PASSAGEIRO · DESEMBARQUE</div>
       <h1>Cabotagem</h1>
       <div class="sub">Do navio à cidade em 4 estações — sem passagem migratória.</div>
+      <div class="flux-time">
+        <span class="clock">⏱</span>
+        <span>Tempo médio do passageiro</span>
+        <span class="total">~12 min</span>
+        <span class="note">sem controle migratório</span>
+      </div>
     </div>
     <div class="legend-row">
       <div class="item" style="color: var(--disembark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
@@ -906,25 +1088,22 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">08 / 15</div>
+      <div class="slide-idx">08 / 16</div>
     </div>
   </div>
 
   <div class="plan-hero">
+    <div class="time-stamp disembark">
+      <div class="ts-kicker">Tempo médio</div>
+      <div class="ts-value">~12 min</div>
+    </div>
     <div class="variant-stamp disembark">CABOTAGEM</div>
-    <img src="plantas/desembarque-cabotagem.png" alt="Planta do terminal com fluxo de desembarque de cabotagem">
-  </div>
-
-  <div class="steps-row disembark" style="--step-count: 4;">
-    <div class="step"><div class="n">1</div><div class="body"><div class="title">Desembarque · cais</div><div class="desc">Entrada pelo portal superior esquerdo a partir do navio.</div><span class="zone">37 m²</span></div></div>
-    <div class="step"><div class="n">2</div><div class="body"><div class="title">Retirada de bagagens</div><div class="desc">Maior zona do terminal · esteiras e área de reencontro.</div><span class="zone">1.054 m²</span></div></div>
-    <div class="step"><div class="n">3</div><div class="body"><div class="title">Saída e acolhimento</div><div class="desc">Portal inferior direito em direção ao transfer e táxi.</div></div></div>
-    <div class="step"><div class="n">4</div><div class="body"><div class="title">Cidade de Itajaí</div><div class="desc">Hotel, city tour ou aeroporto de Navegantes · 4 km.</div></div></div>
+    <img src="plantas/desembarque.jpeg" alt="Planta do terminal com fluxo de desembarque de cabotagem">
   </div>
 
   <div class="slide-foot">
-    <div>Fluxo V3.02.01 · cabotagem · operação doméstica</div>
-    <div>08 / 15</div>
+    <div>Fluxo V3.02.01 · cabotagem · operação doméstica · ~12 min/pax · sequência indicada na própria planta</div>
+    <div>08 / 16</div>
   </div>
 </section>
 
@@ -935,6 +1114,12 @@ body {
       <div class="kicker">JORNADA DO PASSAGEIRO · DESEMBARQUE</div>
       <h1>Internacional · com controle PF</h1>
       <div class="sub">Fluxo linear com controle migratório antes da retirada de bagagens.</div>
+      <div class="flux-time">
+        <span class="clock">⏱</span>
+        <span>Tempo médio do passageiro</span>
+        <span class="total">~22 min</span>
+        <span class="note">com controle migratório</span>
+      </div>
     </div>
     <div class="legend-row">
       <div class="item" style="color: var(--disembark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
@@ -942,26 +1127,22 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">09 / 15</div>
+      <div class="slide-idx">09 / 16</div>
     </div>
   </div>
 
   <div class="plan-hero">
+    <div class="time-stamp disembark">
+      <div class="ts-kicker">Tempo médio</div>
+      <div class="ts-value">~22 min</div>
+    </div>
     <div class="variant-stamp disembark">INTERNACIONAL · PF</div>
-    <img src="plantas/desembarque-internacional.png" alt="Planta do terminal com fluxo de desembarque internacional">
-  </div>
-
-  <div class="steps-row disembark" style="--step-count: 5;">
-    <div class="step"><div class="n">1</div><div class="body"><div class="title">Desembarque · cais</div><div class="desc">Portal superior esquerdo · saída do navio.</div><span class="zone">37 m²</span></div></div>
-    <div class="step"><div class="n">2</div><div class="body"><div class="title">Controle migratório</div><div class="desc">Polícia Federal · longo curso.</div><span class="zone">121 m²</span></div></div>
-    <div class="step"><div class="n">3</div><div class="body"><div class="title">Retirada de bagagens</div><div class="desc">Esteiras e área de reencontro.</div><span class="zone">1.054 m²</span></div></div>
-    <div class="step"><div class="n">4</div><div class="body"><div class="title">Saída e acolhimento</div><div class="desc">Portal inferior direito · transfer e táxi.</div></div></div>
-    <div class="step"><div class="n">5</div><div class="body"><div class="title">Cidade de Itajaí</div><div class="desc">Hotel, city tour ou aeroporto · 4 km.</div></div></div>
+    <img src="plantas/desembarque-com-imigracao.jpeg" alt="Planta do terminal com fluxo de desembarque internacional (com controle migratório)">
   </div>
 
   <div class="slide-foot">
-    <div>Fluxo V3.02.02 · longo curso · com controle migratório PF</div>
-    <div>09 / 15</div>
+    <div>Fluxo V3.02.02 · longo curso · com controle migratório PF · ~22 min/pax · sequência indicada na própria planta</div>
+    <div>09 / 16</div>
   </div>
 </section>
 
@@ -972,6 +1153,12 @@ body {
       <div class="kicker">JORNADA DO PASSAGEIRO · TRÂNSITO</div>
       <h1>Configuração padrão</h1>
       <div class="sub">Passageiro em escala técnica · shore leave durante a janela de atracação.</div>
+      <div class="flux-time">
+        <span class="clock">⏱</span>
+        <span>Re-inspeção no retorno</span>
+        <span class="total">~5 min</span>
+        <span class="note">scanner dedicado · sem refluxo de bagagem</span>
+      </div>
     </div>
     <div class="legend-row">
       <div class="item" style="color: var(--transit);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
@@ -979,25 +1166,22 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">10 / 15</div>
+      <div class="slide-idx">10 / 16</div>
     </div>
   </div>
 
   <div class="plan-hero">
+    <div class="time-stamp transit">
+      <div class="ts-kicker">Re-inspeção</div>
+      <div class="ts-value">~5 min</div>
+    </div>
     <div class="variant-stamp transit">TRÂNSITO · PADRÃO</div>
-    <img src="plantas/transito-01.png" alt="Planta do terminal com fluxo de trânsito padrão">
-  </div>
-
-  <div class="steps-row transit" style="--step-count: 4;">
-    <div class="step"><div class="n">1</div><div class="body"><div class="title">Descida · shore leave</div><div class="desc">Passageiros autorizados durante a janela de atracação.</div></div></div>
-    <div class="step"><div class="n">2</div><div class="body"><div class="title">Controle simplificado</div><div class="desc">Protocolo de trânsito · PF dedicada.</div></div></div>
-    <div class="step"><div class="n">3</div><div class="body"><div class="title">Saída para a cidade</div><div class="desc">Transfer para atrativos, compras e gastronomia.</div></div></div>
-    <div class="step"><div class="n">4</div><div class="body"><div class="title">Retorno ao navio</div><div class="desc">Re-inspeção no retorno à atracação.</div></div></div>
+    <img src="plantas/transito-embarque.jpeg" alt="Planta do terminal com fluxo de trânsito padrão (retorno ao navio)">
   </div>
 
   <div class="slide-foot">
-    <div>Fluxo V3 · escalas Hamburg · Marina · MSC Fantasia</div>
-    <div>10 / 15</div>
+    <div>Fluxo V3 · escalas Hamburg · Marina · MSC Fantasia · ~5 min de re-inspeção · sequência indicada na própria planta</div>
+    <div>10 / 16</div>
   </div>
 </section>
 
@@ -1008,6 +1192,12 @@ body {
       <div class="kicker">JORNADA DO PASSAGEIRO · TRÂNSITO</div>
       <h1>Configuração alternativa</h1>
       <div class="sub">Variante para escalas com maior volume em trânsito · aproveita a área de bagagens.</div>
+      <div class="flux-time">
+        <span class="clock">⏱</span>
+        <span>Travessia do passageiro</span>
+        <span class="total">~6 min</span>
+        <span class="note">desembarque acelerado pela área de bagagens liberada</span>
+      </div>
     </div>
     <div class="legend-row">
       <div class="item" style="color: var(--transit);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
@@ -1015,25 +1205,22 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">11 / 15</div>
+      <div class="slide-idx">11 / 16</div>
     </div>
   </div>
 
   <div class="plan-hero">
+    <div class="time-stamp transit">
+      <div class="ts-kicker">Travessia</div>
+      <div class="ts-value">~6 min</div>
+    </div>
     <div class="variant-stamp transit">TRÂNSITO · ALTERNATIVA</div>
-    <img src="plantas/transito-02.png" alt="Planta do terminal com fluxo de trânsito alternativo">
-  </div>
-
-  <div class="steps-row transit" style="--step-count: 4;">
-    <div class="step"><div class="n">1</div><div class="body"><div class="title">Desembarque · cais</div><div class="desc">Entrada pelo portal superior esquerdo.</div></div></div>
-    <div class="step"><div class="n">2</div><div class="body"><div class="title">Travessia diagonal</div><div class="desc">Pela área de retirada de bagagens liberada.</div></div></div>
-    <div class="step"><div class="n">3</div><div class="body"><div class="title">Saída para a cidade</div><div class="desc">Portal inferior direito · transfer.</div></div></div>
-    <div class="step"><div class="n">4</div><div class="body"><div class="title">Retorno ao navio</div><div class="desc">Re-inspeção no retorno.</div></div></div>
+    <img src="plantas/transito-desembarque.jpeg" alt="Planta do terminal com fluxo de trânsito alternativo (saída acelerada)">
   </div>
 
   <div class="slide-foot">
-    <div>Fluxo V3.03.02 · variação para grande volume em trânsito</div>
-    <div>11 / 15</div>
+    <div>Fluxo V3.03.02 · variação para grande volume em trânsito · ~6 min de travessia · sequência indicada na própria planta</div>
+    <div>11 / 16</div>
   </div>
 </section>
 
@@ -1052,12 +1239,12 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">12 / 15</div>
+      <div class="slide-idx">12 / 16</div>
     </div>
   </div>
 
   <div class="bus-hero">
-    <img src="localizacao/fluxo-onibus.png" alt="Vista aérea do terreno com rotas de ônibus de embarque e desembarque">
+    <img src="plantas/fluxo-onibus-embarque-desembarque.jpeg" alt="Vista aérea do terreno com rotas de ônibus de embarque e desembarque">
   </div>
 
   <div class="bus-routes">
@@ -1082,11 +1269,78 @@ body {
 
   <div class="slide-foot">
     <div>Ciclo operacional · vias segregadas · sem cruzamento de rotas</div>
-    <div>12 / 15</div>
+    <div>12 / 16</div>
   </div>
 </section>
 
-<!-- 13 · CIDADE COMO DESTINO -->
+<!-- 13 · PLANO DE SEGURANÇA INTEGRADO -->
+<section class="slide white" id="s13b">
+  <div class="slide-head">
+    <div class="left">
+      <div class="kicker">SEGURANÇA INTEGRADA · ALINHAMENTO INSTITUCIONAL</div>
+      <h1>Layout pronto para o Plano de Segurança em construção</h1>
+    </div>
+    <div class="brand-mark">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+      <div class="sep"></div>
+      <div class="slide-idx">13 / 16</div>
+    </div>
+  </div>
+
+  <p class="lede">
+    O layout do terminal foi concebido para incorporar, sem retrabalho, o
+    <strong>Plano de Segurança</strong> em desenvolvimento pelo Porto de Itajaí.
+    Os dispositivos previstos integram-se às zonas funcionais já dimensionadas —
+    o fluxo do passageiro permanece o mesmo, agora com camada de segurança
+    institucionalmente coordenada.
+  </p>
+
+  <div class="sec-grid">
+    <div class="sec-card cctv">
+      <div class="h"><span class="ico">●</span>CCTV de cobertura total</div>
+      <div class="b">Perímetro do terreno, vias de acesso, áreas internas e cais. Imagens integradas ao centro de comando para monitoramento contínuo.</div>
+    </div>
+    <div class="sec-card scan">
+      <div class="h"><span class="ico">▦</span>Scanners de bagagem</div>
+      <div class="b">8 esteiras de mão + 4 de mala já dimensionadas no projeto arquitetônico. Capacidade compatível com navio típico de 4.500 pax.</div>
+    </div>
+    <div class="sec-card access">
+      <div class="h"><span class="ico">⌬</span>Controle de acesso</div>
+      <div class="b">Catracas e portões nos 4 pontos de entrada/saída do terreno e do edifício. Segregação de áreas operacionais, técnicas e de público.</div>
+    </div>
+    <div class="sec-card bio">
+      <div class="h"><span class="ico">⊙</span>Biometria · Polícia Federal</div>
+      <div class="b">12 bancadas integradas ao sistema federal de imigração para operação de longo curso. Área PF dimensionada em 121 m².</div>
+    </div>
+    <div class="sec-card alarm">
+      <div class="h"><span class="ico">!</span>Detecção e resposta</div>
+      <div class="b">Sensores de incêndio, gás e intrusão integrados ao centro de comando. Protocolos coordenados com brigada e autoridade marítima.</div>
+    </div>
+    <div class="sec-card command">
+      <div class="h"><span class="ico">⌘</span>Comando integrado</div>
+      <div class="b">Sala dedicada com acesso compartilhado entre SETUR, autoridade marítima e Polícia Federal. Operação coordenada em tempo real.</div>
+    </div>
+  </div>
+
+  <div class="insight" style="margin-top: 16px;">
+    <span class="tag">TRILHO INSTITUCIONAL</span>
+    <h3>O Plano de Segurança é entrega complementar ao layout — não bloqueia a aprovação do projeto arquitetônico.</h3>
+    <p>
+      O terreno, as zonas funcionais e as rotas do passageiro já contemplam todos
+      os pontos físicos onde os dispositivos serão instalados. SETUR e Porto de
+      Itajaí caminham em coordenação contínua: o que se aprova aqui é o
+      dimensionamento operacional; a camada de segurança institucional segue em
+      paralelo, sem reabrir o que já foi dimensionado.
+    </p>
+  </div>
+
+  <div class="slide-foot">
+    <div>Coordenação SETUR ↔ Porto de Itajaí · Plano de Segurança · entrega complementar ao layout</div>
+    <div>13 / 16</div>
+  </div>
+</section>
+
+<!-- 14 · CIDADE COMO DESTINO -->
 <section class="slide white" id="s13">
   <div class="slide-head">
     <div class="left">
@@ -1096,7 +1350,7 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">13 / 15</div>
+      <div class="slide-idx">14 / 16</div>
     </div>
   </div>
 
@@ -1130,11 +1384,11 @@ body {
 
   <div class="slide-foot">
     <div>Itajaí · Santa Catarina · Brasil</div>
-    <div>13 / 15</div>
+    <div>14 / 16</div>
   </div>
 </section>
 
-<!-- 14 · CRONOGRAMA · TIMELINE -->
+<!-- 15 · CRONOGRAMA · TIMELINE -->
 <section class="slide white" id="s14">
   <div class="slide-head">
     <div class="left">
@@ -1144,7 +1398,7 @@ body {
     <div class="brand-mark">
       <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
       <div class="sep"></div>
-      <div class="slide-idx">14 / 15</div>
+      <div class="slide-idx">15 / 16</div>
     </div>
   </div>
 
@@ -1221,11 +1475,11 @@ body {
 
   <div class="slide-foot">
     <div>Cronograma institucional · Abril → Novembro de 2026</div>
-    <div>14 / 15</div>
+    <div>15 / 16</div>
   </div>
 </section>
 
-<!-- 15 · CONTATO -->
+<!-- 16 · CONTATO -->
 <section class="slide dark" id="s15">
   <div class="slide-head">
     <div class="left">
@@ -1269,7 +1523,7 @@ body {
 
   <div class="slide-foot">
     <div>SETUR Itajaí · Secretaria de Turismo e Eventos · Abril de 2026</div>
-    <div>15 · FIM</div>
+    <div>16 · FIM</div>
   </div>
 </section>
 
