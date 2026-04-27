@@ -88,29 +88,32 @@ body {
 /* Lockup duplo SETUR + Porto · sinaliza coautoria institucional em todos os slides */
 .brand-mark.duo {
   background: var(--primary);
-  padding: 6px 12px;
-  border-radius: 6px;
-  gap: 10px;
+  padding: 9px 18px;
+  border-radius: 7px;
+  gap: 16px;
 }
 .brand-mark.duo .logo-setur {
   height: 30px; width: auto;
   background: var(--white);
-  padding: 3px 6px; border-radius: 3px;
+  padding: 5px 9px; border-radius: 4px;
 }
 .brand-mark.duo .duo-sep {
-  width: 1px; height: 26px;
+  width: 1px; height: 30px;
   background: rgba(255,255,255,0.32);
   display: inline-block;
 }
 .brand-mark.duo .logo-porto {
-  height: 28px; width: auto; display: block;
+  height: 30px; width: auto; display: block;
 }
 .brand-mark.duo .sep {
   background: rgba(255,255,255,0.32);
-  height: 26px;
+  height: 30px;
+  margin-left: 4px;
 }
 .brand-mark.duo .slide-idx {
-  color: rgba(255,255,255,0.78);
+  color: rgba(255,255,255,0.85);
+  margin-left: 2px;
+  font-size: 11px;
 }
 /* Em slides escuros, o chip ainda fica para manter consistência visual em todo o deck. */
 .slide.dark .brand-mark.duo {
@@ -151,21 +154,21 @@ body {
 .cover-brand .lockup.duo-lockup {
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.22);
-  padding: 10px 16px;
-  display: flex; align-items: center; gap: 14px;
+  padding: 14px 22px;
+  display: flex; align-items: center; gap: 22px;
 }
 .cover-brand .lockup.duo-lockup .cover-logo-setur {
   height: 44px; width: auto;
   background: var(--white);
-  padding: 5px 9px; border-radius: 4px;
+  padding: 7px 12px; border-radius: 5px;
 }
 .cover-brand .lockup.duo-lockup .duo-sep {
-  width: 1px; height: 38px;
+  width: 1px; height: 44px;
   background: rgba(255,255,255,0.32);
   display: inline-block;
 }
 .cover-brand .lockup.duo-lockup .cover-logo-porto {
-  height: 40px; width: auto; display: block;
+  height: 44px; width: auto; display: block;
 }
 .cover-brand .period-tag {
   font-size: 10px; letter-spacing: 3px; font-weight: 700;
@@ -634,11 +637,11 @@ body {
   .cover-meta .item .v { font-size: 20px; }
   .cover-brand .lockup { padding: 8px 14px; }
   .cover-brand .lockup img { height: 40px; }
-  .cover-brand .lockup.duo-lockup { padding: 7px 12px; gap: 10px;
+  .cover-brand .lockup.duo-lockup { padding: 10px 16px; gap: 16px;
     -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .cover-brand .lockup.duo-lockup .cover-logo-setur { height: 32px; padding: 3px 6px; }
-  .cover-brand .lockup.duo-lockup .cover-logo-porto { height: 28px; }
-  .cover-brand .lockup.duo-lockup .duo-sep { height: 26px; }
+  .cover-brand .lockup.duo-lockup .cover-logo-setur { height: 32px; padding: 5px 9px; border-radius: 4px; }
+  .cover-brand .lockup.duo-lockup .cover-logo-porto { height: 32px; }
+  .cover-brand .lockup.duo-lockup .duo-sep { height: 32px; }
 
   .flux-slide { display: flex; flex-direction: column; }
   .plan-hero {
@@ -739,12 +742,13 @@ body {
   .brand-mark .sep { height: 22px; }
 
   /* Lockup duplo no print — manter chip e ambas as logos legíveis */
-  .brand-mark.duo { padding: 4px 9px; gap: 7px;
+  .brand-mark.duo { padding: 6px 13px; gap: 11px;
     -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .brand-mark.duo .logo-setur { height: 22px; padding: 2px 4px; border-radius: 2px; }
-  .brand-mark.duo .logo-porto { height: 20px; }
-  .brand-mark.duo .duo-sep { height: 18px; }
-  .brand-mark.duo .sep { height: 18px; }
+  .brand-mark.duo .logo-setur { height: 22px; padding: 3px 6px; border-radius: 3px; }
+  .brand-mark.duo .logo-porto { height: 22px; }
+  .brand-mark.duo .duo-sep { height: 22px; }
+  .brand-mark.duo .sep { height: 22px; margin-left: 3px; }
+  .brand-mark.duo .slide-idx { font-size: 9px; }
 
   /* Régua + chips + carimbo de tempo · ajustes de impressão */
   .cap-rule { padding: 10px 14px; gap: 12px; margin-top: 8px; border-radius: 8px; }
