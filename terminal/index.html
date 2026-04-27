@@ -85,6 +85,40 @@ body {
 }
 .slide.dark .brand-mark .slide-idx { color: var(--softbg); }
 
+/* Lockup duplo SETUR + Porto · sinaliza coautoria institucional em todos os slides */
+.brand-mark.duo {
+  background: var(--primary);
+  padding: 6px 12px;
+  border-radius: 6px;
+  gap: 10px;
+}
+.brand-mark.duo .logo-setur {
+  height: 30px; width: auto;
+  background: var(--white);
+  padding: 3px 6px; border-radius: 3px;
+}
+.brand-mark.duo .duo-sep {
+  width: 1px; height: 26px;
+  background: rgba(255,255,255,0.32);
+  display: inline-block;
+}
+.brand-mark.duo .logo-porto {
+  height: 28px; width: auto; display: block;
+}
+.brand-mark.duo .sep {
+  background: rgba(255,255,255,0.32);
+  height: 26px;
+}
+.brand-mark.duo .slide-idx {
+  color: rgba(255,255,255,0.78);
+}
+/* Em slides escuros, o chip ainda fica para manter consistência visual em todo o deck. */
+.slide.dark .brand-mark.duo {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.slide.dark .brand-mark.duo .slide-idx { color: var(--softbg); }
+
 .slide-foot {
   margin-top: auto; padding-top: 10px;
   border-top: 1px solid var(--softbg);
@@ -112,6 +146,27 @@ body {
 .cover-brand { display: flex; justify-content: space-between; align-items: center; }
 .cover-brand .lockup { background: var(--white); padding: 10px 18px; border-radius: 8px; }
 .cover-brand .lockup img { height: 48px; width: auto; display: block; }
+
+/* Lockup duplo na capa — SETUR em sub-chip branco + Porto branca direto sobre fundo escuro */
+.cover-brand .lockup.duo-lockup {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.22);
+  padding: 10px 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.cover-brand .lockup.duo-lockup .cover-logo-setur {
+  height: 44px; width: auto;
+  background: var(--white);
+  padding: 5px 9px; border-radius: 4px;
+}
+.cover-brand .lockup.duo-lockup .duo-sep {
+  width: 1px; height: 38px;
+  background: rgba(255,255,255,0.32);
+  display: inline-block;
+}
+.cover-brand .lockup.duo-lockup .cover-logo-porto {
+  height: 40px; width: auto; display: block;
+}
 .cover-brand .period-tag {
   font-size: 10px; letter-spacing: 3px; font-weight: 700;
   color: var(--yellow); text-transform: uppercase;
@@ -579,6 +634,11 @@ body {
   .cover-meta .item .v { font-size: 20px; }
   .cover-brand .lockup { padding: 8px 14px; }
   .cover-brand .lockup img { height: 40px; }
+  .cover-brand .lockup.duo-lockup { padding: 7px 12px; gap: 10px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cover-brand .lockup.duo-lockup .cover-logo-setur { height: 32px; padding: 3px 6px; }
+  .cover-brand .lockup.duo-lockup .cover-logo-porto { height: 28px; }
+  .cover-brand .lockup.duo-lockup .duo-sep { height: 26px; }
 
   .flux-slide { display: flex; flex-direction: column; }
   .plan-hero {
@@ -678,6 +738,14 @@ body {
   .brand-mark.inverse { padding: 4px 10px; }
   .brand-mark .sep { height: 22px; }
 
+  /* Lockup duplo no print — manter chip e ambas as logos legíveis */
+  .brand-mark.duo { padding: 4px 9px; gap: 7px;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .brand-mark.duo .logo-setur { height: 22px; padding: 2px 4px; border-radius: 2px; }
+  .brand-mark.duo .logo-porto { height: 20px; }
+  .brand-mark.duo .duo-sep { height: 18px; }
+  .brand-mark.duo .sep { height: 18px; }
+
   /* Régua + chips + carimbo de tempo · ajustes de impressão */
   .cap-rule { padding: 10px 14px; gap: 12px; margin-top: 8px; border-radius: 8px; }
   .cap-rule .rule-label { font-size: 8px; padding-left: 5px; }
@@ -722,8 +790,10 @@ body {
 <!-- 01 · CAPA -->
 <section class="cover" id="s1">
   <div class="cover-brand">
-    <div class="lockup">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="lockup duo-lockup">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="cover-logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="cover-logo-porto">
     </div>
     <div class="period-tag">TEMPORADA · 2026/2027</div>
   </div>
@@ -749,7 +819,7 @@ body {
   </div>
 
   <div class="cover-foot">
-    <div>Documento executivo · Versão 2.1 · Abril de 2026</div>
+    <div>Documento executivo · Versão 2.2 · Abril de 2026 · grupo de trabalho SETUR ↔ Porto de Itajaí</div>
     <div class="stamp">USO INSTITUCIONAL</div>
   </div>
 </section>
@@ -761,8 +831,10 @@ body {
       <div class="kicker">PANORAMA · TEMPORADA 2025/2026</div>
       <h1>Itajaí em números</h1>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">02 / 16</div>
     </div>
@@ -820,8 +892,10 @@ body {
       <div class="kicker">A FROTA · 2025/2026</div>
       <h1>Os navios que escolheram Itajaí</h1>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">03 / 16</div>
     </div>
@@ -874,8 +948,10 @@ body {
       </a>
       <div class="sub">Espaço próprio adjacente ao complexo portuário · acesso e saída por vias distintas.</div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">04 / 16</div>
     </div>
@@ -930,8 +1006,10 @@ body {
       <div class="kicker">INFRAESTRUTURA · TERMINAL DE PASSAGEIROS</div>
       <h1>Um terminal desenhado por zona funcional</h1>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">05 / 16</div>
     </div>
@@ -1007,8 +1085,10 @@ body {
     <div class="legend-row">
       <div class="item" style="color: var(--embark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">06 / 16</div>
     </div>
@@ -1046,8 +1126,10 @@ body {
     <div class="legend-row">
       <div class="item" style="color: var(--embark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">07 / 16</div>
     </div>
@@ -1085,8 +1167,10 @@ body {
     <div class="legend-row">
       <div class="item" style="color: var(--disembark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">08 / 16</div>
     </div>
@@ -1124,8 +1208,10 @@ body {
     <div class="legend-row">
       <div class="item" style="color: var(--disembark);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">09 / 16</div>
     </div>
@@ -1163,8 +1249,10 @@ body {
     <div class="legend-row">
       <div class="item" style="color: var(--transit);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">10 / 16</div>
     </div>
@@ -1202,8 +1290,10 @@ body {
     <div class="legend-row">
       <div class="item" style="color: var(--transit);"><span class="line"></span><span style="color: var(--text-2);">Rota do passageiro</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">11 / 16</div>
     </div>
@@ -1236,8 +1326,10 @@ body {
       <div class="item" style="color: var(--bus-dis);"><span class="line"></span><span style="color: var(--text-2);">Ônibus · desembarque</span></div>
       <div class="item" style="color: var(--bus-emb);"><span class="line"></span><span style="color: var(--text-2);">Ônibus · embarque</span></div>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">12 / 16</div>
     </div>
@@ -1280,8 +1372,10 @@ body {
       <div class="kicker">SEGURANÇA INTEGRADA · ALINHAMENTO INSTITUCIONAL</div>
       <h1>Layout pronto para o Plano de Segurança em construção</h1>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">13 / 16</div>
     </div>
@@ -1347,8 +1441,10 @@ body {
       <div class="kicker">INFRAESTRUTURA DE DESTINO</div>
       <h1>O raio de 5 km ao redor do terminal</h1>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">14 / 16</div>
     </div>
@@ -1395,8 +1491,10 @@ body {
       <div class="kicker">PRÓXIMOS PASSOS · ABR → NOV 2026</div>
       <h1>Cronograma de implantação</h1>
     </div>
-    <div class="brand-mark">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
       <div class="sep"></div>
       <div class="slide-idx">15 / 16</div>
     </div>
@@ -1486,28 +1584,36 @@ body {
       <div class="kicker">ABERTURA À CONVERSA</div>
       <h1>A SETUR está à disposição para 2026/2027</h1>
     </div>
-    <div class="brand-mark inverse">
-      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí">
+    <div class="brand-mark duo">
+      <img src="brasao/brasao-oficial-turismo.png" alt="SETUR · Turismo e Eventos de Itajaí" class="logo-setur">
+      <span class="duo-sep"></span>
+      <img src="brasao/logo-porto-branca.svg" alt="Porto de Itajaí · Autoridade Portuária" class="logo-porto">
     </div>
   </div>
 
   <p class="lede" style="color: #D9E0ED; max-width: 980px;">
-    Este documento foi preparado para <strong style="color: var(--yellow);">subsidiar
-    a conversa com armadores, agentes marítimos e autoridades parceiras</strong>
-    sobre a próxima temporada. Convidamos os interlocutores a agendarem uma visita
-    técnica ao terminal e uma reunião institucional com a Secretaria.
+    Este documento é resultado do <strong style="color: var(--yellow);">grupo de
+    trabalho conjunto entre a SETUR e o Porto de Itajaí</strong>, com a contribuição
+    dos demais órgãos e parceiros envolvidos. Convidamos os interlocutores a
+    agendarem visita técnica ao terminal e reunião institucional com as
+    coordenações.
   </p>
 
   <div class="contact-grid">
     <div class="contact-block">
-      <h3>Interlocução institucional</h3>
+      <h3>SETUR · Secretaria de Turismo e Eventos</h3>
       <div class="person"><div class="name">Gabriela Kelm</div><div class="role">Secretária Municipal de Turismo e Eventos</div><div class="channel">Prefeitura Municipal de Itajaí · SC</div></div>
       <div class="person"><div class="name">Diego Oliveira</div><div class="role">Diretor Executivo de Turismo e Eventos</div><div class="channel">Coordenação do processo de cruzeiros · SETUR</div></div>
     </div>
     <div class="contact-block">
-      <h3>Agenda operacional</h3>
-      <div class="person"><div class="name">Visita técnica ao terminal</div><div class="role">Reconhecimento presencial dos fluxos e zonas.</div><div class="channel">Agendamento direto com a SETUR.</div></div>
-      <div class="person"><div class="name">Reunião institucional</div><div class="role">Alinhamento de calendário, demandas e contrapartidas.</div><div class="channel">Formato presencial ou remoto.</div></div>
+      <h3>Porto de Itajaí · Autoridade Portuária</h3>
+      <div class="person"><div class="name">Artur Antunes Pereira</div><div class="role">Superintendente do Porto de Itajaí</div></div>
+      <div class="person">
+        <div class="name">Marcelo Peres</div>
+        <div class="role">Coordenador Executivo de Desempenho, Desenvolvimento e Planejamento Estratégico</div>
+        <div class="channel">marcelo.peres@portoitajai.com.br</div>
+        <div class="channel">+55 (47) 3341-8040 · +55 (11) 9 7226-4169</div>
+      </div>
     </div>
   </div>
 
@@ -1522,7 +1628,7 @@ body {
   </div>
 
   <div class="slide-foot">
-    <div>SETUR Itajaí · Secretaria de Turismo e Eventos · Abril de 2026</div>
+    <div>SETUR Itajaí ↔ Porto de Itajaí · grupo de trabalho conjunto · Abril de 2026</div>
     <div>16 · FIM</div>
   </div>
 </section>
